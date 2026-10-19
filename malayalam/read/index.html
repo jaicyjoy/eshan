@@ -1,381 +1,312 @@
 <!doctype html>
-<html>
+<html lang="ml">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Read</title>
+<title>മലയാളം വായന · Class 8</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#e8f4ff 0%,#fff5eb 55%,#f5e9ff 100%);min-height:100vh;line-height:1.45}
-body.hi{font-family:"Noto Sans Devanagari","Mangal","Avenir Next",system-ui,sans-serif}
-body.ml{font-family:"Noto Sans Malayalam","Malayalam MN","Avenir Next",system-ui,sans-serif}
+body{margin:0;font-family:"Noto Sans Malayalam","Malayalam MN","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#e6f7f2 0%,#fff8ef 55%,#e8f4ff 100%);min-height:100vh;line-height:1.6}
 button{font-family:inherit;cursor:pointer}
 #app{max-width:900px;margin:0 auto;padding:12px 14px 70px}
-.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.12)}
-.top a{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.ib{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none}
 .top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.9;text-transform:uppercase}
 .top .tt b{display:block;font-size:18px;line-height:1.2}
 .chip{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px;white-space:nowrap}
-.slow{border:0;border-radius:99px;padding:7px 10px;font-weight:800;font-size:13px;background:rgba(255,255,255,.25);color:#fff}
-.slow.on{background:#ffd60a;color:#3a2b00}
-.hero{text-align:center;padding:14px 6px 4px}.hero .big{font-size:52px}.hero h1{margin:2px 0;font-size:28px;color:var(--c2)}.hero p{margin:0;color:#5b5f86}
-.hint{background:#fff;border-radius:18px;padding:12px 14px;margin:12px 0;box-shadow:0 5px 0 #e6e3f7;font-weight:700;color:#4a4f7a;font-size:15px}
+.banner{border-radius:20px;padding:14px 16px;margin:14px 0;font-weight:800;font-size:16px;box-shadow:0 5px 0 rgba(0,0,0,.08)}
+.banner.great{background:#c9f7d6;color:#145233;border:2px solid #2fbf71}
+.banner.ok{background:#fff1b8;color:#7a5200;border:2px solid #ffb703}
+.banner.practice{background:#ffe8e8;color:#9b2226;border:2px solid #e5484d}
+.banner.start{background:#fff;border:2px solid #e3e0f7;color:#4a4f7a}
+.hero{text-align:center;padding:10px 6px 4px}.hero .big{font-size:48px}.hero h1{margin:2px 0;font-size:26px;color:var(--c2)}.hero p{margin:0;color:#5b5f86;font-size:15px}
+.hint{background:#fff;border-radius:18px;padding:12px 14px;margin:10px 0;box-shadow:0 5px 0 #e6e3f7;font-weight:700;color:#4a4f7a;font-size:15px}
 .gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:10px}
-.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16)}
-.gt .i{font-size:30px;display:block}.gt b{display:block;font-size:17px;margin-top:4px}.gt small{display:block;opacity:.95;font-size:13px}
-.packs{display:grid;gap:10px;margin-top:14px}
-.pcard{border:0;border-radius:18px;padding:14px;text-align:left;background:#fff;box-shadow:0 5px 0 #e6e3f7;display:flex;gap:12px;align-items:center;width:100%}
-.pcard .em{font-size:36px}.pcard .inf{flex:1}.pcard b{display:block;font-size:18px;color:var(--c2)}.pcard small{color:#6b6f93;font-weight:700}
-.pcard .st{font-size:14px;font-weight:800;color:#e08a00;white-space:nowrap}
-
-.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#eef4ff,#fff8ef 60%,#f8e9ff)}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);width:100%}
+.gt .i{font-size:30px;display:block}.gt b{display:block;font-size:17px;margin-top:4px}.gt small{display:block;opacity:.95;font-size:13px;margin-top:2px}
+.gt .st{display:inline-block;margin-top:8px;font-size:15px;letter-spacing:1px;background:rgba(0,0,0,.15);padding:3px 10px;border-radius:99px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#eefaf5,#fff8ef 60%,#e8f4ff)}
 .ov.show{display:flex}
 .ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2))}
 .ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900}
-.ovtop .t{flex:1;font-weight:800;font-size:16px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovtop .t{flex:1;font-weight:800;font-size:16px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px}
 .ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
 .card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 7px 0 #e6e3f7}
-.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:12px}
-.pill{border:0;border-radius:99px;padding:10px 16px;font-weight:800;font-size:15px;color:#fff;background:var(--c1);box-shadow:0 4px 0 var(--c2)}
-.pill.alt{background:#fff;color:var(--c2);box-shadow:0 4px 0 #dedbf3}
-.linebox{min-height:120px;display:flex;flex-wrap:wrap;gap:8px;align-content:center;justify-content:center;padding:12px;border-radius:18px;background:#f8f7ff;border:3px dashed #d8ccff}
-.w{border:0;background:#fff;border-radius:14px;padding:10px 12px;font-size:var(--fs,28px);font-weight:800;color:#1f2340;box-shadow:0 3px 0 #e3e0f7;line-height:1.2}
-.w.on{background:#ffd60a;transform:scale(1.06);box-shadow:0 4px 0 #f48c06}
-.w.done{background:#c9f7d6}
-.navl{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:8px;flex-wrap:wrap}
-.nx{border:0;border-radius:99px;padding:11px 22px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 4px 0 rgba(0,0,0,.15)}
-.nx.alt{background:#fff;color:var(--c1);border:2px solid #cfd6ff;box-shadow:0 4px 0 #e3e0f7}
-.prog{font-weight:800;color:#5b5f86}
-.bigword{font-size:48px;font-weight:900;text-align:center;margin:16px 0;color:var(--c2);min-height:60px}
-.opts{display:grid;gap:10px}.opt{border:2px solid #e3e0f7;background:#f8f7ff;border-radius:16px;padding:14px;font-size:22px;font-weight:800;text-align:left;box-shadow:0 4px 0 #e3e0f7}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:10px;font-size:15px}
+.prompt{font-size:14px;font-weight:800;color:#6b6f93;margin-bottom:8px}
+.bigtext{font-size:clamp(26px,6vw,40px);font-weight:900;text-align:center;margin:12px 0 16px;color:var(--c2);line-height:1.4}
+.readbox{background:#f4fbf8;border:3px dashed #9dd9c8;border-radius:18px;padding:16px;font-size:18px;line-height:1.75;margin:10px 0;color:#1f2340}
+.readbox.poem{white-space:pre-line}
+.readbox h3{margin:0 0 8px;font-size:20px;color:var(--c2)}
+.qtext{font-size:18px;font-weight:800;margin:14px 0 10px;color:#1f2340}
+.opts{display:grid;gap:10px}.opt{border:2px solid #e3e0f7;background:#f8f7ff;border-radius:16px;padding:14px;font-size:16px;font-weight:700;text-align:left;box-shadow:0 4px 0 #e3e0f7;width:100%}
 .opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d;animation:shake .35s}
 @keyframes shake{25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
-.fb{text-align:center;font-weight:800;margin-top:10px;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
-.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
-.chipb{border:2px solid #e3e0f7;background:#fff;border-radius:14px;padding:10px 14px;font-size:20px;font-weight:800;box-shadow:0 3px 0 #e3e0f7}
-.chipb.sel{background:#fff1b8;border-color:#ffb703}.chipb.bad{background:#ffd3d3;animation:shake .35s}
-.built{min-height:56px;border:3px dashed #cfc8f5;border-radius:16px;padding:10px;background:#fff;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
-.built span{background:#c9f7d6;border-radius:10px;padding:6px 10px;font-weight:800;font-size:18px}
-.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
-.wcard{border:3px solid #f1e8ff;background:#fffaf2;border-radius:18px;padding:12px;text-align:center;font-weight:800}
-.wcard .e{font-size:32px}.wcard .ww{font-size:22px;color:var(--c2);margin-top:4px}.wcard.playing{border-color:#ffb703;background:#fff3c4}
-.sizebar{display:flex;gap:8px;justify-content:center;margin:8px 0 4px}
-.sizebar button{border:0;border-radius:99px;padding:6px 12px;font-weight:800;background:#efeaff}
-.sizebar button.on{background:var(--c1);color:#fff}
+.fb{text-align:center;font-weight:800;margin-top:12px;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.navl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.nx{border:0;border-radius:99px;padding:11px 22px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.nx.alt{background:#fff;color:var(--c1);border:2px solid #b8e6d5;box-shadow:0 4px 0 #e3e0f7}
 .end{text-align:center}.end .big{font-size:56px}.stars{font-size:32px;letter-spacing:2px}
-.conf{position:fixed;top:-30px;font-size:28px;pointer-events:none;z-index:60;animation:fall 1.5s ease-in forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(480deg);opacity:.5}}
-@media(max-width:560px){.w{font-size:var(--fs,24px)}.bigword{font-size:36px}.opt{font-size:18px}}
+.pick{display:grid;gap:10px;margin-top:8px}
+.pbtn{border:2px solid #9dd9c8;background:#fff;border-radius:16px;padding:14px;text-align:left;font-weight:800;font-size:17px;color:var(--c2);box-shadow:0 4px 0 #9dd9c8;width:100%}
+.pbtn small{display:block;font-weight:700;color:#6b6f93;font-size:13px;margin-top:4px}
+.opt.en{font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;font-size:15px}
+@media(max-width:560px){.bigtext{font-size:28px}.opt{font-size:14px}}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <div class="ov" id="ov"><div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div><div class="ovb" id="ovb"></div></div>
-<script type="application/json" id="data">{"meta": {"id": "e-ml", "grade": 8, "lang": "ml", "tl": "ml", "title": "വായിക്കാം · മലയാളം", "subject": "Malayalam", "emoji": "📖", "c1": "#2a9d8f", "c2": "#007f5f", "back": "../", "hint": "കഠിന വാക്കിൽ ടാപ്പ് ചെയ്യുക. Play കൊണ്ട് വരി പിന്തുടരുക. Slow വേഗം കുറയ്ക്കും."}, "packs": [{"id": "em1", "title": "പനിനീർപ്പൂവ് — സാരം", "emoji": "🌸", "lines": ["പനിനീർപ്പൂവ് ഉള്ളൂർ എസ്. പരമേശ്വരയ്യരുടെ കവിതയാണ്.", "അമൃതധാര എന്ന സമാഹാരത്തിൽ നിന്നെടുത്തതാണ്.", "കവി പൂവിനോട് മാപ്പ് പറയുന്നു.", "അന്തികത്തിൽ എന്നാൽ അരികിൽ എന്നർത്ഥം.", "ഔദ്ധത്യം എന്നാൽ അഹങ്കാരം."], "words": [["പനിനീർപ്പൂവ്", "കവിത"], ["അമൃതധാര", "സമാഹാരം"], ["അന്തികത്തിൽ", "അരികിൽ"], ["ഔദ്ധത്യം", "അഹങ്കാരം"], ["മാപ്പ്", "ക്ഷമ"]], "lineAudio": [["e-ml-em1-L0-W0-പനിനീർപ്പൂവ്", "e-ml-em1-L0-W1-ഉള്ളൂർ", "e-ml-em1-L0-W2-എസ്", "e-ml-em1-L0-W3-പരമേശ്വരയ്യരുടെ", "e-ml-em1-L0-W4-കവിതയാണ്"], ["e-ml-em1-L1-W0-അമൃതധാര", "e-ml-em1-L1-W1-എന്ന", "e-ml-em1-L1-W2-സമാഹാരത്തിൽ", "e-ml-em1-L1-W3-നിന്നെടുത്തതാണ്"], ["e-ml-em1-L2-W0-കവി", "e-ml-em1-L2-W1-പൂവിനോട്", "e-ml-em1-L2-W2-മാപ്പ്", "e-ml-em1-L2-W3-പറയുന്നു"], ["e-ml-em1-L3-W0-അന്തികത്തിൽ", "e-ml-em1-L3-W1-എന്നാൽ", "e-ml-em1-L3-W2-അരികിൽ", "e-ml-em1-L3-W3-എന്നർത്ഥം"], ["e-ml-em1-L4-W0-ഔദ്ധത്യം", "e-ml-em1-L4-W1-എന്നാൽ", "e-ml-em1-L4-W2-അഹങ്കാരം"]], "wordAudio": ["e-ml-em1-wd-പനിനീർപ്പൂവ്", "e-ml-em1-wd-അമൃതധാര", "e-ml-em1-wd-അന്തികത്തിൽ", "e-ml-em1-wd-ഔദ്ധത്യം", "e-ml-em1-wd-മാപ്പ്"]}, {"id": "em2", "title": "അർത്ഥങ്ങൾ", "emoji": "📚", "lines": ["അന്നപൂർണ്ണേശ്വരി സുഭിക്ഷതയുടെ ദേവിയാണ്.", "കൂപ്പുകൈ എന്നാൽ അഞ്ജലി അല്ലെങ്കിൽ പ്രണാമം.", "ആതങ്കം എന്നാൽ സങ്കടം.", "ധാമം എന്നാൽ ഇരിപ്പിടം.", "മാൻപ് എന്നാൽ അഴക്."], "words": [["അന്നപൂർണ്ണേശ്വരി", "ദേവി"], ["കൂപ്പുകൈ", "അഞ്ജലി"], ["ആതങ്കം", "സങ്കടം"], ["ധാമം", "ഇരിപ്പിടം"], ["മാൻപ്", "അഴക്"]], "lineAudio": [["e-ml-em2-L0-W0-അന്നപൂർണ്ണേശ്വരി", "e-ml-em2-L0-W1-സുഭിക്ഷതയുടെ", "e-ml-em2-L0-W2-ദേവിയാണ്"], ["e-ml-em2-L1-W0-കൂപ്പുകൈ", "e-ml-em2-L1-W1-എന്നാൽ", "e-ml-em2-L1-W2-അഞ്ജലി", "e-ml-em2-L1-W3-അല്ലെങ്കിൽ", "e-ml-em2-L1-W4-പ്രണാമം"], ["e-ml-em2-L2-W0-ആതങ്കം", "e-ml-em2-L2-W1-എന്നാൽ", "e-ml-em2-L2-W2-സങ്കടം"], ["e-ml-em2-L3-W0-ധാമം", "e-ml-em2-L3-W1-എന്നാൽ", "e-ml-em2-L3-W2-ഇരിപ്പിടം"], ["e-ml-em2-L4-W0-മാൻപ്", "e-ml-em2-L4-W1-എന്നാൽ", "e-ml-em2-L4-W2-അഴക്"]], "wordAudio": ["e-ml-em2-wd-അന്നപൂർണ്ണേശ്വരി", "e-ml-em2-wd-കൂപ്പുകൈ", "e-ml-em2-wd-ആതങ്കം", "e-ml-em2-wd-ധാമം", "e-ml-em2-wd-മാൻപ്"]}, {"id": "em3", "title": "അനുതാര", "emoji": "👧", "lines": ["അനുതാരയുടെ സ്നേഹിതൻ നീലകണ്ഠൻ ആണ്.", "അസുഖം കാരണം അവൾക്ക് ബാല്യം ആസ്വദിക്കാൻ കഴിഞ്ഞില്ല.", "ചികിത്സയ്ക്കായി അവർ അമ്മാവന്റെ അടുത്തേക്ക് പോകുന്നു.", "വേദനകളുടെ ലോകത്തായിരുന്നു അവളുടെ ജീവിതം."], "words": [["സ്നേഹിതൻ", "friend"], ["ബാല്യം", "childhood"], ["ചികിത്സ", "treatment"], ["അമ്മാവൻ", "uncle"]], "lineAudio": [["e-ml-em3-L0-W0-അനുതാരയുടെ", "e-ml-em3-L0-W1-സ്നേഹിതൻ", "e-ml-em3-L0-W2-നീലകണ്ഠൻ", "e-ml-em3-L0-W3-ആണ്"], ["e-ml-em3-L1-W0-അസുഖം", "e-ml-em3-L1-W1-കാരണം", "e-ml-em3-L1-W2-അവൾക്ക്", "e-ml-em3-L1-W3-ബാല്യം", "e-ml-em3-L1-W4-ആസ്വദിക്കാൻ", "e-ml-em3-L1-W5-കഴിഞ്ഞില്ല"], ["e-ml-em3-L2-W0-ചികിത്സയ്ക്കായി", "e-ml-em3-L2-W1-അവർ", "e-ml-em3-L2-W2-അമ്മാവന്റെ", "e-ml-em3-L2-W3-അടുത്തേക്ക്", "e-ml-em3-L2-W4-പോകുന്നു"], ["e-ml-em3-L3-W0-വേദനകളുടെ", "e-ml-em3-L3-W1-ലോകത്തായിരുന്നു", "e-ml-em3-L3-W2-അവളുടെ", "e-ml-em3-L3-W3-ജീവിതം"]], "wordAudio": ["e-ml-em3-wd-സ്നേഹിതൻ", "e-ml-em3-wd-ബാല്യം", "e-ml-em3-wd-ചികിത്സ", "e-ml-em3-wd-അമ്മാവൻ"]}, {"id": "em4", "title": "ദൈനംദിന വായന", "emoji": "✍️", "lines": ["ഞാൻ എട്ടാം ക്ലാസ്സിലാണ് പഠിക്കുന്നത്.", "മലയാളം ശ്രദ്ധയോടെ വായിക്കണം.", "ഓരോ വാക്കും വ്യക്തമായി ഉച്ചരിക്കുക.", "പതുക്കെ വായിച്ചാൽ മനസ്സിലാകും."], "words": [["ക്ലാസ്", "class"], ["ശ്രദ്ധ", "attention"], ["ഉച്ചരിക്കുക", "pronounce"], ["പതുക്കെ", "slowly"]], "lineAudio": [["e-ml-em4-L0-W0-ഞാൻ", "e-ml-em4-L0-W1-എട്ടാം", "e-ml-em4-L0-W2-ക്ലാസ്സിലാണ്", "e-ml-em4-L0-W3-പഠിക്കുന്നത്"], ["e-ml-em4-L1-W0-മലയാളം", "e-ml-em4-L1-W1-ശ്രദ്ധയോടെ", "e-ml-em4-L1-W2-വായിക്കണം"], ["e-ml-em4-L2-W0-ഓരോ", "e-ml-em4-L2-W1-വാക്കും", "e-ml-em4-L2-W2-വ്യക്തമായി", "e-ml-em4-L2-W3-ഉച്ചരിക്കുക"], ["e-ml-em4-L3-W0-പതുക്കെ", "e-ml-em4-L3-W1-വായിച്ചാൽ", "e-ml-em4-L3-W2-മനസ്സിലാകും"]], "wordAudio": ["e-ml-em4-wd-ക്ലാസ്", "e-ml-em4-wd-ശ്രദ്ധ", "e-ml-em4-wd-ഉച്ചരിക്കുക", "e-ml-em4-wd-പതുക്കെ"]}], "voice": [["e-ml-em1-L0-W0-പനിനീർപ്പൂവ്", "പനിനീർപ്പൂവ്"], ["e-ml-em1-L0-W1-ഉള്ളൂർ", "ഉള്ളൂർ"], ["e-ml-em1-L0-W2-എസ്", "എസ്"], ["e-ml-em1-L0-W3-പരമേശ്വരയ്യരുടെ", "പരമേശ്വരയ്യരുടെ"], ["e-ml-em1-L0-W4-കവിതയാണ്", "കവിതയാണ്"], ["e-ml-em1-L1-W0-അമൃതധാര", "അമൃതധാര"], ["e-ml-em1-L1-W1-എന്ന", "എന്ന"], ["e-ml-em1-L1-W2-സമാഹാരത്തിൽ", "സമാഹാരത്തിൽ"], ["e-ml-em1-L1-W3-നിന്നെടുത്തതാണ്", "നിന്നെടുത്തതാണ്"], ["e-ml-em1-L2-W0-കവി", "കവി"], ["e-ml-em1-L2-W1-പൂവിനോട്", "പൂവിനോട്"], ["e-ml-em1-L2-W2-മാപ്പ്", "മാപ്പ്"], ["e-ml-em1-L2-W3-പറയുന്നു", "പറയുന്നു"], ["e-ml-em1-L3-W0-അന്തികത്തിൽ", "അന്തികത്തിൽ"], ["e-ml-em1-L3-W1-എന്നാൽ", "എന്നാൽ"], ["e-ml-em1-L3-W2-അരികിൽ", "അരികിൽ"], ["e-ml-em1-L3-W3-എന്നർത്ഥം", "എന്നർത്ഥം"], ["e-ml-em1-L4-W0-ഔദ്ധത്യം", "ഔദ്ധത്യം"], ["e-ml-em1-L4-W1-എന്നാൽ", "എന്നാൽ"], ["e-ml-em1-L4-W2-അഹങ്കാരം", "അഹങ്കാരം"], ["e-ml-em1-wd-പനിനീർപ്പൂവ്", "പനിനീർപ്പൂവ്"], ["e-ml-em1-wd-അമൃതധാര", "അമൃതധാര"], ["e-ml-em1-wd-അന്തികത്തിൽ", "അന്തികത്തിൽ"], ["e-ml-em1-wd-ഔദ്ധത്യം", "ഔദ്ധത്യം"], ["e-ml-em1-wd-മാപ്പ്", "മാപ്പ്"], ["e-ml-em2-L0-W0-അന്നപൂർണ്ണേശ്വരി", "അന്നപൂർണ്ണേശ്വരി"], ["e-ml-em2-L0-W1-സുഭിക്ഷതയുടെ", "സുഭിക്ഷതയുടെ"], ["e-ml-em2-L0-W2-ദേവിയാണ്", "ദേവിയാണ്"], ["e-ml-em2-L1-W0-കൂപ്പുകൈ", "കൂപ്പുകൈ"], ["e-ml-em2-L1-W1-എന്നാൽ", "എന്നാൽ"], ["e-ml-em2-L1-W2-അഞ്ജലി", "അഞ്ജലി"], ["e-ml-em2-L1-W3-അല്ലെങ്കിൽ", "അല്ലെങ്കിൽ"], ["e-ml-em2-L1-W4-പ്രണാമം", "പ്രണാമം"], ["e-ml-em2-L2-W0-ആതങ്കം", "ആതങ്കം"], ["e-ml-em2-L2-W1-എന്നാൽ", "എന്നാൽ"], ["e-ml-em2-L2-W2-സങ്കടം", "സങ്കടം"], ["e-ml-em2-L3-W0-ധാമം", "ധാമം"], ["e-ml-em2-L3-W1-എന്നാൽ", "എന്നാൽ"], ["e-ml-em2-L3-W2-ഇരിപ്പിടം", "ഇരിപ്പിടം"], ["e-ml-em2-L4-W0-മാൻപ്", "മാൻപ്"], ["e-ml-em2-L4-W1-എന്നാൽ", "എന്നാൽ"], ["e-ml-em2-L4-W2-അഴക്", "അഴക്"], ["e-ml-em2-wd-അന്നപൂർണ്ണേശ്വരി", "അന്നപൂർണ്ണേശ്വരി"], ["e-ml-em2-wd-കൂപ്പുകൈ", "കൂപ്പുകൈ"], ["e-ml-em2-wd-ആതങ്കം", "ആതങ്കം"], ["e-ml-em2-wd-ധാമം", "ധാമം"], ["e-ml-em2-wd-മാൻപ്", "മാൻപ്"], ["e-ml-em3-L0-W0-അനുതാരയുടെ", "അനുതാരയുടെ"], ["e-ml-em3-L0-W1-സ്നേഹിതൻ", "സ്നേഹിതൻ"], ["e-ml-em3-L0-W2-നീലകണ്ഠൻ", "നീലകണ്ഠൻ"], ["e-ml-em3-L0-W3-ആണ്", "ആണ്"], ["e-ml-em3-L1-W0-അസുഖം", "അസുഖം"], ["e-ml-em3-L1-W1-കാരണം", "കാരണം"], ["e-ml-em3-L1-W2-അവൾക്ക്", "അവൾക്ക്"], ["e-ml-em3-L1-W3-ബാല്യം", "ബാല്യം"], ["e-ml-em3-L1-W4-ആസ്വദിക്കാൻ", "ആസ്വദിക്കാൻ"], ["e-ml-em3-L1-W5-കഴിഞ്ഞില്ല", "കഴിഞ്ഞില്ല"], ["e-ml-em3-L2-W0-ചികിത്സയ്ക്കായി", "ചികിത്സയ്ക്കായി"], ["e-ml-em3-L2-W1-അവർ", "അവർ"], ["e-ml-em3-L2-W2-അമ്മാവന്റെ", "അമ്മാവന്റെ"], ["e-ml-em3-L2-W3-അടുത്തേക്ക്", "അടുത്തേക്ക്"], ["e-ml-em3-L2-W4-പോകുന്നു", "പോകുന്നു"], ["e-ml-em3-L3-W0-വേദനകളുടെ", "വേദനകളുടെ"], ["e-ml-em3-L3-W1-ലോകത്തായിരുന്നു", "ലോകത്തായിരുന്നു"], ["e-ml-em3-L3-W2-അവളുടെ", "അവളുടെ"], ["e-ml-em3-L3-W3-ജീവിതം", "ജീവിതം"], ["e-ml-em3-wd-സ്നേഹിതൻ", "സ്നേഹിതൻ"], ["e-ml-em3-wd-ബാല്യം", "ബാല്യം"], ["e-ml-em3-wd-ചികിത്സ", "ചികിത്സ"], ["e-ml-em3-wd-അമ്മാവൻ", "അമ്മാവൻ"], ["e-ml-em4-L0-W0-ഞാൻ", "ഞാൻ"], ["e-ml-em4-L0-W1-എട്ടാം", "എട്ടാം"], ["e-ml-em4-L0-W2-ക്ലാസ്സിലാണ്", "ക്ലാസ്സിലാണ്"], ["e-ml-em4-L0-W3-പഠിക്കുന്നത്", "പഠിക്കുന്നത്"], ["e-ml-em4-L1-W0-മലയാളം", "മലയാളം"], ["e-ml-em4-L1-W1-ശ്രദ്ധയോടെ", "ശ്രദ്ധയോടെ"], ["e-ml-em4-L1-W2-വായിക്കണം", "വായിക്കണം"], ["e-ml-em4-L2-W0-ഓരോ", "ഓരോ"], ["e-ml-em4-L2-W1-വാക്കും", "വാക്കും"], ["e-ml-em4-L2-W2-വ്യക്തമായി", "വ്യക്തമായി"], ["e-ml-em4-L2-W3-ഉച്ചരിക്കുക", "ഉച്ചരിക്കുക"], ["e-ml-em4-L3-W0-പതുക്കെ", "പതുക്കെ"], ["e-ml-em4-L3-W1-വായിച്ചാൽ", "വായിച്ചാൽ"], ["e-ml-em4-L3-W2-മനസ്സിലാകും", "മനസ്സിലാകും"], ["e-ml-em4-wd-ക്ലാസ്", "ക്ലാസ്"], ["e-ml-em4-wd-ശ്രദ്ധ", "ശ്രദ്ധ"], ["e-ml-em4-wd-ഉച്ചരിക്കുക", "ഉച്ചരിക്കുക"], ["e-ml-em4-wd-പതുക്കെ", "പതുക്കെ"]]}</script>
+<script type="application/json" id="data">{"meta":{"lsKey":"eshan_read_ml_v2","title":"മലയാളം വായന","grade":"Class 8","emoji":"📗","c1":"#2a9d8f","c2":"#007f5f","hint":"വാക്കുകളും വാക്യങ്ങളും നിങ്ങൾ തന്നെ വായിക്കുക — സ്പീക്കർ ഇല്ല. ശരിയായ ഉത്തരം തിരഞ്ഞെടുക്കുക."},"modes":[{"id":"words","emoji":"🔤","title":"വാക്കുകൾ","sub":"വായിക്കൂ · അർത്ഥം തിരഞ്ഞെടുക്കൂ","color":"linear-gradient(135deg,#2a9d8f,#007f5f)"},{"id":"sentences","emoji":"💬","title":"വാക്യം","sub":"വായിക്കൂ · ഇംഗ്ലീഷ് അർത്ഥം","color":"linear-gradient(135deg,#4361ee,#7b2cbf)"},{"id":"passage","emoji":"📄","title":"ഗദ്യം","sub":"വായിക്കൂ · ചോദ്യങ്ങൾ","color":"linear-gradient(135deg,#ff9f1c,#e76f51)"},{"id":"poem","emoji":"🎵","title":"കവിത","sub":"വായിക്കൂ · ചോദ്യങ്ങൾ","color":"linear-gradient(135deg,#ef476f,#b5179e)"}],"words":[{"w":"അച്ചടക്കം","options":["discipline","courage","friendship","health"],"a":0},{"w":"ധൈര്യം","options":["courage","freedom","manners","truth"],"a":0},{"w":"സ്വാതന്ത്ര്യം","options":["freedom","hard work","environment","education"],"a":0},{"w":"കൂട്ടായ്മ","options":["togetherness / unity","betrayal","weary","splendid"],"a":0},{"w":"പരിസ്ഥിതി","options":["environment","patience","imagination","respect"],"a":0},{"w":"വിദ്യാഭ്യാസം","options":["education","health","truth","duty"],"a":0},{"w":"സത്യം","options":["truth","manners","cooperation","courage"],"a":0},{"w":"സൗഹൃദം","options":["friendship","discipline","environment","liberty"],"a":0},{"w":"ക്ഷമ","options":["patience","hard work","health","freedom"],"a":0},{"w":"അധ്വാനം","options":["hard work","truth","togetherness","manners"],"a":0},{"w":"ആരോഗ്യം","options":["health","education","environment","courage"],"a":0},{"w":"മര്യാദ","options":["manners / respect","imagination","betrayal","weary"],"a":0},{"w":"സഹകരണം","options":["cooperation","loneliness","pollution","cheating"],"a":0},{"w":"സമ്മാനം","options":["reward / prize","discipline only","murmur","venture"],"a":0},{"w":"കല്പന","options":["imagination","health","duty","betrayal"],"a":0}],"sentences":[{"s":"അച്ചടക്കം ജീവിതത്തിന്റെ കീലാണ്.","options":["Discipline is the key to life","We must protect the environment","Hard work brings success","Truth is greatest duty"],"a":0},{"s":"നമ്മൾ പരിസ്ഥിതി സംരക്ഷിക്കണം.","options":["We must protect the environment","Education is useless","Patience is bad","Freedom means no rules"],"a":0},{"s":"അധ്വാനത്തിലൂടെ വിജയം ലഭിക്കും.","options":["Success comes through hard work","Friendship is weak","Health does not matter","Togetherness is wrong"],"a":0},{"s":"സത്യം സംസാരിക്കുന്നത് നല്ല മര്യാദയാണ്.","options":["Speaking truth is good manners","Cheating is fine","Environment is enemy","Courage is fear"],"a":0},{"s":"കൂട്ടായ്മയിൽ കഠിന ജോലിയും എളുപ്പമാകും.","options":["Togetherness makes hard work easier","Patience never helps","Education ends","Health is lost"],"a":0},{"s":"വിദ്യാഭ്യാസം മനുഷ്യന്റെ നല്ല സുഹൃത്താണ്.","options":["Education is a good friend to humans","Freedom means silence","Truth is hidden","Manners are useless"],"a":0},{"s":"ക്ഷമ വെച്ചാൽ പ്രശ്നങ്ങൾ പരിഹരിക്കാം.","options":["With patience problems can be solved","Hard work never wins","Cooperation hurts","Environment is small"],"a":0},{"s":"സൗഹൃദം ഹൃദയത്തിന് ആശ്വാസം നൽകുന്നു.","options":["Friendship gives comfort to the heart","Betrayal builds trust","Weary days are best","Imagination is banned"],"a":0}],"passages":[{"title":"അമ്മായിയുടെ സഹായം","text":"അർജുൻ സ്കൂളിൽ നിന്ന് വീട്ടിലേക്ക് നടന്നു. വഴിയിൽ ഒരു വൃദ്ധയായ അമ്മായി ഭാരമുള്ള സാധനങ്ങൾ കൊണ്ട് നടക്കാൻ ബുദ്ധിമുട്ടുന്നു. അർജുൻ നിർത്താതെ അവരുടെ കൈകളിലെ സാധനങ്ങൾ എടുത്ത് വീടുവരെ കൂടെ നടന്നു. അമ്മായി പുഞ്ചിരിച്ച് പറഞ്ഞു, \"മോനേ, നിന്റെ സഹായം എനിക്ക് വലിയ ആശ്വാസമായി.\" അടുത്ത ദിവസം ക്ലാസിൽ ടീച്ചർ സഹകരണവും മര്യാദയും പറഞ്ഞു. അർജുൻ മനസ്സിലാക്കി — ചെറിയ ധൈര്യവും കൂട്ടായ്മയും മറ്റുള്ളവർക്ക് വലിയ സന്തോഷം നൽകും.","questions":[{"q":"അർജുൻ വഴിയിൽ ആരെ കണ്ടു?","options":["An elderly woman struggling with heavy things","A sports coach","A lost wallet","A computer lab"],"a":0},{"q":"അർജുൻ എന്ത് ചെയ്തു?","options":["Helped carry things and walked her home","Kept the items","Ran away","Called police only"],"a":0},{"q":"ടീച്ചർ ക്ലാസിൽ എന്ത് പറഞ്ഞു?","options":["Cooperation and manners","Cybersecurity hacking","Poetry rules only","Betrayal skills"],"a":0},{"q":"അർജുന്റെ പാഠം എന്ത്?","options":["Small courage and togetherness greatly help others","Honesty is useless","Environment does not matter","Discipline is bad"],"a":0}]},{"title":"സത്യത്തിന്റെ പരീക്ഷ","text":"ക്ലാസിൽ ഒരു പരീക്ഷ നടന്നു. രമയുടെ അടുത്തുള്ള കുട്ടി രഹസ്യമായി നോട്ട് നോക്കുന്നത് അവർ കണ്ടു. രമയ്ക്ക് ഭയം തോന്നി, പക്ഷേ സത്യവും അച്ചടക്കവും യഥാർത്ഥ വിദ്യാഭ്യാസമാണെന്ന് ഓർത്തു. പരീക്ഷ കഴിഞ്ഞ് അവർ ടീച്ചറോട് ശാന്തമായി സംസാരിച്ചു. ടീച്ചർ അപമാനിക്കാതെ കൂട്ടായ്മ കൊണ്ട് മെച്ചപ്പെടുത്താമെന്ന് വിശദീകരിച്ചു. സ്കൂളിൽ വഞ്ചന തടയൽ ചർച്ച ചെയ്തു. സത്യം പറയാൻ ചിലപ്പോൾ ബുദ്ധിമുട്ടാണെങ്കിലും അത് മര്യാദ നേടുമെന്ന് രമ മനസ്സിലാക്കി.","questions":[{"q":"പരീക്ഷയിൽ രമ എന്ത് കണ്ടു?","options":["A student secretly looking at notes","A bird in class","A poem only","A trophy"],"a":0},{"q":"രമയ്ക്ക് എന്ത് ഓർമ വന്നു?","options":["Truth and discipline are real education","Cheating is best","Health is nothing","Friendship means hide"],"a":0},{"q":"ടീച്ചർ എന്ത് explain ചെയ്തു?","options":["Improve without insult through togetherness","Never tell truth","Ignore discipline","Copy always"],"a":0},{"q":"രമ learned what?","options":["Truth is hard sometimes but earns respect","Betrayal wins","Hard work fails","Imagination is danger"],"a":0}]}],"poems":[{"title":"അധ്വാനത്തിന്റെ ഗാനം","text":"അധ്വാനം ചെയ്യ്, നീ വിശ്രമിക്കരുത്,\nക്ഷമ കാത്ത്, മനം നല്ലതാക്ക്.\nകൂട്ടായ്മയിൽ വലിയ കാര്യം സാധ്യം,\nവിജയം നേടാം, നമ്മൾക്ക് സാധ്യം.\n\nഅച്ചടക്കം പാലിക്ക്, സത്യം സംസാരിക്ക്,\nമര്യാദയോടെ എല്ലാവരെയും സ്നേഹിക്ക്.","questions":[{"q":"വിജയത്തിന് കവിതാ എന്ത് പറയുന്നു?","options":["Work hard and keep patience","Sleep all day","Hide truth","Avoid togetherness"],"a":0},{"q":"കൂട്ടായ്മയിൽ എന്ത് സാധ്യമാണ്?","options":["Even big tasks can be done","Environment is harmed","Education ends","Health is lost"],"a":0},{"q":"അച്ചടക്കത്തോടെ എന്ത് ചെയ്യണം?","options":["Keep discipline and speak truth","Betray friends","Pollute rivers","Leave school"],"a":0}]},{"title":"പരിസ്ഥിതിയുടെ നാദം","text":"പച്ചപ്പ് കാത്ത്, നദി തെളിഞ്ഞ് ഒഴുകട്ടെ,\nമരം നട്ട്, ആകാശം നീലമാക്കട്ടെ.\nപരിസ്ഥിതി ജീവിതത്തിന്റെ കീലാണ്,\nആരോഗ്യവും സന്തോഷവും അതിൽ നിറയട്ടെ.\n\nകുഴിച്ചിൽ ഇടരുത്, ഭൂമിയെ സ്നേഹിക്കണം,\nപ്രകൃതി സംരക്ഷിക്കണം, നമ്മൾ മറക്കരുത്.","questions":[{"q":"നദിയെക്കുറിച്ച് കവിതാ എന്ത് പറയുന്നു?","options":["Let the river flow clear and clean","Cut all trees","Pollute water","Close schools"],"a":0},{"q":"പരിസ്ഥിതിയെ എന്തായി വിശേഷിപ്പിച്ചു?","options":["Key to life","Source of betrayal","Sign of laziness","Enemy of health"],"a":0},{"q":"ഭൂമിയോട് എന്ത് ചെയ്യണം?","options":["Love the earth; do not litter","Burn plants","Waste water","Ignore health"],"a":0},{"q":"ആരോഗ്യം എന്തുമായി ബന്ധപ്പെട്ടിരിക്കുന്നു?","options":["Protecting nature and environment","Cheating in exams","No discipline","Avoiding friendship"],"a":0}]}]}</script>
 <script>
 const D = JSON.parse(document.getElementById('data').textContent);
-const M = D.meta, PACKS = D.packs, TXT = Object.fromEntries(D.voice || []);
-document.title = M.emoji + ' ' + M.title;
+const M = D.meta;
+document.title = M.emoji + ' ' + M.title + ' · ' + M.grade;
 document.body.style.setProperty('--c1', M.c1);
 document.body.style.setProperty('--c2', M.c2);
-if (M.lang === 'hi') document.body.classList.add('hi');
-if (M.lang === 'ml') document.body.classList.add('ml');
-document.documentElement.lang = M.lang;
 
 const app = document.getElementById('app');
+const ov = document.getElementById('ov');
+const ovb = () => document.getElementById('ovb');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const SKEY = 'read-' + M.id;
-const S = JSON.parse(localStorage.getItem(SKEY) || '{}');
-let slow = localStorage.getItem(SKEY + '-slow') === '1';
-let fontN = +(localStorage.getItem(SKEY + '-fs') || 1);
-const FS = [24, 28, 34];
-const save = () => localStorage.setItem(SKEY, JSON.stringify(S));
-const award = (k, n) => { const p = S[k] || 0; if (n > p) { S[k] = n; save(); return true; } return false; };
 const starStr = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
-const packStars = p => (S[p.id + '-read'] || 0) + (S[p.id + '-tap'] || 0) + (S[p.id + '-build'] || 0);
-const packTotal = () => 9;
 
-const sp = new Audio();
-let ptok = 0;
-const rate = () => slow ? 0.7 : 0.92;
-function stopAudio() { ptok++; sp.pause(); document.querySelectorAll('.on,.playing').forEach(e => { e.classList.remove('on'); e.classList.remove('playing'); }); }
-function playId(id, el) {
-  return new Promise(res => {
-    if (!id) return res(false);
-    let remote = false;
-    const mine = ptok;
-    if (el) el.classList.add(el.classList.contains('w') ? 'on' : 'playing');
-    sp.onended = () => { if (el && mine === ptok) { el.classList.remove('on'); el.classList.remove('playing'); } res(mine === ptok); };
-    sp.onerror = () => {
-      if (mine !== ptok || remote) return res(false);
-      remote = true;
-      const t = TXT[id] || '';
-      sp.src = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=' + M.tl + '&q=' + encodeURIComponent(t.slice(0, 190));
-      sp.defaultPlaybackRate = sp.playbackRate = rate();
-      sp.play().catch(() => {});
-    };
-    sp.src = 'voice/' + id + '.mp3';
-    sp.defaultPlaybackRate = sp.playbackRate = rate();
-    sp.play().catch(e => { if (e.name === 'NotAllowedError') res(false); });
-  });
-}
-async function playSeq(items) {
-  stopAudio();
-  const mine = ptok;
-  for (const {id, el} of items) {
-    if (mine !== ptok) return;
-    if (!(await playId(id, el))) return;
-  }
-}
-function toggleSlow() {
-  slow = !slow; localStorage.setItem(SKEY + '-slow', slow ? '1' : '0');
-  sp.defaultPlaybackRate = sp.playbackRate = rate();
-  document.querySelectorAll('.slow').forEach(b => b.classList.toggle('on', slow));
-}
-function setFs(n) {
-  fontN = n; localStorage.setItem(SKEY + '-fs', n);
-  document.body.style.setProperty('--fs', FS[n] + 'px');
-  document.querySelectorAll('.sizebar button').forEach((b, i) => b.classList.toggle('on', i === n));
+const SKEY = M.lsKey;
+let store = JSON.parse(localStorage.getItem(SKEY) || '{}');
+if (!store.stars) store.stars = {};
+if (!store.tried) store.tried = {};
+const save = () => localStorage.setItem(SKEY, JSON.stringify(store));
+const getStar = id => store.stars[id] || 0;
+const setStar = (id, n) => { if (n > (store.stars[id] || 0)) { store.stars[id] = n; save(); return true; } return false; };
+const markTried = id => { store.tried[id] = true; save(); };
+
+function starsFromAccuracy(correct, total) {
+  if (!total) return 0;
+  const p = correct / total;
+  if (p >= 0.85) return 3;
+  if (p >= 0.65) return 2;
+  if (p >= 0.4) return 1;
+  return 0;
 }
 
-let actx = null;
-function tone(fs, d, type, v) {
-  try {
-    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
-    const t0 = actx.currentTime;
-    fs.forEach((f, k) => {
-      const o = actx.createOscillator(), g = actx.createGain();
-      o.type = type; o.frequency.value = f;
-      g.gain.setValueAtTime(0.0001, t0 + k * d);
-      g.gain.exponentialRampToValueAtTime(v, t0 + k * d + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, t0 + (k + 1) * d);
-      o.connect(g); g.connect(actx.destination);
-      o.start(t0 + k * d); o.stop(t0 + (k + 1) * d + 0.05);
-    });
-  } catch (e) {}
-}
-const ding = () => tone([660, 880, 1175], 0.1, 'sine', 0.3);
-const buzz = () => tone([220, 165], 0.16, 'triangle', 0.3);
-function confetti() {
-  for (let i = 0; i < 16; i++) {
-    const s = document.createElement('span'); s.className = 'conf';
-    s.textContent = ['⭐', '🎉', '✨', '🌟'][i % 4];
-    s.style.left = Math.random() * 100 + 'vw';
-    document.body.appendChild(s); setTimeout(() => s.remove(), 1800);
-  }
+function coverageBanner() {
+  const modes = D.modes.map(m => m.id);
+  const triedAll = modes.every(id => store.tried[id]);
+  const starSum = modes.reduce((s, id) => s + getStar(id), 0);
+  const allGood = modes.every(id => getStar(id) >= 2);
+  if (triedAll && allGood) return { cls: 'great', text: '🎉 എല്ലാ ഭാഗവും — നല്ല നക്ഷത്രങ്ങൾ! നിങ്ങൾ നന്നായി വായിക്കുന്നു.' };
+  if (triedAll) return { cls: 'ok', text: '✅ എല്ലാ ഭാഗവും ശ്രമിച്ചു. ദുർബല മോഡ് വീണ്ടും ചെയ്യുക.' };
+  if (starSum >= 8) return { cls: 'great', text: '🌟 നല്ല നക്ഷത്രങ്ങൾ! ബാക്കി ഭാഗങ്ങൾ പൂർത്തിയാക്കുക.' };
+  const any = modes.some(id => store.tried[id]);
+  if (any) return { cls: 'practice', text: '📚 കൂടുതൽ പരിശീലനം — വീണ്ടും വായിച്ച് 3 നക്ഷത്രം നേടുക.' };
+  return { cls: 'start', text: '👋 നിങ്ങൾ തന്നെ വായിക്കുക, പിന്നെ ഉത്തരം തിരഞ്ഞെടുക്കുക. സ്പീക്കർ ഇല്ല!' };
 }
 
 function home() {
-  const got = PACKS.reduce((s, p) => s + packStars(p), 0);
-  const tot = PACKS.length * packTotal();
+  const b = coverageBanner();
+  const modes = D.modes;
+  const starSum = modes.reduce((s, m) => s + getStar(m.id), 0);
   app.innerHTML = `
     <div class="top">
-      <a href="${M.back}" title="Back">🏠</a>
-      <div class="tt"><small>${M.subject} · Class ${M.grade}</small><b>${M.emoji} ${esc(M.title)}</b></div>
-      <span class="chip">⭐ ${got}/${tot}</span>
-      <button class="slow ${slow ? 'on' : ''}" onclick="toggleSlow()">🐢 Slow</button>
+      <a href="../../index.html" title="Home">🏠</a>
+      <button type="button" class="ib" onclick="history.back()" title="Back">←</button>
+      <div class="tt"><small>${esc(M.grade)}</small><b>${M.emoji} ${esc(M.title)}</b></div>
+      <span class="chip">${starSum}/${modes.length * 3}★</span>
     </div>
-    <div class="hero"><div class="big">${M.emoji}</div><h1>${esc(M.title)}</h1>
-      <p>${M.grade <= 3 ? 'Big words · hear every word · read together' : 'Follow the line · tap hard words · build fluency'}</p></div>
+    <div class="hero"><div class="big">${M.emoji}</div><h1>${esc(M.title)}</h1><p>Silent reading · നിങ്ങൾ വായിക്കുക, ഉത്തരം നൽകുക</p></div>
+    <div class="banner ${b.cls}">${esc(b.text)}</div>
     <div class="hint">💡 ${esc(M.hint)}</div>
-    <div class="sizebar">
-      <button class="${fontN === 0 ? 'on' : ''}" onclick="setFs(0)">A</button>
-      <button class="${fontN === 1 ? 'on' : ''}" onclick="setFs(1)">A+</button>
-      <button class="${fontN === 2 ? 'on' : ''}" onclick="setFs(2)">A++</button>
-    </div>
-    <div class="packs">${PACKS.map(p => {
-      const st = packStars(p);
-      return `<button class="pcard" onclick="openPack('${p.id}')"><span class="em">${p.emoji}</span>
-        <div class="inf"><b>${esc(p.title)}</b><small>${p.lines.length} lines · ${p.words.length} words</small></div>
-        <span class="st">${starStr(Math.min(3, Math.round(st / 3)))}</span></button>`;
-    }).join('')}</div>`;
-  setFs(fontN);
+    <div class="gtiles">${modes.map(m => `
+      <button type="button" class="gt" style="--b:${m.color}" onclick="openMode('${m.id}')">
+        <span class="i">${m.emoji}</span><b>${esc(m.title)}</b><small>${esc(m.sub)}</small>
+        <span class="st">${starStr(getStar(m.id))}</span>
+      </button>`).join('')}</div>`;
 }
 
-const ov = document.getElementById('ov'), ovb = () => document.getElementById('ovb');
 let G = null;
-function openOv(title) {
-  stopAudio();
+function openOv(title, score) {
   document.getElementById('ovt').textContent = title;
-  document.getElementById('ovs').textContent = '';
-  ov.classList.add('show'); document.body.style.overflow = 'hidden';
+  document.getElementById('ovs').textContent = score || '';
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
-function closeOv() { stopAudio(); ov.classList.remove('show'); document.body.style.overflow = ''; G = null; home(); }
-const setScore = t => document.getElementById('ovs').innerHTML = t;
+function closeOv() { ov.classList.remove('show'); document.body.style.overflow = ''; G = null; home(); }
+function setScore(t) { document.getElementById('ovs').textContent = t; }
 
-function openPack(pid) {
-  const p = PACKS.find(x => x.id === pid);
-  G = {p};
-  openOv(p.emoji + ' ' + p.title);
+function openMode(id) {
+  G = { mode: id, correct: 0, total: 0, qi: 0 };
+  const m = D.modes.find(x => x.id === id);
+  openOv(m.emoji + ' ' + m.title, '');
+  if (id === 'words') { G.items = shuffle(D.words); G.i = 0; showWordQ(); }
+  else if (id === 'sentences') { G.items = shuffle(D.sentences); G.i = 0; showSentQ(); }
+  else if (id === 'passage') showPassagePick();
+  else if (id === 'poem') showPoemPick();
+}
+
+function showWordQ() {
+  if (G.i >= G.items.length) return finishMode('words');
+  const item = G.items[G.i];
+  const opts = shuffle(item.options.map((t, i) => ({ t, i })));
   ovb().innerHTML = `<div class="card">
-    <div class="gtiles">
-      <button class="gt" style="--b:linear-gradient(135deg,#4361ee,#7b2cbf)" onclick="startRead()">
-        <span class="i">🔊</span><b>${M.lang === 'hi' ? 'साथ में पढ़ो' : M.lang === 'ml' ? 'കൂടെ വായിക്കാം' : 'Read with me'}</b>
-        <small>${M.lang === 'en' ? 'Hear each word, follow the highlight' : 'വാക്ക് തിരിച്ചറിഞ്ഞ് വായിക്കുക / शब्द सुनकर पढ़ें'}</small></button>
-      <button class="gt" style="--b:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startTap()">
-        <span class="i">👆</span><b>${M.lang === 'hi' ? 'सुनो और चुनो' : M.lang === 'ml' ? 'കേൾക്കൂ, തിരഞ്ഞെടുക്കൂ' : 'Hear & find'}</b>
-        <small>${M.lang === 'en' ? 'Listen, then tap the right word' : 'ശരിയായ വാക്ക് കണ്ടെത്തുക'}</small></button>
-      <button class="gt" style="--b:linear-gradient(135deg,#ff9f1c,#e76f51)" onclick="startBuild()">
-        <span class="i">🧩</span><b>${M.lang === 'hi' ? 'वाक्य बनाओ' : M.lang === 'ml' ? 'വാക്യം ഉണ്ടാക്കൂ' : 'Build the line'}</b>
-        <small>${M.lang === 'en' ? 'Put the words in order' : 'വാക്കുകൾ ക്രമത്തിൽ വയ്ക്കുക'}</small></button>
-      ${p.words.length ? `<button class="gt" style="--b:linear-gradient(135deg,#ef476f,#b5179e)" onclick="startWords()">
-        <span class="i">🃏</span><b>${M.lang === 'hi' ? 'शब्द कार्ड' : M.lang === 'ml' ? 'വാക്ക് കാർഡ്' : 'Word cards'}</b>
-        <small>${M.lang === 'en' ? 'Tap cards to hear hard words' : 'കഠിന വാക്കുകൾ കേൾക്കുക'}</small></button>` : ''}
+    <div class="prog">${G.i + 1} / ${G.items.length}</div>
+    <div class="prompt">ഈ വാക്ക് വായിക്കുക</div>
+    <div class="bigtext">${esc(item.w)}</div>
+    <div class="prompt">ശരിയായ ഇംഗ്ലീഷ് അർത്ഥം തിരഞ്ഞെടുക്കുക</div>
+    <div class="opts" id="opts">${opts.map(o => `<button type="button" class="opt en" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  bindOpts(item.a, () => { G.i++; showWordQ(); });
+}
+
+function showSentQ() {
+  if (G.i >= G.items.length) return finishMode('sentences');
+  const item = G.items[G.i];
+  const opts = shuffle(item.options.map((t, i) => ({ t, i })));
+  ovb().innerHTML = `<div class="card">
+    <div class="prog">${G.i + 1} / ${G.items.length}</div>
+    <div class="prompt">ഈ വാക്യം വായിക്കുക</div>
+    <div class="readbox">${esc(item.s)}</div>
+    <div class="prompt">ശരിയായ ഇംഗ്ലീഷ് അർത്ഥം തിരഞ്ഞെടുക്കുക</div>
+    <div class="opts" id="opts">${opts.map(o => `<button type="button" class="opt en" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  bindOpts(item.a, () => { G.i++; showSentQ(); });
+}
+
+function showPassagePick() {
+  ovb().innerHTML = `<div class="card">
+    <p class="prompt">ഗദ്യം വായിച്ച ശേഷം ചോദ്യങ്ങൾ പരിഹരിക്കുക.</p>
+    <div class="pick">
+      <button type="button" class="pbtn" onclick="startPassage(0)">📄 ${esc(D.passages[0].title)}<small>3+ ചോദ്യങ്ങൾ</small></button>
+      <button type="button" class="pbtn" onclick="startPassage(1)">📄 ${esc(D.passages[1].title)}<small>3+ ചോദ്യങ്ങൾ</small></button>
+      <button type="button" class="pbtn" onclick="startPassage('all')">📚 രണ്ട് ഗദ്യവും<small>പൂർണ്ണ പരിശീലനം</small></button>
     </div>
-    <div style="text-align:center;margin-top:12px"><button class="nx alt" onclick="closeOv()">✕ Close</button></div>
+    <div class="navl"><button type="button" class="nx alt" onclick="closeOv()">← Home</button></div>
   </div>`;
 }
 
-function toks(line) {
-  // Keep punctuation attached lightly; split on spaces
-  return line.trim().split(/\s+/).filter(Boolean);
+function startPassage(which) {
+  G.passages = which === 'all' ? [0, 1] : [which];
+  G.pi = 0; G.correct = 0; G.total = 0; G.qi = 0;
+  showPassageRead();
 }
 
-function startRead() {
-  const p = G.p;
-  G.mode = 'read'; G.i = 0; G.done = 0;
-  openOv('🔊 ' + p.title);
-  showRead();
-}
-function showRead() {
-  const p = G.p;
-  if (G.i >= p.lines.length) {
-    award(p.id + '-read', 3); confetti(); ding();
-    ovb().innerHTML = `<div class="card end"><div class="big">🏆</div><h2>${M.lang === 'ml' ? 'കൊള്ളാം!' : M.lang === 'hi' ? 'शाबाश!' : 'Great reading!'}</h2>
-      <div class="stars">⭐⭐⭐</div>
-      <button class="nx" onclick="startRead()">🔁 Again</button>
-      <button class="nx alt" onclick="openPack('${p.id}')">← Back</button></div>`;
-    return;
-  }
-  const line = p.lines[G.i];
-  const words = toks(line);
-  setScore(`${G.i + 1}/${p.lines.length}`);
+function showPassageRead() {
+  const p = D.passages[G.passages[G.pi]];
   ovb().innerHTML = `<div class="card">
-    <div class="tools">
-      <button class="pill" id="playAll">▶ ${M.lang === 'ml' ? 'പ്ലേ' : M.lang === 'hi' ? 'चलाएँ' : 'Play line'}</button>
-      <button class="pill alt" onclick="stopAudio()">⏸ Stop</button>
+    <div class="prog">ഗദ്യം ${G.pi + 1} / ${G.passages.length}</div>
+    <div class="readbox"><h3>${esc(p.title)}</h3>${esc(p.text)}</div>
+    <p style="text-align:center;font-weight:800;color:#5b5f86">ശ്രദ്ധയോടെ വായിച്ച ശേഷം തുടരുക.</p>
+    <div class="navl"><button type="button" class="nx" onclick="G.qi=0;showPassageQ()">വായിച്ചു →</button></div>
+  </div>`;
+}
+
+function showPassageQ() {
+  const p = D.passages[G.passages[G.pi]];
+  if (G.qi >= p.questions.length) {
+    G.pi++;
+    if (G.pi >= G.passages.length) return finishMode('passage');
+    G.qi = 0;
+    return showPassageRead();
+  }
+  const q = p.questions[G.qi];
+  const opts = shuffle(q.options.map((t, i) => ({ t, i })));
+  ovb().innerHTML = `<div class="card">
+    <div class="prog">${esc(p.title)} · Q ${G.qi + 1}/${p.questions.length}</div>
+    <div class="qtext">${esc(q.q)}</div>
+    <div class="opts" id="opts">${opts.map(o => `<button type="button" class="opt en" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  bindOpts(q.a, () => { G.qi++; showPassageQ(); });
+}
+
+function showPoemPick() {
+  ovb().innerHTML = `<div class="card">
+    <p class="prompt">കവിത വായിച്ച ശേഷം ചോദ്യങ്ങൾ പരിഹരിക്കുക.</p>
+    <div class="pick">
+      <button type="button" class="pbtn" onclick="startPoem(0)">🎵 ${esc(D.poems[0].title)}<small>3+ ചോദ്യങ്ങൾ</small></button>
+      <button type="button" class="pbtn" onclick="startPoem(1)">🎵 ${esc(D.poems[1].title)}<small>3+ ചോദ്യങ്ങൾ</small></button>
+      <button type="button" class="pbtn" onclick="startPoem('all')">📚 രണ്ട് കവിതകളും<small>പൂർണ്ണ പരിശീലനം</small></button>
     </div>
-    <div class="linebox" id="lb">${words.map((w, k) => `<button class="w" data-k="${k}" data-id="${p.lineAudio[G.i][k]}">${esc(w)}</button>`).join('')}</div>
-    <p style="text-align:center;color:#6b6f93;font-weight:700;margin:10px 0 0">💡 ${M.lang === 'en' ? 'Tap any word to hear it alone' : 'ഓരോ വാക്കും ടാപ്പ് ചെയ്ത് കേൾക്കാം / किसी भी शब्द पर टैप करें'}</p>
+    <div class="navl"><button type="button" class="nx alt" onclick="closeOv()">← Home</button></div>
+  </div>`;
+}
+
+function startPoem(which) {
+  G.poems = which === 'all' ? [0, 1] : [which];
+  G.pi = 0; G.correct = 0; G.total = 0; G.qi = 0;
+  showPoemRead();
+}
+
+function showPoemRead() {
+  const p = D.poems[G.poems[G.pi]];
+  ovb().innerHTML = `<div class="card">
+    <div class="prog">കവിത ${G.pi + 1} / ${G.poems.length}</div>
+    <div class="readbox poem"><h3>${esc(p.title)}</h3>${esc(p.text)}</div>
+    <p style="text-align:center;font-weight:800;color:#5b5f86">ഭാവത്തോടെ വായിച്ച ശേഷം തുടരുക.</p>
+    <div class="navl"><button type="button" class="nx" onclick="G.qi=0;showPoemQ()">വായിച്ചു →</button></div>
+  </div>`;
+}
+
+function showPoemQ() {
+  const p = D.poems[G.poems[G.pi]];
+  if (G.qi >= p.questions.length) {
+    G.pi++;
+    if (G.pi >= G.poems.length) return finishMode('poem');
+    G.qi = 0;
+    return showPoemRead();
+  }
+  const q = p.questions[G.qi];
+  const opts = shuffle(q.options.map((t, i) => ({ t, i })));
+  ovb().innerHTML = `<div class="card">
+    <div class="prog">${esc(p.title)} · Q ${G.qi + 1}/${p.questions.length}</div>
+    <div class="qtext">${esc(q.q)}</div>
+    <div class="opts" id="opts">${opts.map(o => `<button type="button" class="opt en" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  bindOpts(q.a, () => { G.qi++; showPoemQ(); });
+}
+
+function bindOpts(correctIdx, next) {
+  let locked = false;
+  document.querySelectorAll('#opts .opt').forEach(btn => {
+    btn.onclick = () => {
+      if (locked) return;
+      locked = true;
+      const pick = +btn.dataset.i;
+      const ok = pick === correctIdx;
+      G.total++;
+      if (ok) G.correct++;
+      document.querySelectorAll('#opts .opt').forEach(b => {
+        b.disabled = true;
+        if (+b.dataset.i === correctIdx) b.classList.add('ok');
+        else if (+b.dataset.i === pick) b.classList.add('bad');
+      });
+      const fb = document.getElementById('fb');
+      fb.className = 'fb ' + (ok ? 'good' : 'bad');
+      fb.textContent = ok ? 'ശരി! 🌟' : 'വീണ്ടും വായിച്ച് ഓർമ്മിക്കുക.';
+      setScore(G.correct + '/' + G.total);
+      setTimeout(next, ok ? 700 : 1200);
+    };
+  });
+}
+
+function finishMode(modeId) {
+  markTried(modeId);
+  const stars = starsFromAccuracy(G.correct, G.total);
+  const improved = setStar(modeId, stars);
+  ovb().innerHTML = `<div class="card end">
+    <div class="big">${stars >= 2 ? '🏆' : '📗'}</div>
+    <h2 style="color:var(--c2);margin:8px 0">Round complete!</h2>
+    <p style="font-weight:800;font-size:18px">${G.correct} / ${G.total} correct</p>
+    <div class="stars">${starStr(stars)}</div>
+    <p style="color:#5b5f86;font-weight:700">${improved ? 'New best stars for this mode!' : 'Keep reading to earn more stars.'}</p>
     <div class="navl">
-      <button class="nx alt" ${G.i === 0 ? 'disabled' : ''} onclick="G.i--;showRead()">← Prev</button>
-      <span class="prog">${G.i + 1} / ${p.lines.length}</span>
-      <button class="nx" onclick="G.i++;showRead()">Next →</button>
+      <button type="button" class="nx" onclick="openMode('${modeId}')">🔁 Again</button>
+      <button type="button" class="nx alt" onclick="closeOv()">← Home</button>
     </div>
   </div>`;
-  document.body.style.setProperty('--fs', FS[fontN] + 'px');
-  document.getElementById('lb').onclick = e => {
-    const b = e.target.closest('.w'); if (!b) return;
-    playId(b.dataset.id, b);
-  };
-  document.getElementById('playAll').onclick = () => {
-    const btns = [...document.querySelectorAll('.w')];
-    playSeq(btns.map(b => ({id: b.dataset.id, el: b})));
-  };
-  // auto-play the line once for struggling readers
-  setTimeout(() => document.getElementById('playAll').click(), 250);
-}
-
-function startTap() {
-  const p = G.p;
-  const items = [];
-  p.lines.forEach((line, li) => toks(line).forEach((w, wi) => {
-    if (w.length >= (M.grade <= 3 ? 2 : 3)) items.push({w, id: p.lineAudio[li][wi], line});
-  }));
-  G.mode = 'tap'; G.queue = shuffle(items).slice(0, Math.min(12, items.length)); G.i = 0; G.ok = 0; G.miss = 0;
-  openOv('👆 Hear & find');
-  showTap();
-}
-function showTap() {
-  if (G.i >= G.queue.length) {
-    const s = G.miss === 0 ? 3 : G.miss <= 3 ? 2 : 1;
-    award(G.p.id + '-tap', s); confetti(); ding();
-    ovb().innerHTML = `<div class="card end"><div class="big">${s === 3 ? '🏆' : '🥳'}</div>
-      <h2>${G.ok}/${G.queue.length} ${M.lang === 'en' ? 'correct' : 'ശരി / सही'}</h2>
-      <div class="stars">${starStr(s)}</div>
-      <button class="nx" onclick="startTap()">🔁 Again</button>
-      <button class="nx alt" onclick="openPack('${G.p.id}')">← Back</button></div>`;
-    return;
-  }
-  const x = G.queue[G.i];
-  const pool = shuffle(G.queue.map(q => q.w).filter((w, i, a) => a.indexOf(w) === i && w !== x.w)).slice(0, 3);
-  const opts = shuffle([x.w, ...pool]);
-  G.answered = false;
-  setScore(`${G.i + 1}/${G.queue.length}`);
-  ovb().innerHTML = `<div class="card" style="text-align:center">
-    <button class="pill" style="width:80px;height:80px;border-radius:50%;font-size:32px" onclick="playId('${x.id}',this)">🔊</button>
-    <p class="fb" style="color:#5b5f86">${M.lang === 'en' ? 'Which word did you hear?' : M.lang === 'hi' ? 'कौन-सा शब्द सुना?' : 'ഏത് വാക്ക് കേട്ടു?'}</p>
-    <div class="opts">${opts.map(o => `<button class="opt" data-w="${esc(o)}" onclick="pickTap(this)">${esc(o)}</button>`).join('')}</div>
-    <div id="after"></div>
-  </div>`;
-  playId(x.id);
-}
-function pickTap(btn) {
-  if (G.answered) return;
-  G.answered = true;
-  const x = G.queue[G.i];
-  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
-  if (btn.dataset.w === x.w) {
-    btn.classList.add('ok'); ding(); G.ok++;
-    document.getElementById('after').innerHTML = `<div class="fb good">${M.lang === 'en' ? 'Yes!' : 'ശരി! / सही!'}</div><button class="nx" onclick="G.i++;showTap()">Next →</button>`;
-  } else {
-    btn.classList.add('bad'); buzz(); G.miss++;
-    document.querySelectorAll('.opt').forEach(b => { if (b.dataset.w === x.w) b.classList.add('ok'); });
-    document.getElementById('after').innerHTML = `<div class="fb bad">${M.lang === 'en' ? 'The green one is right' : 'പച്ച നിറമുള്ളത് ശരി / हरा सही है'}</div><button class="nx" onclick="G.i++;showTap()">Next →</button>`;
-  }
-}
-
-function startBuild() {
-  const p = G.p;
-  G.mode = 'build'; G.queue = shuffle(p.lines.map((line, li) => ({line, ids: p.lineAudio[li]}))); G.i = 0; G.miss = 0;
-  openOv('🧩 Build the line');
-  showBuild();
-}
-function showBuild() {
-  if (G.i >= G.queue.length) {
-    const s = G.miss === 0 ? 3 : G.miss <= 2 ? 2 : 1;
-    award(G.p.id + '-build', s); confetti(); ding();
-    ovb().innerHTML = `<div class="card end"><div class="big">🏆</div><div class="stars">${starStr(s)}</div>
-      <button class="nx" onclick="startBuild()">🔁 Again</button>
-      <button class="nx alt" onclick="openPack('${G.p.id}')">← Back</button></div>`;
-    return;
-  }
-  const x = G.queue[G.i];
-  G.parts = toks(x.line); G.pos = 0;
-  setScore(`${G.i + 1}/${G.queue.length}`);
-  G.curIds = x.ids;
-  const tiles = shuffle(G.parts.map((w, i) => ({w, i, id: x.ids[i]})));
-  ovb().innerHTML = `<div class="card">
-    <p class="fb" style="color:#5b5f86">${M.lang === 'en' ? 'Tap the words in the right order' : 'ശരിയായ ക്രമത്തിൽ ടാപ്പ് ചെയ്യുക / सही क्रम में टैप करें'}</p>
-    <button class="pill alt" onclick="playSeq(G.curIds.map(id=>({id})))">🔊 ${M.lang === 'en' ? 'Hear the line first' : 'ആദ്യം കേൾക്കുക / पहले सुनें'}</button>
-    <div class="built" id="built"></div>
-    <div class="pool">${tiles.map(t => `<button class="chipb" data-i="${t.i}" data-w="${esc(t.w)}" data-id="${t.id}" onclick="pickBuild(this)">${esc(t.w)}</button>`).join('')}</div>
-    <div id="after"></div>
-  </div>`;
-}
-function pickBuild(btn) {
-  if (+btn.dataset.i === G.pos) {
-    document.getElementById('built').insertAdjacentHTML('beforeend', `<span>${esc(btn.dataset.w)}</span>`);
-    playId(btn.dataset.id);
-    btn.remove(); G.pos++;
-    if (G.pos === G.parts.length) {
-      ding(); confetti();
-      document.getElementById('after').innerHTML = `<div class="fb good">${M.lang === 'en' ? 'Perfect!' : 'കൊള്ളാം! / शाबाश!'}</div><button class="nx" onclick="G.i++;showBuild()">Next →</button>`;
-    }
-  } else {
-    G.miss++; buzz(); btn.classList.add('bad'); setTimeout(() => btn.classList.remove('bad'), 350);
-  }
-}
-
-function startWords() {
-  const p = G.p;
-  openOv('🃏 Word cards');
-  ovb().innerHTML = `<div class="card"><div class="wgrid">${p.words.map((w, k) => {
-    const id = p.wordAudio[k];
-    return `<button class="wcard" onclick="playId('${id}',this)"><div class="e">${esc(w[1] || '🔤')}</div><div class="ww">${esc(w[0])}</div></button>`;
-  }).join('')}</div>
-  <div style="text-align:center;margin-top:14px"><button class="nx alt" onclick="openPack('${p.id}')">← Back</button></div></div>`;
 }
 
 home();

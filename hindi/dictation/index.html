@@ -171,29 +171,30 @@ function home() {
   const g = gotStars(), t = totalStars(), pct = t ? Math.round(g / t * 100) : 0;
   app.innerHTML = `
     <div class="top">
-      <a class="icon" href="../" title="Subjects">🏠</a>
+      <a class="icon" href="../../index.html" title="Home">🏠</a>
+      <button type="button" class="icon" onclick="history.back()" title="Back">←</button>
       <div class="tt"><small>${M.subject} · Class 8</small><b>${M.emoji} ${esc(M.title)}</b></div>
       <span class="chip">⭐ ${g}/${t}</span>
       <button class="slow ${slow ? 'on' : ''}" onclick="toggleSlow()">🐢 Slow</button>
     </div>
     <div class="hero"><div class="big">${M.emoji}</div>
       <h1>${esc(M.title)}</h1>
-      <p>${M.lang === 'hi' ? 'सुनो, याद करो, लिखो — श्रुतलेख अभ्यास' : 'Listen, remember, write — Poorvi textbook words'}</p>
+      <p>${M.lang === 'hi' ? 'क्रम: फ्लैश → चुनो → लिखो' : 'Order: Flash → Pick spelling → Type'}</p>
     </div>
     <div class="starbox"><div class="row"><span>⭐ ${M.lang === 'hi' ? 'मेरे सितारे' : 'My stars'}</span><span>${g} / ${t} · ${pct}%</span></div>
       <div class="bar"><i style="width:${pct}%"></i></div></div>
     <div class="gtiles">
-      <button class="gt" style="--b:linear-gradient(135deg,#4361ee,#7b2cbf)" onclick="startDrill('type')">
-        <span class="i">⌨️</span><b>${M.lang === 'hi' ? 'लिखकर अभ्यास' : 'Type dictation'}</b>
-        <small>${M.lang === 'hi' ? 'सुनो और लिखो (असली टेस्ट जैसा)' : 'Listen and type (like the real test)'}</small>
+      <button class="gt" style="--b:linear-gradient(135deg,#ff9f1c,#e76f51)" onclick="startDrill('flash')">
+        <span class="i">🃏</span><b>${M.lang === 'hi' ? '1 · फ्लैशकार्ड' : '1 · Letter flash'}</b>
+        <small>${M.lang === 'hi' ? 'सुनो, फिर शब्द देखो' : 'Listen first, then reveal the word'}</small>
       </button>
       <button class="gt" style="--b:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startDrill('mcq')">
-        <span class="i">🎯</span><b>${M.lang === 'hi' ? 'सही शब्द चुनो' : 'Pick the spelling'}</b>
+        <span class="i">🎯</span><b>${M.lang === 'hi' ? '2 · सही शब्द चुनो' : '2 · Pick the spelling'}</b>
         <small>${M.lang === 'hi' ? 'सुनो और सही विकल्प चुनो' : 'Hear it, then choose the correct word'}</small>
       </button>
-      <button class="gt" style="--b:linear-gradient(135deg,#ff9f1c,#e76f51)" onclick="startDrill('flash')">
-        <span class="i">🃏</span><b>${M.lang === 'hi' ? 'फ्लैशकार्ड' : 'Flash listen'}</b>
-        <small>${M.lang === 'hi' ? 'सुनो, फिर शब्द देखो' : 'Listen first, then reveal the word'}</small>
+      <button class="gt" style="--b:linear-gradient(135deg,#4361ee,#7b2cbf)" onclick="startDrill('type')">
+        <span class="i">⌨️</span><b>${M.lang === 'hi' ? '3 · लिखकर अभ्यास' : '3 · Type dictation'}</b>
+        <small>${M.lang === 'hi' ? 'सुनो और लिखो (असली टेस्ट जैसा)' : 'Listen and type (like the real test)'}</small>
       </button>
       ${M.lang === 'hi' ? `<a class="gt" style="--b:linear-gradient(135deg,#ef476f,#b5179e);display:block" href="../../hindi-revision/">
         <span class="i">📕</span><b>पूरा हिंदी रिवीज़न</b>

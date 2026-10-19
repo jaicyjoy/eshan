@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Value Education | Class 8</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;color:#134e4a;background:linear-gradient(180deg,#ccfbf1 0%,#fff7ed 45%,#fef3c7 100%);min-height:100vh;line-height:1.5}
+button{font-family:inherit;cursor:pointer}
+#root{max-width:920px;margin:0 auto;padding:10px 14px 80px}
+.top{position:sticky;top:8px;z-index:20;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:20px;color:#fff;background:linear-gradient(135deg,#0d9488,#f97316);box-shadow:0 6px 0 rgba(13,148,136,.35)}
+.top button{border:0;background:#fff;color:#0f766e;width:44px;height:44px;border-radius:50%;font-size:18px;font-weight:800;flex:none}
+.top .mid{flex:1;min-width:0}
+.top .mid small{display:block;font-size:12px;font-weight:800;opacity:.92;text-transform:uppercase;letter-spacing:.4px}
+.top .mid b{display:block;font-size:18px;line-height:1.2}
+.chip{background:rgba(255,255,255,.28);border-radius:99px;padding:5px 12px;font-weight:800;font-size:13px;white-space:nowrap}
+.hero{text-align:center;padding:16px 6px 8px}
+.hero .em{font-size:56px;display:inline-block;animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px)}}
+.hero h1{margin:6px 0 0;font-size:30px;color:#0f766e}
+.hero p{margin:4px 0 0;color:#115e59;font-size:16px;font-weight:600}
+.banner{background:#fff;border-radius:22px;padding:14px 16px;margin:12px 0;box-shadow:0 6px 0 #99f6e4;border-left:6px solid #f97316}
+.banner .row{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:17px;color:#0f766e;gap:8px;flex-wrap:wrap}
+.bar{height:14px;background:#e6fffa;border-radius:99px;overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#0d9488,#fb923c);transition:width .45s}
+.banner small{display:block;margin-top:8px;color:#64748b;font-size:14px;font-weight:600}
+.msg{margin-top:10px;padding:10px 12px;border-radius:14px;font-weight:800;font-size:15px}
+.msg.win{background:#d1fae5;color:#065f46}
+.msg.practice{background:#ffedd5;color:#9a3412}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:8px}
+.lcard{border:0;border-radius:22px;padding:16px;text-align:left;color:#fff;background:linear-gradient(145deg,var(--c1),var(--c2));box-shadow:0 7px 0 rgba(0,0,0,.14);transition:transform .12s}
+.lcard:active{transform:translateY(4px);box-shadow:0 3px 0 rgba(0,0,0,.14)}
+.lcard .sub{font-size:12px;font-weight:800;text-transform:uppercase;opacity:.92}
+.lcard .ic{font-size:42px;float:right;line-height:1}
+.lcard h2{margin:4px 0 8px;font-size:21px;line-height:1.25}
+.lcard .stars{font-size:18px;letter-spacing:2px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.tab{border:0;border-radius:14px;padding:11px 6px;font-weight:800;font-size:14px;background:#fff;color:#0f766e;box-shadow:0 4px 0 #99f6e4}
+.tab.on{background:#0d9488;color:#fff;box-shadow:0 4px 0 #0f766e}
+.panel{display:none}
+.panel.on{display:block}
+.learn{display:grid;gap:10px}
+.lcard2{background:#fff;border-radius:18px;padding:14px;box-shadow:0 4px 0 #99f6e4;border-left:5px solid #0d9488}
+.lcard2 h3{margin:0 0 6px;font-size:17px;color:#0f766e}
+.lcard2 p{margin:0;font-size:16px;color:#334155}
+.lcard2.flip{cursor:pointer;position:relative;min-height:100px}
+.lcard2.flip .back{display:none;margin-top:8px;padding-top:8px;border-top:2px dashed #99f6e4;color:#475569;font-size:15px}
+.lcard2.flip.open .back{display:block}
+.lcard2.flip small{color:#f97316;font-weight:800}
+.keyval{background:linear-gradient(135deg,#fff7ed,#ffedd5);border:2px solid #fdba74;border-radius:16px;padding:12px;margin-top:12px;font-weight:700;color:#9a3412}
+.act{background:#fff;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 4px 0 #99f6e4}
+.act h3{margin:0 0 8px;font-size:17px;color:#0f766e}
+.act p{margin:0 0 10px;color:#475569;font-size:15px}
+.opts{display:grid;gap:8px}
+.opt{border:2px solid #ccfbf1;background:#f0fdfa;border-radius:14px;padding:11px 12px;font-size:15px;font-weight:700;text-align:left;color:#134e4a;box-shadow:0 3px 0 #99f6e4}
+.opt:disabled{cursor:default}
+.opt.ok{background:#bbf7d0;border-color:#22c55e;box-shadow:0 3px 0 #22c55e}
+.opt.bad{background:#fecaca;border-color:#ef4444;box-shadow:0 3px 0 #ef4444}
+.feed{margin-top:10px;font-weight:800;font-size:14px;padding:8px 10px;border-radius:12px}
+.feed.good{background:#d1fae5;color:#065f46}
+.feed.bad{background:#fee2e2;color:#991b1b}
+.mh{font-weight:800;color:#0f766e;margin-bottom:10px;text-align:center;font-size:15px}
+.mcols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.mcols{grid-template-columns:1fr}}
+.mcol{display:flex;flex-direction:column;gap:8px}
+.mcol h4{margin:0;text-align:center;font-size:14px;color:#64748b}
+.mb{border:2px solid #ccfbf1;background:#fff;border-radius:12px;padding:10px;font-size:14px;font-weight:700;box-shadow:0 3px 0 #99f6e4}
+.mb.sel{background:#ffedd5;border-color:#fb923c;box-shadow:0 3px 0 #fb923c}
+.mb.done{background:#bbf7d0;border-color:#22c55e;opacity:.85}
+.pill{border:0;border-radius:99px;padding:10px 18px;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(135deg,#0d9488,#14b8a6);box-shadow:0 4px 0 #0f766e;margin-top:8px}
+.pill.coral{background:linear-gradient(135deg,#f97316,#fb923c);box-shadow:0 4px 0 #c2410c}
+.quizbox{background:#fff;border-radius:20px;padding:16px;box-shadow:0 6px 0 #99f6e4}
+.qhead{display:flex;justify-content:space-between;align-items:center;font-weight:800;color:#0f766e;margin-bottom:10px;font-size:14px}
+.qq{font-size:18px;font-weight:800;color:#134e4a;margin:8px 0 12px;line-height:1.4}
+.blank{display:inline-block;min-width:80px;border-bottom:3px solid #f97316;margin:0 4px}
+.inp{width:100%;border:2px solid #99f6e4;border-radius:12px;padding:10px 12px;font-size:16px;font-weight:600;margin-top:8px}
+.ov{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;background:linear-gradient(165deg,#ecfdf5,#fff7ed)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#0d9488,#f97316)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;flex:none}
+.ovtop .t{flex:1;font-weight:800;font-size:16px}
+.end{text-align:center;padding:20px}
+.end .big{font-size:56px}
+.end h2{margin:8px 0;color:#0f766e}
+.end .stars{font-size:32px;letter-spacing:3px}
+.done-tag{display:inline-block;background:#d1fae5;color:#065f46;font-size:12px;font-weight:800;padding:3px 10px;border-radius:99px;margin-left:6px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const STORAGE = 'eshan_ve_v1';
+const HOME = '../index.html';
+let store = JSON.parse(localStorage.getItem(STORAGE) || '{}');
+const save = () => localStorage.setItem(STORAGE, JSON.stringify(store));
+
+function starFromPct(p) {
+  if (p >= 90) return 3;
+  if (p >= 70) return 2;
+  if (p >= 50) return 1;
+  return 0;
+}
+function starStr(n) { return '★'.repeat(n) + '☆'.repeat(3 - n); }
+function lessonRec(id) {
+  if (!store[id]) store[id] = { stars: 0, acts: {}, learnDone: false };
+  return store[id];
+}
+function awardStars(id, pct) {
+  const r = lessonRec(id);
+  const s = starFromPct(pct);
+  if (s > r.stars) { r.stars = s; save(); return true; }
+  save();
+  return false;
+}
+
+const LESSONS = [
+  {
+    id: 'ch3',
+    title: 'Veiled Betrayal',
+    sub: 'Ch 3 · Cyber Safety',
+    emoji: '🛡️',
+    c1: '#0d9488',
+    c2: '#0891b2',
+    key: 'Be careful and responsible on the internet. Never share personal information or passwords with strangers.',
+    learn: [
+      { t: 'Cybersecurity', b: 'Protecting computer systems, networks, and data from digital attacks and harm.' },
+      { t: 'Cybercrime', b: 'Crimes that use computers or the internet — stealing data, tricking people, or harassing online.' },
+      { t: 'Personal information', b: 'Name, address, phone, school, photos, passwords, bank details — NEVER share these with strangers online.' },
+      { t: 'Hacking', b: 'Unauthorized access to someone\'s computer, account, or network without permission.' },
+      { t: 'Phishing', b: 'Fake emails or websites designed to trick you into giving passwords or bank details.' },
+      { t: 'Cyberbullying', b: 'Harassing, teasing, or hurting someone repeatedly using the internet or messages.' },
+      { t: 'Identity theft', b: 'Stealing personal information to pretend to be you and misuse your accounts or money.' }
+    ],
+    activities: [
+      {
+        id: 'story-rohan',
+        title: 'Mini story: Rohan & Alex',
+        intro: 'Rohan met "Alex" in an online game. Alex seemed friendly and asked for Rohan\'s gaming password "just to help level up." Rohan shared it. Alex used the linked bank account and emptied it.',
+        type: 'mcq',
+        q: 'What is the best lesson from Rohan\'s story?',
+        opts: [
+          'Online friends are always trustworthy if they play the same game',
+          'Never share passwords — even with online friends you have never met in real life',
+          'Passwords are safe to share if you change them later',
+          'Only share passwords with people who have more points than you'
+        ],
+        a: 1,
+        ok: 'Correct! Passwords are private. Real friends never pressure you to share them.'
+      },
+      {
+        id: 'match-crime',
+        title: 'Match cybercrime types',
+        type: 'match',
+        left: ['Hacking', 'Phishing', 'Cyberbullying', 'Identity theft'],
+        right: [
+          'Harassing someone online again and again',
+          'Breaking into systems without permission',
+          'Fake messages to steal your login details',
+          'Using stolen info to pretend to be you'
+        ],
+        pairs: [[0,1],[1,2],[2,0],[3,3]]
+      },
+      {
+        id: 'safe-share',
+        title: 'Safe or risky?',
+        type: 'pick',
+        q: 'Your online nickname in a public forum — is sharing it with strangers usually OK?',
+        opts: ['Safe — nicknames are never personal', 'Risky — still be careful; don\'t link it to real identity'],
+        a: 1
+      },
+      {
+        id: 'safe-share2',
+        title: 'Safe or risky? #2',
+        type: 'pick',
+        q: 'Posting your full home address in a chat with someone you only know online?',
+        opts: ['Safe if they seem nice', 'Never — address is personal information'],
+        a: 1
+      },
+      {
+        id: 'fill-cyber',
+        title: 'Fill the blank',
+        type: 'fill',
+        q: 'Protecting systems and data from digital attacks is called ___.',
+        answers: ['cybersecurity', 'cyber security']
+      }
+    ],
+    quiz: [
+      { q: 'Cybersecurity means…', o: ['Sharing passwords safely', 'Protecting systems, networks and data from digital attacks', 'Using more apps', 'Deleting all photos'], a: 1 },
+      { q: 'Which is personal information you must NOT share with strangers?', o: ['Favourite colour', 'School name and phone number', 'Favourite cartoon', 'A joke'], a: 1 },
+      { q: 'Phishing is…', o: ['Catching fish online', 'Fake emails/sites to steal information', 'A type of sport', 'Strong password'], a: 1 },
+      { q: 'Cyberbullying is…', o: ['Helping homework online', 'Harassing someone on the internet', 'Learning coding', 'Playing games fairly'], a: 1 },
+      { q: 'Identity theft means…', o: ['Changing your hairstyle', 'Stealing personal info to pretend to be you', 'Making a new email', 'Saving photos'], a: 1 },
+      { q: 'Hacking is…', o: ['Authorized IT repair', 'Unauthorized access to computers or accounts', 'Typing fast', 'Using antivirus'], a: 1 },
+      { q: 'Rohan\'s mistake was…', o: ['Playing games', 'Sharing his password with online "friend" Alex', 'Using a bank', 'Having a nickname'], a: 1 },
+      { q: 'You should be ___ while using the internet.', o: ['careless', 'careful and responsible', 'silent always', 'offline only'], a: 1 },
+      { q: 'Bank details should be shared with…', o: ['Online strangers', 'Nobody except trusted parents/guardians and official secure sites you use with adults', 'Everyone in chat', 'Game moderators you don\'t know'], a: 1 },
+      { q: 'Cybercrime uses…', o: ['Only phones without internet', 'Computers and the internet', 'Only books', 'Sports equipment'], a: 1 }
+    ]
+  },
+  {
+    id: 'ch4',
+    title: 'Tamae Watanabe',
+    sub: 'Ch 4 · Willpower & diligence',
+    emoji: '🏔️',
+    c1: '#14b8a6',
+    c2: '#f97316',
+    key: 'With willpower, hard work and determination, we can achieve even the hardest goals.',
+    learn: [
+      { t: 'Willpower', b: 'Inner strength to keep going and not give up even when things are difficult.' },
+      { t: 'Diligent', b: 'Hardworking and careful — doing your tasks regularly and with focus.' },
+      { t: 'Ascent', b: 'The act of climbing up or rising — like climbing a mountain toward the summit.' },
+      { t: 'Watanabe\'s spirit', b: 'She climbed Mount Everest despite obstacles because of strong willpower, determination, and hard training.' },
+      { t: 'Role of diligence', b: 'She practised regularly, prepared carefully, and stayed focused — diligence turned effort into success.' }
+    ],
+    activities: [
+      {
+        id: 'vocab-match',
+        title: 'Vocabulary match',
+        type: 'match',
+        left: ['Willpower', 'Diligent', 'Ascent'],
+        right: ['Climbing up / rising', 'Hardworking and careful', 'Inner strength to keep going'],
+        pairs: [[0,2],[1,1],[2,0]]
+      },
+      {
+        id: 'why-climb',
+        title: 'Why did Watanabe climb Everest?',
+        type: 'mcq',
+        q: 'What helped Watanabe climb Mt Everest despite obstacles?',
+        opts: [
+          'She gave up when it was hard',
+          'Strong willpower, determination, and training hard without giving up',
+          'She never practised',
+          'She only watched videos about mountains'
+        ],
+        a: 1,
+        ok: 'Yes! Willpower + determination + training made the climb possible.'
+      },
+      {
+        id: 'diligence',
+        title: 'How diligence helped',
+        type: 'mcq',
+        q: 'How did being diligent help Watanabe succeed?',
+        opts: [
+          'She skipped practice to rest always',
+          'She practised regularly, prepared carefully, and stayed focused',
+          'She ignored safety rules',
+          'She climbed without any plan'
+        ],
+        a: 1,
+        ok: 'Diligence means steady, careful work over time.'
+      },
+      {
+        id: 'fill-will',
+        title: 'Fill the blank',
+        type: 'fill',
+        q: 'Inner strength to keep going despite difficulties is called ___.',
+        answers: ['willpower', 'will power']
+      },
+      {
+        id: 'tf-everest',
+        title: 'True or false',
+        type: 'pick',
+        q: 'With willpower and hard work, even very hard goals can be achieved.',
+        opts: ['True', 'False'],
+        a: 0
+      }
+    ],
+    quiz: [
+      { q: 'Willpower is…', o: ['Giving up quickly', 'Inner strength to keep going despite difficulties', 'Avoiding all work', 'Only for athletes'], a: 1 },
+      { q: 'A diligent person is…', o: ['Lazy and careless', 'Hardworking and careful in work', 'Always sleeping', 'Never learning'], a: 1 },
+      { q: 'Ascent means…', o: ['Going down a hill', 'The act of climbing up / rising', 'Eating lunch', 'Writing homework'], a: 1 },
+      { q: 'Watanabe climbed Everest because of…', o: ['Luck only', 'Willpower, determination, and hard training', 'No obstacles', 'Never practising'], a: 1 },
+      { q: 'Diligence helped her by…', o: ['Skipping practice', 'Practising regularly and preparing carefully', 'Ignoring goals', 'Quitting early'], a: 1 },
+      { q: 'Determination means…', o: ['Changing your mind every minute', 'Firm purpose to reach a goal', 'Forgetting the goal', 'Waiting forever'], a: 1 },
+      { q: 'The chapter teaches that hard goals need…', o: ['No effort', 'Willpower and hard work', 'Only wishes', 'Avoiding challenges'], a: 1 },
+      { q: 'Staying focused during preparation is part of…', o: ['diligence', 'carelessness', 'phishing', 'hacking'], a: 0 },
+      { q: 'Mount Everest is a symbol of…', o: ['An easy walk', 'A very difficult challenge that needs effort', 'A computer network', 'A phishing email'], a: 1 },
+      { q: 'Key value: we can achieve hard goals with…', o: ['willpower, hard work and determination', 'sharing passwords online', 'cyberbullying', 'ignoring practice'], a: 0 }
+    ]
+  }
+];
+
+let view = { page: 'hub', lessonId: null, tab: 'learn' };
+let quizRun = null;
+
+function progressStats() {
+  let covered = 0, totalStars = 0, maxStars = LESSONS.length * 3;
+  LESSONS.forEach(L => {
+    const r = lessonRec(L.id);
+    if (r.learnDone || r.stars > 0 || Object.keys(r.acts || {}).length) covered++;
+    totalStars += r.stars || 0;
+  });
+  const allQuiz = LESSONS.every(L => lessonRec(L.id).stars >= 1);
+  const allMax = LESSONS.every(L => lessonRec(L.id).stars === 3);
+  let msg = '';
+  if (allMax) msg = 'win|🌟 Amazing! All lessons at 3 stars — you mastered Value Education!';
+  else if (allQuiz) msg = 'practice|Great coverage! Push quizzes to 90%+ for 3 stars each.';
+  else msg = 'practice|Keep going — flip all Learn cards, finish activities, then take each quiz.';
+  const pct = Math.round((covered / LESSONS.length) * 100);
+  return { covered, pct, totalStars, maxStars, msg };
+}
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+
+function topBar(title, sub, chip) {
+  return `<div class="top">
+    <button type="button" aria-label="Home" onclick="location.href='${HOME}'">🏠</button>
+    <button type="button" aria-label="Back" onclick="goBack()">←</button>
+    <div class="mid"><small>${esc(sub || 'Class 8')}</small><b>${esc(title)}</b></div>
+    ${chip ? `<span class="chip">${chip}</span>` : ''}
+  </div>`;
+}
+
+window.goBack = function() {
+  if (quizRun) { closeQuiz(); return; }
+  if (view.page === 'lesson') { view.page = 'hub'; view.lessonId = null; render(); return; }
+  if (history.length > 1) history.back();
+  else location.href = HOME;
+};
+
+function renderHub() {
+  const st = progressStats();
+  const [mc, mt] = st.msg.split('|');
+  const cards = LESSONS.map(L => {
+    const r = lessonRec(L.id);
+    return `<button type="button" class="lcard" style="--c1:${L.c1};--c2:${L.c2}" onclick="openLesson('${L.id}')">
+      <span class="ic">${L.emoji}</span><span class="sub">${esc(L.sub)}</span>
+      <h2>${esc(L.title)}</h2>
+      <div class="stars">${starStr(r.stars || 0)}</div>
+    </button>`;
+  }).join('');
+  return topBar('Value Education', 'Eshan · Class 8', `⭐ ${st.totalStars}/${st.maxStars}`) + `
+    <div class="hero"><div class="em">💎</div><h1>Value Education</h1><p>Cyber safety &amp; willpower — learn, play, quiz!</p></div>
+    <div class="banner">
+      <div class="row"><span>Progress</span><span>${st.covered}/${LESSONS.length} lessons touched · ${st.totalStars} ⭐ total</span></div>
+      <div class="bar"><i style="width:${st.pct}%"></i></div>
+      <small>Mom can check stars here — each quiz awards 0–3 stars (90%+ = 3 stars).</small>
+      <div class="msg ${mc}">${esc(mt)}</div>
+    </div>
+    <div class="grid">${cards}</div>`;
+}
+
+function renderLearn(L) {
+  const r = lessonRec(L.id);
+  return L.learn.map((c, i) => `
+    <div class="lcard2 flip" onclick="this.classList.toggle('open');markLearn('${L.id}')">
+      <h3>${esc(c.t)}</h3>
+      <small>Tap to see more ▼</small>
+      <div class="back">${esc(c.b)}</div>
+    </div>`).join('') + `<div class="keyval">🔑 Key value: ${esc(L.key)}</div>`;
+}
+
+window.markLearn = function(id) {
+  const r = lessonRec(id);
+  r.learnDone = true;
+  save();
+};
+
+function renderActivity(L, act) {
+  const r = lessonRec(L.id);
+  const done = r.acts[act.id];
+  let inner = `<h3>${esc(act.title)}${done ? '<span class="done-tag">Done</span>' : ''}</h3>`;
+  if (act.intro) inner += `<p>${esc(act.intro)}</p>`;
+  if (act.type === 'mcq' || act.type === 'pick') {
+    inner += `<p class="qq">${esc(act.q)}</p><div class="opts" id="act-${act.id}">` +
+      act.opts.map((o, i) => `<button type="button" class="opt" data-i="${i}" onclick="actMcq('${L.id}','${act.id}',${i},${act.a})">${esc(o)}</button>`).join('') +
+      `</div><div id="feed-${act.id}"></div>`;
+  } else if (act.type === 'fill') {
+    inner += `<p class="qq">${esc(act.q)}</p>
+      <input class="inp" id="inp-${act.id}" placeholder="Type your answer">
+      <button type="button" class="pill" onclick="actFill('${L.id}','${act.id}')">Check</button>
+      <div id="feed-${act.id}"></div>`;
+  } else if (act.type === 'match') {
+    inner += `<div class="mh">Tap one term, then its meaning</div>
+      <div class="mcols" id="match-${act.id}">
+        <div class="mcol"><h4>Terms</h4>${act.left.map((t,i)=>`<button type="button" class="mb" data-side="L" data-i="${i}" onclick="matchPick('${L.id}','${act.id}',this)">${esc(t)}</button>`).join('')}</div>
+        <div class="mcol"><h4>Meanings</h4>${act.right.map((t,i)=>`<button type="button" class="mb" data-side="R" data-i="${i}" onclick="matchPick('${L.id}','${act.id}',this)">${esc(t)}</button>`).join('')}</div>
+      </div><div id="feed-${act.id}"></div>`;
+    window['_match_'+act.id] = { pairs: act.pairs, sel: null, matched: new Set() };
+  }
+  return `<div class="act">${inner}</div>`;
+}
+
+window.actMcq = function(lid, aid, pick, ans) {
+  const box = document.getElementById('act-' + aid);
+  if (!box || box.dataset.lock) return;
+  const ok = pick === ans;
+  box.querySelectorAll('.opt').forEach((b, i) => {
+    b.disabled = true;
+    if (i === ans) b.classList.add('ok');
+    else if (i === pick) b.classList.add('bad');
+  });
+  box.dataset.lock = '1';
+  const fd = document.getElementById('feed-' + aid);
+  const act = LESSONS.find(x => x.id === lid).activities.find(a => a.id === aid);
+  fd.innerHTML = `<div class="feed ${ok ? 'good' : 'bad'}">${ok ? (act.ok || 'Great job!') : 'Try to remember the lesson — you can re-read Learn tab.'}</div>`;
+  if (ok) { lessonRec(lid).acts[aid] = true; save(); render(); }
+};
+
+window.actFill = function(lid, aid) {
+  const act = LESSONS.find(x => x.id === lid).activities.find(a => a.id === aid);
+  const v = (document.getElementById('inp-' + aid).value || '').trim().toLowerCase();
+  const ok = act.answers.some(a => a.toLowerCase() === v);
+  const fd = document.getElementById('feed-' + aid);
+  fd.innerHTML = `<div class="feed ${ok ? 'good' : 'bad'}">${ok ? 'Correct!' : 'Answer: ' + act.answers[0]}</div>`;
+  if (ok) { lessonRec(lid).acts[aid] = true; save(); setTimeout(render, 600); }
+};
+
+window.matchPick = function(lid, aid, el) {
+  const st = window['_match_' + aid];
+  if (!st || el.classList.contains('done')) return;
+  const side = el.dataset.side, idx = +el.dataset.i;
+  if (!st.sel) {
+    st.sel = { side, idx, el };
+    el.classList.add('sel');
+    return;
+  }
+  if (st.sel.side === side) {
+    st.sel.el.classList.remove('sel');
+    st.sel = { side, idx, el };
+    el.classList.add('sel');
+    return;
+  }
+  const leftIdx = side === 'L' ? idx : st.sel.idx;
+  const rightIdx = side === 'R' ? idx : st.sel.idx;
+  const pairOk = st.pairs.some(p => p[0] === leftIdx && p[1] === rightIdx);
+  st.sel.el.classList.remove('sel');
+  if (pairOk) {
+    el.classList.add('done'); st.sel.el.classList.add('done');
+    st.matched.add(leftIdx + '-' + rightIdx);
+  } else {
+    el.classList.add('bad'); st.sel.el.classList.add('bad');
+    setTimeout(() => { el.classList.remove('bad','sel'); st.sel.el.classList.remove('bad','sel'); }, 500);
+  }
+  st.sel = null;
+  const act = LESSONS.find(x => x.id === lid).activities.find(a => a.id === aid);
+  if (st.matched.size === act.pairs.length) {
+    document.getElementById('feed-' + aid).innerHTML = '<div class="feed good">All matched! 🎉</div>';
+    lessonRec(lid).acts[aid] = true;
+    save();
+  }
+};
+
+function renderLesson() {
+  const L = LESSONS.find(x => x.id === view.lessonId);
+  if (!L) return renderHub();
+  const r = lessonRec(L.id);
+  const tabs = ['learn','play','quiz'].map(t => `<button type="button" class="tab${view.tab===t?' on':''}" onclick="setTab('${t}')">${t==='learn'?'📖 Learn':t==='play'?'🎮 Play':'✅ Quiz'}</button>`).join('');
+  let body = '';
+  if (view.tab === 'learn') body = `<div class="panel on learn">${renderLearn(L)}</div>`;
+  if (view.tab === 'play') body = `<div class="panel on">${L.activities.map(a => renderActivity(L, a)).join('')}</div>`;
+  if (view.tab === 'quiz') body = `<div class="panel on"><div class="quizbox">
+    <p>10 questions · Stars: &lt;50% = 0, 50–69% = 1, 70–89% = 2, 90%+ = 3</p>
+    <p>Your best: <b>${starStr(r.stars || 0)}</b></p>
+    <button type="button" class="pill coral" onclick="startQuiz('${L.id}')">Start quiz</button>
+  </div></div>`;
+  return topBar(L.title, L.sub, starStr(r.stars || 0)) + `
+    <div class="tabs">${tabs}</div>${body}`;
+}
+
+window.openLesson = function(id) { view.page = 'lesson'; view.lessonId = id; view.tab = 'learn'; render(); };
+window.setTab = function(t) { view.tab = t; render(); };
+
+window.startQuiz = function(lid) {
+  const L = LESSONS.find(x => x.id === lid);
+  quizRun = { lid, i: 0, score: 0, total: L.quiz.length, answers: [] };
+  document.getElementById('quiz-ov').classList.add('show');
+  renderQuizQ();
+};
+
+function renderQuizQ() {
+  const L = LESSONS.find(x => x.id === quizRun.lid);
+  const q = L.quiz[quizRun.i];
+  const pct = Math.round((quizRun.i / quizRun.total) * 100);
+  document.getElementById('quiz-body').innerHTML = `
+    <div class="qhead"><span>Question ${quizRun.i + 1}/${quizRun.total}</span><span>Score: ${quizRun.score}</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <div class="qq">${esc(q.q)}</div>
+    <div class="opts" id="q-opts">${q.o.map((t, i) => `<button type="button" class="opt" onclick="quizPick(${i},${q.a})">${esc(t)}</button>`).join('')}</div>
+    <div id="q-feed"></div>`;
+}
+
+window.quizPick = function(pick, ans) {
+  const box = document.getElementById('q-opts');
+  if (!box || box.dataset.lock) return;
+  const ok = pick === ans;
+  if (ok) quizRun.score++;
+  box.querySelectorAll('.opt').forEach((b, i) => {
+    b.disabled = true;
+    if (i === ans) b.classList.add('ok');
+    else if (i === pick) b.classList.add('bad');
+  });
+  box.dataset.lock = '1';
+  document.getElementById('q-feed').innerHTML = `<button type="button" class="pill" onclick="quizNext()">${quizRun.i + 1 >= quizRun.total ? 'See results' : 'Next →'}</button>`;
+};
+
+window.quizNext = function() {
+  quizRun.i++;
+  if (quizRun.i >= quizRun.total) { renderQuizEnd(); return; }
+  renderQuizQ();
+};
+
+function renderQuizEnd() {
+  const pct = Math.round((quizRun.score / quizRun.total) * 100);
+  const stars = starFromPct(pct);
+  const improved = awardStars(quizRun.lid, pct);
+  document.getElementById('quiz-body').innerHTML = `
+    <div class="end">
+      <div class="big">${stars >= 2 ? '🏆' : stars >= 1 ? '👍' : '💪'}</div>
+      <h2>Quiz complete!</h2>
+      <p>${quizRun.score}/${quizRun.total} (${pct}%)</p>
+      <div class="stars">${starStr(stars)}</div>
+      <p>${improved ? 'New best stars saved!' : 'Keep practising to earn more stars.'}</p>
+      <button type="button" class="pill" onclick="closeQuiz()">Back to lesson</button>
+      <button type="button" class="pill coral" onclick="startQuiz('${quizRun.lid}')">Try again</button>
+    </div>`;
+}
+
+window.closeQuiz = function() {
+  document.getElementById('quiz-ov').classList.remove('show');
+  quizRun = null;
+  render();
+};
+
+function render() {
+  document.getElementById('root').innerHTML = view.page === 'hub' ? renderHub() : renderLesson();
+}
+
+document.body.insertAdjacentHTML('beforeend', `<div class="ov" id="quiz-ov"><div class="ovtop">
+  <button type="button" onclick="closeQuiz()">×</button><div class="t">Lesson quiz</div></div>
+  <div style="flex:1;overflow:auto;padding:16px;max-width:820px;margin:0 auto;width:100%" id="quiz-body"></div></div>`);
+
+render();
+</script>
+</body>
+</html>

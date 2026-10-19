@@ -293,7 +293,9 @@ function home() {
 }
 
 function topBar(c, small, title, right) {
-  return `<div class="top"><button class="home" onclick="go({name:'home'})">🏠</button>
+  return `<div class="top">
+    <button class="home" title="Home" onclick="location.href='../index.html'">🏠</button>
+    <button class="home" title="Back" onclick="if(history.length>1)history.back();else go({name:'home'})">←</button>
     <div class="tt"><small>${small}</small><b>${esc(title)}</b></div>${right || ''}${slowBtn()}</div>`;
 }
 

@@ -17,6 +17,25 @@
     --on: #fff4d6;
   }
   * { box-sizing: border-box; }
+  .page-nav {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; gap: 8px; align-items: center;
+    padding: 10px 12px;
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .page-nav a, .page-nav button {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 44px; height: 40px; padding: 0 12px; border-radius: 99px;
+    background: var(--green); color: #fff; text-decoration: none; border: 0;
+    font: inherit; font-weight: 800; font-size: 14px; cursor: pointer;
+    box-shadow: 0 3px 0 var(--green-d);
+  }
+  .page-nav button.back {
+    background: #fff; color: var(--green); border: 2px solid var(--line); box-shadow: 0 3px 0 #e4d9c8;
+  }
+  .page-nav .grow { flex: 1; font-weight: 800; color: var(--muted); font-size: 14px; }
   body {
     margin: 0;
     background: var(--paper);
@@ -25,7 +44,7 @@
     line-height: 1.55;
   }
   header {
-    position: sticky; top: 0; z-index: 5;
+    position: sticky; top: 52px; z-index: 5;
     background: #1f6b45;
     color: #fff;
     padding: 14px 16px 10px;
@@ -119,6 +138,11 @@
 </style>
 </head>
 <body>
+<div class="page-nav">
+  <a href="../../index.html" title="Home">🏠 Home</a>
+  <button type="button" class="back" onclick="if(history.length>1)history.back();else location.href='../'">← Back</button>
+  <span class="grow">മലയാളം റിവിഷൻ</span>
+</div>
 <header>
   <h1>നാളത്തെ മലയാളം പരീക്ഷ</h1>
   <p>Class 8 · tap Play on one box at a time</p>

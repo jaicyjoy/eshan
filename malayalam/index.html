@@ -18,7 +18,10 @@ body.ml{font-family:"Noto Sans Malayalam","Malayalam MN",system-ui,sans-serif}
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a href="../">🏠</a></div>
+  <div class="top" style="display:flex;gap:8px">
+    <a href="../index.html" title="Home">🏠</a>
+    <a href="javascript:history.back()" title="Back" style="font-weight:800;font-size:18px">←</a>
+  </div>
   <div class="hero"><div class="big" id="em">📘</div><h1 id="t">Subject</h1><p id="s">Choose what to practise</p></div>
   <div class="grid" id="g"></div>
 </div>
@@ -35,8 +38,8 @@ const cfg = {
     cards:[[`📖 Read with me`,'read/','Follow lines · hard words'],[`📝 Dictation`,'dictation/','Poorvi spelling practice']]},
   'eshan-hi': {em:'📕', t:'हिंदी · कक्षा 8', s:'श्रुतलेख, पढ़ना और रिवीज़न', c1:'#e85d04', c2:'#9d0208', lang:'hi',
     cards:[[`📖 पढ़ो`,'read/','श्रुतलेख शब्द · पठन'],[`📝 श्रुतलेख`,'dictation/','सुनो और लिखो'],[`📚 पूरा रिवीज़न`,'../hindi-revision/','Malhar app']]},
-  'eshan-ml': {em:'📗', t:'മലയാളം · ക്ലാസ് 8', s:'വായനയും റിവിഷനും', c1:'#2a9d8f', c2:'#007f5f', lang:'ml',
-    cards:[[`📖 വായിക്കാം`,'read/','സാരം · അർത്ഥം · വാക്യം'],[`📚 മുഴുവൻ റിവിഷൻ`,'revision/','നാളത്തെ പരീക്ഷ notes']]},
+  'eshan-ml': {em:'📗', t:'മലയാളം · ക്ലാസ് 8', s:'വായന · ഡിക്ടേഷൻ · റിവിഷൻ', c1:'#2a9d8f', c2:'#007f5f', lang:'ml',
+    cards:[[`📖 വായന`,'read/','വാക്ക് · വാക്യം · ഗദ്യം · കവിത'],[`📝 ഡിക്ടേഷൻ`,'dictation/','Flash → Pick → Type'],[`📚 മുഴുവൻ റിവിഷൻ`,'revision/','നാളത്തെ പരീക്ഷ notes']]},
 };
 const id = 'eshan-ml';
 const C = cfg[id] || cfg['joshua-en'];

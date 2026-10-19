@@ -1,381 +1,312 @@
 <!doctype html>
-<html>
+<html lang="hi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Read</title>
+<title>हिंदी पढ़ना · कक्षा 8</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#e8f4ff 0%,#fff5eb 55%,#f5e9ff 100%);min-height:100vh;line-height:1.45}
-body.hi{font-family:"Noto Sans Devanagari","Mangal","Avenir Next",system-ui,sans-serif}
-body.ml{font-family:"Noto Sans Malayalam","Malayalam MN","Avenir Next",system-ui,sans-serif}
+body{margin:0;font-family:"Noto Sans Devanagari","Mangal","Avenir Next",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#fff0e6 0%,#fff5eb 55%,#ffe8e0 100%);min-height:100vh;line-height:1.55}
 button{font-family:inherit;cursor:pointer}
 #app{max-width:900px;margin:0 auto;padding:12px 14px 70px}
-.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.12)}
-.top a{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.ib{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none}
 .top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.9;text-transform:uppercase}
 .top .tt b{display:block;font-size:18px;line-height:1.2}
 .chip{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px;white-space:nowrap}
-.slow{border:0;border-radius:99px;padding:7px 10px;font-weight:800;font-size:13px;background:rgba(255,255,255,.25);color:#fff}
-.slow.on{background:#ffd60a;color:#3a2b00}
-.hero{text-align:center;padding:14px 6px 4px}.hero .big{font-size:52px}.hero h1{margin:2px 0;font-size:28px;color:var(--c2)}.hero p{margin:0;color:#5b5f86}
-.hint{background:#fff;border-radius:18px;padding:12px 14px;margin:12px 0;box-shadow:0 5px 0 #e6e3f7;font-weight:700;color:#4a4f7a;font-size:15px}
+.banner{border-radius:20px;padding:14px 16px;margin:14px 0;font-weight:800;font-size:16px;box-shadow:0 5px 0 rgba(0,0,0,.08)}
+.banner.great{background:#c9f7d6;color:#145233;border:2px solid #2fbf71}
+.banner.ok{background:#fff1b8;color:#7a5200;border:2px solid #ffb703}
+.banner.practice{background:#ffe8e8;color:#9b2226;border:2px solid #e5484d}
+.banner.start{background:#fff;border:2px solid #e3e0f7;color:#4a4f7a}
+.hero{text-align:center;padding:10px 6px 4px}.hero .big{font-size:48px}.hero h1{margin:2px 0;font-size:26px;color:var(--c2)}.hero p{margin:0;color:#5b5f86;font-size:15px}
+.hint{background:#fff;border-radius:18px;padding:12px 14px;margin:10px 0;box-shadow:0 5px 0 #e6e3f7;font-weight:700;color:#4a4f7a;font-size:15px}
 .gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:10px}
-.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16)}
-.gt .i{font-size:30px;display:block}.gt b{display:block;font-size:17px;margin-top:4px}.gt small{display:block;opacity:.95;font-size:13px}
-.packs{display:grid;gap:10px;margin-top:14px}
-.pcard{border:0;border-radius:18px;padding:14px;text-align:left;background:#fff;box-shadow:0 5px 0 #e6e3f7;display:flex;gap:12px;align-items:center;width:100%}
-.pcard .em{font-size:36px}.pcard .inf{flex:1}.pcard b{display:block;font-size:18px;color:var(--c2)}.pcard small{color:#6b6f93;font-weight:700}
-.pcard .st{font-size:14px;font-weight:800;color:#e08a00;white-space:nowrap}
-
-.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#eef4ff,#fff8ef 60%,#f8e9ff)}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);width:100%}
+.gt .i{font-size:30px;display:block}.gt b{display:block;font-size:17px;margin-top:4px}.gt small{display:block;opacity:.95;font-size:13px;margin-top:2px}
+.gt .st{display:inline-block;margin-top:8px;font-size:15px;letter-spacing:1px;background:rgba(0,0,0,.15);padding:3px 10px;border-radius:99px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#fff3eb,#fff8ef 60%,#ffe8f0)}
 .ov.show{display:flex}
 .ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2))}
 .ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900}
-.ovtop .t{flex:1;font-weight:800;font-size:16px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovtop .t{flex:1;font-weight:800;font-size:16px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px}
 .ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
 .card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 7px 0 #e6e3f7}
-.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:12px}
-.pill{border:0;border-radius:99px;padding:10px 16px;font-weight:800;font-size:15px;color:#fff;background:var(--c1);box-shadow:0 4px 0 var(--c2)}
-.pill.alt{background:#fff;color:var(--c2);box-shadow:0 4px 0 #dedbf3}
-.linebox{min-height:120px;display:flex;flex-wrap:wrap;gap:8px;align-content:center;justify-content:center;padding:12px;border-radius:18px;background:#f8f7ff;border:3px dashed #d8ccff}
-.w{border:0;background:#fff;border-radius:14px;padding:10px 12px;font-size:var(--fs,28px);font-weight:800;color:#1f2340;box-shadow:0 3px 0 #e3e0f7;line-height:1.2}
-.w.on{background:#ffd60a;transform:scale(1.06);box-shadow:0 4px 0 #f48c06}
-.w.done{background:#c9f7d6}
-.navl{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:8px;flex-wrap:wrap}
-.nx{border:0;border-radius:99px;padding:11px 22px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 4px 0 rgba(0,0,0,.15)}
-.nx.alt{background:#fff;color:var(--c1);border:2px solid #cfd6ff;box-shadow:0 4px 0 #e3e0f7}
-.prog{font-weight:800;color:#5b5f86}
-.bigword{font-size:48px;font-weight:900;text-align:center;margin:16px 0;color:var(--c2);min-height:60px}
-.opts{display:grid;gap:10px}.opt{border:2px solid #e3e0f7;background:#f8f7ff;border-radius:16px;padding:14px;font-size:22px;font-weight:800;text-align:left;box-shadow:0 4px 0 #e3e0f7}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:10px;font-size:15px}
+.prompt{font-size:14px;font-weight:800;color:#6b6f93;margin-bottom:8px}
+.bigtext{font-size:clamp(28px,7vw,44px);font-weight:900;text-align:center;margin:12px 0 16px;color:var(--c2);line-height:1.35}
+.readbox{background:#fff8f5;border:3px dashed #f5c4a8;border-radius:18px;padding:16px;font-size:19px;line-height:1.7;margin:10px 0;color:#1f2340}
+.readbox.poem{white-space:pre-line}
+.readbox h3{margin:0 0 8px;font-size:20px;color:var(--c2)}
+.qtext{font-size:18px;font-weight:800;margin:14px 0 10px;color:#1f2340}
+.opts{display:grid;gap:10px}.opt{border:2px solid #e3e0f7;background:#f8f7ff;border-radius:16px;padding:14px;font-size:17px;font-weight:700;text-align:left;box-shadow:0 4px 0 #e3e0f7;width:100%}
 .opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d;animation:shake .35s}
 @keyframes shake{25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
-.fb{text-align:center;font-weight:800;margin-top:10px;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
-.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
-.chipb{border:2px solid #e3e0f7;background:#fff;border-radius:14px;padding:10px 14px;font-size:20px;font-weight:800;box-shadow:0 3px 0 #e3e0f7}
-.chipb.sel{background:#fff1b8;border-color:#ffb703}.chipb.bad{background:#ffd3d3;animation:shake .35s}
-.built{min-height:56px;border:3px dashed #cfc8f5;border-radius:16px;padding:10px;background:#fff;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
-.built span{background:#c9f7d6;border-radius:10px;padding:6px 10px;font-weight:800;font-size:18px}
-.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
-.wcard{border:3px solid #f1e8ff;background:#fffaf2;border-radius:18px;padding:12px;text-align:center;font-weight:800}
-.wcard .e{font-size:32px}.wcard .ww{font-size:22px;color:var(--c2);margin-top:4px}.wcard.playing{border-color:#ffb703;background:#fff3c4}
-.sizebar{display:flex;gap:8px;justify-content:center;margin:8px 0 4px}
-.sizebar button{border:0;border-radius:99px;padding:6px 12px;font-weight:800;background:#efeaff}
-.sizebar button.on{background:var(--c1);color:#fff}
+.fb{text-align:center;font-weight:800;margin-top:12px;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.navl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.nx{border:0;border-radius:99px;padding:11px 22px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.nx.alt{background:#fff;color:var(--c1);border:2px solid #ffd6c4;box-shadow:0 4px 0 #e3e0f7}
 .end{text-align:center}.end .big{font-size:56px}.stars{font-size:32px;letter-spacing:2px}
-.conf{position:fixed;top:-30px;font-size:28px;pointer-events:none;z-index:60;animation:fall 1.5s ease-in forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(480deg);opacity:.5}}
-@media(max-width:560px){.w{font-size:var(--fs,24px)}.bigword{font-size:36px}.opt{font-size:18px}}
+.pick{display:grid;gap:10px;margin-top:8px}
+.pbtn{border:2px solid #f5c4a8;background:#fff;border-radius:16px;padding:14px;text-align:left;font-weight:800;font-size:17px;color:var(--c2);box-shadow:0 4px 0 #f5c4a8;width:100%}
+.pbtn small{display:block;font-weight:700;color:#6b6f93;font-size:13px;margin-top:4px}
+.opt.en{font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;font-size:16px}
+@media(max-width:560px){.bigtext{font-size:30px}.opt{font-size:15px}}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <div class="ov" id="ov"><div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div><div class="ovb" id="ovb"></div></div>
-<script type="application/json" id="data">{"meta": {"id": "e-hi", "grade": 8, "lang": "hi", "tl": "hi", "title": "पढ़ो · हिंदी", "subject": "Hindi", "emoji": "📖", "c1": "#e85d04", "c2": "#9d0208", "back": "../", "hint": "कठिन शब्द पर टैप करें। Play से पूरी पंक्ति सुनें। धीमी आवाज़ के लिए Slow दबाएँ।"}, "packs": [{"id": "eh1", "title": "श्रुतलेख शब्द", "emoji": "📝", "lines": ["बानी का अर्थ वाणी है।", "आपा का अर्थ अहंकार है।", "औरन का अर्थ दूसरा है।", "सीतल का अर्थ शीतल है।", "आपहुँ का अर्थ स्वयं है।", "साँच बराबर तप नहीं।", "जाके मन में हिरदै बसै।"], "words": [["बानी", "वाणी"], ["आपा", "अहंकार"], ["औरन", "दूसरा"], ["सीतल", "शीतल"], ["आपहुँ", "स्वयं"], ["साँच", "सत्य"], ["तप", "तपस्या"], ["हिरदै", "हृदय"]], "lineAudio": [["e-hi-eh1-L0-W0-बानी", "e-hi-eh1-L0-W1-का", "e-hi-eh1-L0-W2-अर्थ", "e-hi-eh1-L0-W3-वाणी", "e-hi-eh1-L0-W4-है।"], ["e-hi-eh1-L1-W0-आपा", "e-hi-eh1-L1-W1-का", "e-hi-eh1-L1-W2-अर्थ", "e-hi-eh1-L1-W3-अहंकार", "e-hi-eh1-L1-W4-है।"], ["e-hi-eh1-L2-W0-औरन", "e-hi-eh1-L2-W1-का", "e-hi-eh1-L2-W2-अर्थ", "e-hi-eh1-L2-W3-दूसरा", "e-hi-eh1-L2-W4-है।"], ["e-hi-eh1-L3-W0-सीतल", "e-hi-eh1-L3-W1-का", "e-hi-eh1-L3-W2-अर्थ", "e-hi-eh1-L3-W3-शीतल", "e-hi-eh1-L3-W4-है।"], ["e-hi-eh1-L4-W0-आपहुँ", "e-hi-eh1-L4-W1-का", "e-hi-eh1-L4-W2-अर्थ", "e-hi-eh1-L4-W3-स्वयं", "e-hi-eh1-L4-W4-है।"], ["e-hi-eh1-L5-W0-साँच", "e-hi-eh1-L5-W1-बराबर", "e-hi-eh1-L5-W2-तप", "e-hi-eh1-L5-W3-नहीं।"], ["e-hi-eh1-L6-W0-जाके", "e-hi-eh1-L6-W1-मन", "e-hi-eh1-L6-W2-में", "e-hi-eh1-L6-W3-हिरदै", "e-hi-eh1-L6-W4-बसै।"]], "wordAudio": ["e-hi-eh1-wd-बानी", "e-hi-eh1-wd-आपा", "e-hi-eh1-wd-औरन", "e-hi-eh1-wd-सीतल", "e-hi-eh1-wd-आपहुँ", "e-hi-eh1-wd-साँच", "e-hi-eh1-wd-तप", "e-hi-eh1-wd-हिरदै"]}, {"id": "eh2", "title": "आशीर्वाद और स्वप्न", "emoji": "🌟", "lines": ["गुरु का आशीर्वाद अनुग्रह है।", "स्वप्न का अर्थ सपना है।", "भावना से कल्पना जन्म लेती है।", "मचलना उचित नहीं है।", "रोशनी का अर्थ प्रकाश है।", "दीया का अर्थ दीपक है।"], "words": [["आशीर्वाद", "blessing"], ["स्वप्न", "dream"], ["भावना", "feeling"], ["मचलना", "हठ"], ["रोशनी", "प्रकाश"], ["दीया", "दीपक"]], "lineAudio": [["e-hi-eh2-L0-W0-गुरु", "e-hi-eh2-L0-W1-का", "e-hi-eh2-L0-W2-आशीर्वाद", "e-hi-eh2-L0-W3-अनुग्रह", "e-hi-eh2-L0-W4-है।"], ["e-hi-eh2-L1-W0-स्वप्न", "e-hi-eh2-L1-W1-का", "e-hi-eh2-L1-W2-अर्थ", "e-hi-eh2-L1-W3-सपना", "e-hi-eh2-L1-W4-है।"], ["e-hi-eh2-L2-W0-भावना", "e-hi-eh2-L2-W1-से", "e-hi-eh2-L2-W2-कल्पना", "e-hi-eh2-L2-W3-जन्म", "e-hi-eh2-L2-W4-लेती", "e-hi-eh2-L2-W5-है।"], ["e-hi-eh2-L3-W0-मचलना", "e-hi-eh2-L3-W1-उचित", "e-hi-eh2-L3-W2-नहीं", "e-hi-eh2-L3-W3-है।"], ["e-hi-eh2-L4-W0-रोशनी", "e-hi-eh2-L4-W1-का", "e-hi-eh2-L4-W2-अर्थ", "e-hi-eh2-L4-W3-प्रकाश", "e-hi-eh2-L4-W4-है।"], ["e-hi-eh2-L5-W0-दीया", "e-hi-eh2-L5-W1-का", "e-hi-eh2-L5-W2-अर्थ", "e-hi-eh2-L5-W3-दीपक", "e-hi-eh2-L5-W4-है।"]], "wordAudio": ["e-hi-eh2-wd-आशीर्वाद", "e-hi-eh2-wd-स्वप्न", "e-hi-eh2-wd-भावना", "e-hi-eh2-wd-मचलना", "e-hi-eh2-wd-रोशनी", "e-hi-eh2-wd-दीया"]}, {"id": "eh3", "title": "मुहावरे", "emoji": "💬", "lines": ["उँगली जलना कष्ट सहना है।", "अपने पाँवों पर खड़ा होना आत्मनिर्भर होना है।", "हमें मेहनत से आगे बढ़ना चाहिए।", "सच बोलना सबसे बड़ा तप है।"], "words": [["उँगली जलना", "कष्ट सहना"], ["आत्मनिर्भर", "self-dependent"], ["मेहनत", "hard work"], ["सच", "truth"]], "lineAudio": [["e-hi-eh3-L0-W0-उँगली", "e-hi-eh3-L0-W1-जलना", "e-hi-eh3-L0-W2-कष्ट", "e-hi-eh3-L0-W3-सहना", "e-hi-eh3-L0-W4-है।"], ["e-hi-eh3-L1-W0-अपने", "e-hi-eh3-L1-W1-पाँवों", "e-hi-eh3-L1-W2-पर", "e-hi-eh3-L1-W3-खड़ा", "e-hi-eh3-L1-W4-होना", "e-hi-eh3-L1-W5-आत्मनिर्भर", "e-hi-eh3-L1-W6-होना", "e-hi-eh3-L1-W7-है।"], ["e-hi-eh3-L2-W0-हमें", "e-hi-eh3-L2-W1-मेहनत", "e-hi-eh3-L2-W2-से", "e-hi-eh3-L2-W3-आगे", "e-hi-eh3-L2-W4-बढ़ना", "e-hi-eh3-L2-W5-चाहिए।"], ["e-hi-eh3-L3-W0-सच", "e-hi-eh3-L3-W1-बोलना", "e-hi-eh3-L3-W2-सबसे", "e-hi-eh3-L3-W3-बड़ा", "e-hi-eh3-L3-W4-तप", "e-hi-eh3-L3-W5-है।"]], "wordAudio": ["e-hi-eh3-wd-उँगली-जलना", "e-hi-eh3-wd-आत्मनिर्भर", "e-hi-eh3-wd-मेहनत", "e-hi-eh3-wd-सच"]}, {"id": "eh4", "title": "पठन अभ्यास", "emoji": "📘", "lines": ["मैं आठवीं कक्षा में पढ़ता हूँ।", "मुझे हिंदी पढ़ना अच्छा लगता है।", "शब्दों को ध्यान से देखो और पढ़ो।", "आवाज़ के साथ पढ़ने से याद रहता है।"], "words": [["कक्षा", "class"], ["ध्यान", "attention"], ["याद", "memory"]], "lineAudio": [["e-hi-eh4-L0-W0-मैं", "e-hi-eh4-L0-W1-आठवीं", "e-hi-eh4-L0-W2-कक्षा", "e-hi-eh4-L0-W3-में", "e-hi-eh4-L0-W4-पढ़ता", "e-hi-eh4-L0-W5-हूँ।"], ["e-hi-eh4-L1-W0-मुझे", "e-hi-eh4-L1-W1-हिंदी", "e-hi-eh4-L1-W2-पढ़ना", "e-hi-eh4-L1-W3-अच्छा", "e-hi-eh4-L1-W4-लगता", "e-hi-eh4-L1-W5-है।"], ["e-hi-eh4-L2-W0-शब्दों", "e-hi-eh4-L2-W1-को", "e-hi-eh4-L2-W2-ध्यान", "e-hi-eh4-L2-W3-से", "e-hi-eh4-L2-W4-देखो", "e-hi-eh4-L2-W5-और", "e-hi-eh4-L2-W6-पढ़ो।"], ["e-hi-eh4-L3-W0-आवाज़", "e-hi-eh4-L3-W1-के", "e-hi-eh4-L3-W2-साथ", "e-hi-eh4-L3-W3-पढ़ने", "e-hi-eh4-L3-W4-से", "e-hi-eh4-L3-W5-याद", "e-hi-eh4-L3-W6-रहता", "e-hi-eh4-L3-W7-है।"]], "wordAudio": ["e-hi-eh4-wd-कक्षा", "e-hi-eh4-wd-ध्यान", "e-hi-eh4-wd-याद"]}], "voice": [["e-hi-eh1-L0-W0-बानी", "बानी"], ["e-hi-eh1-L0-W1-का", "का"], ["e-hi-eh1-L0-W2-अर्थ", "अर्थ"], ["e-hi-eh1-L0-W3-वाणी", "वाणी"], ["e-hi-eh1-L0-W4-है।", "है।"], ["e-hi-eh1-L1-W0-आपा", "आपा"], ["e-hi-eh1-L1-W1-का", "का"], ["e-hi-eh1-L1-W2-अर्थ", "अर्थ"], ["e-hi-eh1-L1-W3-अहंकार", "अहंकार"], ["e-hi-eh1-L1-W4-है।", "है।"], ["e-hi-eh1-L2-W0-औरन", "औरन"], ["e-hi-eh1-L2-W1-का", "का"], ["e-hi-eh1-L2-W2-अर्थ", "अर्थ"], ["e-hi-eh1-L2-W3-दूसरा", "दूसरा"], ["e-hi-eh1-L2-W4-है।", "है।"], ["e-hi-eh1-L3-W0-सीतल", "सीतल"], ["e-hi-eh1-L3-W1-का", "का"], ["e-hi-eh1-L3-W2-अर्थ", "अर्थ"], ["e-hi-eh1-L3-W3-शीतल", "शीतल"], ["e-hi-eh1-L3-W4-है।", "है।"], ["e-hi-eh1-L4-W0-आपहुँ", "आपहुँ"], ["e-hi-eh1-L4-W1-का", "का"], ["e-hi-eh1-L4-W2-अर्थ", "अर्थ"], ["e-hi-eh1-L4-W3-स्वयं", "स्वयं"], ["e-hi-eh1-L4-W4-है।", "है।"], ["e-hi-eh1-L5-W0-साँच", "साँच"], ["e-hi-eh1-L5-W1-बराबर", "बराबर"], ["e-hi-eh1-L5-W2-तप", "तप"], ["e-hi-eh1-L5-W3-नहीं।", "नहीं।"], ["e-hi-eh1-L6-W0-जाके", "जाके"], ["e-hi-eh1-L6-W1-मन", "मन"], ["e-hi-eh1-L6-W2-में", "में"], ["e-hi-eh1-L6-W3-हिरदै", "हिरदै"], ["e-hi-eh1-L6-W4-बसै।", "बसै।"], ["e-hi-eh1-wd-बानी", "बानी"], ["e-hi-eh1-wd-आपा", "आपा"], ["e-hi-eh1-wd-औरन", "औरन"], ["e-hi-eh1-wd-सीतल", "सीतल"], ["e-hi-eh1-wd-आपहुँ", "आपहुँ"], ["e-hi-eh1-wd-साँच", "साँच"], ["e-hi-eh1-wd-तप", "तप"], ["e-hi-eh1-wd-हिरदै", "हिरदै"], ["e-hi-eh2-L0-W0-गुरु", "गुरु"], ["e-hi-eh2-L0-W1-का", "का"], ["e-hi-eh2-L0-W2-आशीर्वाद", "आशीर्वाद"], ["e-hi-eh2-L0-W3-अनुग्रह", "अनुग्रह"], ["e-hi-eh2-L0-W4-है।", "है।"], ["e-hi-eh2-L1-W0-स्वप्न", "स्वप्न"], ["e-hi-eh2-L1-W1-का", "का"], ["e-hi-eh2-L1-W2-अर्थ", "अर्थ"], ["e-hi-eh2-L1-W3-सपना", "सपना"], ["e-hi-eh2-L1-W4-है।", "है।"], ["e-hi-eh2-L2-W0-भावना", "भावना"], ["e-hi-eh2-L2-W1-से", "से"], ["e-hi-eh2-L2-W2-कल्पना", "कल्पना"], ["e-hi-eh2-L2-W3-जन्म", "जन्म"], ["e-hi-eh2-L2-W4-लेती", "लेती"], ["e-hi-eh2-L2-W5-है।", "है।"], ["e-hi-eh2-L3-W0-मचलना", "मचलना"], ["e-hi-eh2-L3-W1-उचित", "उचित"], ["e-hi-eh2-L3-W2-नहीं", "नहीं"], ["e-hi-eh2-L3-W3-है।", "है।"], ["e-hi-eh2-L4-W0-रोशनी", "रोशनी"], ["e-hi-eh2-L4-W1-का", "का"], ["e-hi-eh2-L4-W2-अर्थ", "अर्थ"], ["e-hi-eh2-L4-W3-प्रकाश", "प्रकाश"], ["e-hi-eh2-L4-W4-है।", "है।"], ["e-hi-eh2-L5-W0-दीया", "दीया"], ["e-hi-eh2-L5-W1-का", "का"], ["e-hi-eh2-L5-W2-अर्थ", "अर्थ"], ["e-hi-eh2-L5-W3-दीपक", "दीपक"], ["e-hi-eh2-L5-W4-है।", "है।"], ["e-hi-eh2-wd-आशीर्वाद", "आशीर्वाद"], ["e-hi-eh2-wd-स्वप्न", "स्वप्न"], ["e-hi-eh2-wd-भावना", "भावना"], ["e-hi-eh2-wd-मचलना", "मचलना"], ["e-hi-eh2-wd-रोशनी", "रोशनी"], ["e-hi-eh2-wd-दीया", "दीया"], ["e-hi-eh3-L0-W0-उँगली", "उँगली"], ["e-hi-eh3-L0-W1-जलना", "जलना"], ["e-hi-eh3-L0-W2-कष्ट", "कष्ट"], ["e-hi-eh3-L0-W3-सहना", "सहना"], ["e-hi-eh3-L0-W4-है।", "है।"], ["e-hi-eh3-L1-W0-अपने", "अपने"], ["e-hi-eh3-L1-W1-पाँवों", "पाँवों"], ["e-hi-eh3-L1-W2-पर", "पर"], ["e-hi-eh3-L1-W3-खड़ा", "खड़ा"], ["e-hi-eh3-L1-W4-होना", "होना"], ["e-hi-eh3-L1-W5-आत्मनिर्भर", "आत्मनिर्भर"], ["e-hi-eh3-L1-W6-होना", "होना"], ["e-hi-eh3-L1-W7-है।", "है।"], ["e-hi-eh3-L2-W0-हमें", "हमें"], ["e-hi-eh3-L2-W1-मेहनत", "मेहनत"], ["e-hi-eh3-L2-W2-से", "से"], ["e-hi-eh3-L2-W3-आगे", "आगे"], ["e-hi-eh3-L2-W4-बढ़ना", "बढ़ना"], ["e-hi-eh3-L2-W5-चाहिए।", "चाहिए।"], ["e-hi-eh3-L3-W0-सच", "सच"], ["e-hi-eh3-L3-W1-बोलना", "बोलना"], ["e-hi-eh3-L3-W2-सबसे", "सबसे"], ["e-hi-eh3-L3-W3-बड़ा", "बड़ा"], ["e-hi-eh3-L3-W4-तप", "तप"], ["e-hi-eh3-L3-W5-है।", "है।"], ["e-hi-eh3-wd-उँगली-जलना", "उँगली जलना"], ["e-hi-eh3-wd-आत्मनिर्भर", "आत्मनिर्भर"], ["e-hi-eh3-wd-मेहनत", "मेहनत"], ["e-hi-eh3-wd-सच", "सच"], ["e-hi-eh4-L0-W0-मैं", "मैं"], ["e-hi-eh4-L0-W1-आठवीं", "आठवीं"], ["e-hi-eh4-L0-W2-कक्षा", "कक्षा"], ["e-hi-eh4-L0-W3-में", "में"], ["e-hi-eh4-L0-W4-पढ़ता", "पढ़ता"], ["e-hi-eh4-L0-W5-हूँ।", "हूँ।"], ["e-hi-eh4-L1-W0-मुझे", "मुझे"], ["e-hi-eh4-L1-W1-हिंदी", "हिंदी"], ["e-hi-eh4-L1-W2-पढ़ना", "पढ़ना"], ["e-hi-eh4-L1-W3-अच्छा", "अच्छा"], ["e-hi-eh4-L1-W4-लगता", "लगता"], ["e-hi-eh4-L1-W5-है।", "है।"], ["e-hi-eh4-L2-W0-शब्दों", "शब्दों"], ["e-hi-eh4-L2-W1-को", "को"], ["e-hi-eh4-L2-W2-ध्यान", "ध्यान"], ["e-hi-eh4-L2-W3-से", "से"], ["e-hi-eh4-L2-W4-देखो", "देखो"], ["e-hi-eh4-L2-W5-और", "और"], ["e-hi-eh4-L2-W6-पढ़ो।", "पढ़ो।"], ["e-hi-eh4-L3-W0-आवाज़", "आवाज़"], ["e-hi-eh4-L3-W1-के", "के"], ["e-hi-eh4-L3-W2-साथ", "साथ"], ["e-hi-eh4-L3-W3-पढ़ने", "पढ़ने"], ["e-hi-eh4-L3-W4-से", "से"], ["e-hi-eh4-L3-W5-याद", "याद"], ["e-hi-eh4-L3-W6-रहता", "रहता"], ["e-hi-eh4-L3-W7-है।", "है।"], ["e-hi-eh4-wd-कक्षा", "कक्षा"], ["e-hi-eh4-wd-ध्यान", "ध्यान"], ["e-hi-eh4-wd-याद", "याद"]]}</script>
+<script type="application/json" id="data">{"meta":{"lsKey":"eshan_read_hi_v2","title":"हिंदी पढ़ना","grade":"कक्षा 8","emoji":"📕","c1":"#e85d04","c2":"#9d0208","hint":"शब्द और वाक्य स्वयं पढ़ें। कोई स्पीकर नहीं — फिर सही उत्तर चुनें।"},"modes":[{"id":"words","emoji":"🔤","title":"शब्द जानें","sub":"शब्द पढ़ो · अर्थ चुनो","color":"linear-gradient(135deg,#e85d04,#9d0208)"},{"id":"sentences","emoji":"💬","title":"वाक्य मिलान","sub":"वाक्य पढ़ो · अंग्रेज़ी अर्थ","color":"linear-gradient(135deg,#06d6a0,#118ab2)"},{"id":"passage","emoji":"📄","title":"गद्यांश","sub":"पढ़ो · प्रश्न हल करो","color":"linear-gradient(135deg,#ff9f1c,#e76f51)"},{"id":"poem","emoji":"🎵","title":"कविता","sub":"पढ़ो · प्रश्न हल करो","color":"linear-gradient(135deg,#ef476f,#b5179e)"}],"words":[{"w":"अनुशासन","options":["discipline","courage","imagination","health"],"a":0},{"w":"साहस","options":["courage","duty","friendship","education"],"a":0},{"w":"स्वतंत्रता","options":["freedom","patience","hard work","respect"],"a":0},{"w":"कर्तव्य","options":["duty","truth","environment","cooperation"],"a":0},{"w":"ईमानदारी","options":["honesty","discipline","health","imagination"],"a":0},{"w":"मेहनत","options":["hard work","freedom","respect","courage"],"a":0},{"w":"धैर्य","options":["patience","education","truth","duty"],"a":0},{"w":"सहयोग","options":["cooperation","betrayal","weary","splendid"],"a":0},{"w":"पर्यावरण","options":["environment","friendship","discipline","courage"],"a":0},{"w":"स्वास्थ्य","options":["health","imagination","freedom","duty"],"a":0},{"w":"शिक्षा","options":["education","patience","honesty","cooperation"],"a":0},{"w":"मित्रता","options":["friendship","hard work","environment","respect"],"a":0},{"w":"सत्य","options":["truth","health","education","courage"],"a":0},{"w":"सम्मान","options":["respect","patience","imagination","cooperation"],"a":0},{"w":"कल्पना","options":["imagination","discipline","honesty","environment"],"a":0}],"sentences":[{"s":"अनुशासन जीवन की कुंजी है।","options":["Discipline is the key to life","We should protect the environment","Hard work brings success","Truth is the greatest duty"],"a":0},{"s":"हमें पर्यावरण की रक्षा करनी चाहिए।","options":["We should protect the environment","Discipline is the key to life","Education is man's best friend","Patience solves problems"],"a":0},{"s":"मेहनत से सफलता मिलती है।","options":["Hard work brings success","Cooperation makes hard tasks easy","Honesty builds trust","Freedom is celebrated"],"a":0},{"s":"सत्य बोलना सबसे बड़ा कर्तव्य है।","options":["Speaking truth is the greatest duty","Health is wealth","Friendship is precious","Imagination has no limits"],"a":0},{"s":"सहयोग से कठिन कार्य भी आसान हो जाता है।","options":["With cooperation even hard work becomes easy","Courage means fear","Education is useless","Environment does not matter"],"a":0},{"s":"शिक्षा मनुष्य का सर्वश्रेष्ठ मित्र है।","options":["Education is man's best friend","Patience is weakness","Honesty is bad","Discipline is a prison"],"a":0},{"s":"धैर्य रखने से समस्याएँ हल होती हैं।","options":["Keeping patience solves problems","Hard work never helps","Respect is unnecessary","Freedom means no rules"],"a":0},{"s":"ईमानदारी पर विश्वास बनता है।","options":["Honesty builds trust","Courage builds walls","Health builds cars","Imagination builds roads"],"a":0}],"passages":[{"title":"बुजुर्ग माँ की मदद","text":"अमन स्कूल से घर लौट रहा था। रास्ते में एक बुजुर्ग महिला भारी थैला लेकर धीरे-धीरे चल रही थीं। अमन ने देखा कि वे सहारे के बिना ठहर गई हैं। उसने बिना सोचे थैला उठाया और उन्हें घर तक छोड़ा। महिला ने मुस्कुराकर कहा, \"बेटा, तुम्हारी मदद से मुझे बहुत आराम मिला।\" अगले दिन कक्षा में अध्यापक ने सहयोग और सम्मान की बात की। अमन को एहसास हुआ कि छोटा सा साहस और कर्तव्य दूसरों के लिए बड़ी राहत बन सकता है।","questions":[{"q":"अमन रास्ते में किसे देखता है?","options":["A elderly woman with a heavy bag","A lost wallet","A school principal","A sports coach"],"a":0},{"q":"अमन ने क्या किया?","options":["He carried the bag and helped her home","He kept the bag","He ran away","He called the police first"],"a":0},{"q":"अध्यापक ने किस विषय पर बात की?","options":["Cooperation and respect","Cybersecurity","Poetry writing","Betrayal"],"a":0},{"q":"अमन को क्या समझ आया?","options":["Small courage and duty can greatly help others","Honesty is useless","Environment does not matter","Discipline is bad"],"a":0}]},{"title":"ईमानदारी की परीक्षा","text":"कक्षा में एक परीक्षा चल रही थी। रोहन की नज़र पड़ी कि उसके पास बैठे छात्र ने अपनी कॉपी पर छिपकर किताब देखी। रोहन का मन घबराया, पर उसे याद आया कि ईमानदारी और अनुशासन ही सच्ची शिक्षा है। परीक्षा के बाद उसने शांति से अध्यापक को बताया। अध्यापक ने धीरे से समझाया कि सहयोग से हम किसी को अपमानित किए बिना सुधार सकते हैं। स्कूल ने धोखे की रोकथाम पर चर्चा की। रोहन ने महसूस किया कि सत्य बोलना कभी-कभी कठिन होता है, पर यह सम्मान पाता है।","questions":[{"q":"परीक्षा के दौरान रोहन ने क्या देखा?","options":["A student secretly looking at a book","A bird in class","A lost poem","A sports trophy"],"a":0},{"q":"रोहन को क्या याद आया?","options":["Honesty and discipline are true education","Freedom means cheating","Health is not important","Friendship means silence"],"a":0},{"q":"अध्यापक ने क्या समझाया?","options":["We can improve someone without insult through cooperation","Cheating is fine","Never tell the truth","Ignore discipline"],"a":0},{"q":"रोहन ने क्या महसूस किया?","options":["Speaking truth is hard sometimes but earns respect","Betrayal is best","Hard work is useless","Imagination is danger"],"a":0}]}],"poems":[{"title":"मेहनत का फल","text":"मेहनत कर, न झुक जा पैर,\nधैर्य रख, मन में संसकार।\nसहयोग से बनता है बड़ा कार्य,\nसफलता मिले, यही है आशकार।\n\nअनुशासन रख, मार्ग पर चल,\nसत्य बोल, न कर झूठी चाल।","questions":[{"q":"कविता में सफलता के लिए क्या कहा गया है?","options":["Work hard and keep patience","Sleep all day","Hide the truth","Avoid cooperation"],"a":0},{"q":"'सहयोग' से क्या होता है?","options":["Even big tasks can be done","Environment is harmed","Education ends","Health is lost"],"a":0},{"q":"अनुशासन के साथ क्या करने को कहा है?","options":["Walk on the right path and speak truth","Betray friends","Murmur in class","Leave school"],"a":0}]},{"title":"पर्यावरण की पुकार","text":"हरियाली बचाओ, नदी को स्वच्छ रखो,\nपेड़ लगाओ, आकाश नीला देखो।\nपर्यावरण है जीवन की कुंजी,\nस्वास्थ्य और खुशी, यही है सुंदर तुंजी।\n\nकचरा न फैलाओ, धरती को प्यार दो,\nप्रकृति संभालो, इसे अपनों से यार दो।","questions":[{"q":"कविता में नदी के लिए क्या कहा है?","options":["Keep the river clean","Cut all trees","Pollute water","Close schools"],"a":0},{"q":"पर्यावरण को क्या बताया गया है?","options":["Key to life","Source of betrayal","Sign of laziness","Enemy of health"],"a":0},{"q":"धरती के प्रति क्या करने को कहा है?","options":["Do not spread garbage; love the earth","Burn all plants","Waste water","Ignore health"],"a":0},{"q":"स्वास्थ्य किस से जुड़ा है?","options":["Caring for nature and environment","Cheating in exams","Keeping no discipline","Avoiding friendship"],"a":0}]}]}</script>
 <script>
 const D = JSON.parse(document.getElementById('data').textContent);
-const M = D.meta, PACKS = D.packs, TXT = Object.fromEntries(D.voice || []);
-document.title = M.emoji + ' ' + M.title;
+const M = D.meta;
+document.title = M.emoji + ' ' + M.title + ' · ' + M.grade;
 document.body.style.setProperty('--c1', M.c1);
 document.body.style.setProperty('--c2', M.c2);
-if (M.lang === 'hi') document.body.classList.add('hi');
-if (M.lang === 'ml') document.body.classList.add('ml');
-document.documentElement.lang = M.lang;
 
 const app = document.getElementById('app');
+const ov = document.getElementById('ov');
+const ovb = () => document.getElementById('ovb');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const SKEY = 'read-' + M.id;
-const S = JSON.parse(localStorage.getItem(SKEY) || '{}');
-let slow = localStorage.getItem(SKEY + '-slow') === '1';
-let fontN = +(localStorage.getItem(SKEY + '-fs') || 1);
-const FS = [24, 28, 34];
-const save = () => localStorage.setItem(SKEY, JSON.stringify(S));
-const award = (k, n) => { const p = S[k] || 0; if (n > p) { S[k] = n; save(); return true; } return false; };
 const starStr = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
-const packStars = p => (S[p.id + '-read'] || 0) + (S[p.id + '-tap'] || 0) + (S[p.id + '-build'] || 0);
-const packTotal = () => 9;
 
-const sp = new Audio();
-let ptok = 0;
-const rate = () => slow ? 0.7 : 0.92;
-function stopAudio() { ptok++; sp.pause(); document.querySelectorAll('.on,.playing').forEach(e => { e.classList.remove('on'); e.classList.remove('playing'); }); }
-function playId(id, el) {
-  return new Promise(res => {
-    if (!id) return res(false);
-    let remote = false;
-    const mine = ptok;
-    if (el) el.classList.add(el.classList.contains('w') ? 'on' : 'playing');
-    sp.onended = () => { if (el && mine === ptok) { el.classList.remove('on'); el.classList.remove('playing'); } res(mine === ptok); };
-    sp.onerror = () => {
-      if (mine !== ptok || remote) return res(false);
-      remote = true;
-      const t = TXT[id] || '';
-      sp.src = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=' + M.tl + '&q=' + encodeURIComponent(t.slice(0, 190));
-      sp.defaultPlaybackRate = sp.playbackRate = rate();
-      sp.play().catch(() => {});
-    };
-    sp.src = 'voice/' + id + '.mp3';
-    sp.defaultPlaybackRate = sp.playbackRate = rate();
-    sp.play().catch(e => { if (e.name === 'NotAllowedError') res(false); });
-  });
-}
-async function playSeq(items) {
-  stopAudio();
-  const mine = ptok;
-  for (const {id, el} of items) {
-    if (mine !== ptok) return;
-    if (!(await playId(id, el))) return;
-  }
-}
-function toggleSlow() {
-  slow = !slow; localStorage.setItem(SKEY + '-slow', slow ? '1' : '0');
-  sp.defaultPlaybackRate = sp.playbackRate = rate();
-  document.querySelectorAll('.slow').forEach(b => b.classList.toggle('on', slow));
-}
-function setFs(n) {
-  fontN = n; localStorage.setItem(SKEY + '-fs', n);
-  document.body.style.setProperty('--fs', FS[n] + 'px');
-  document.querySelectorAll('.sizebar button').forEach((b, i) => b.classList.toggle('on', i === n));
+const SKEY = M.lsKey;
+let store = JSON.parse(localStorage.getItem(SKEY) || '{}');
+if (!store.stars) store.stars = {};
+if (!store.tried) store.tried = {};
+const save = () => localStorage.setItem(SKEY, JSON.stringify(store));
+const getStar = id => store.stars[id] || 0;
+const setStar = (id, n) => { if (n > (store.stars[id] || 0)) { store.stars[id] = n; save(); return true; } return false; };
+const markTried = id => { store.tried[id] = true; save(); };
+
+function starsFromAccuracy(correct, total) {
+  if (!total) return 0;
+  const p = correct / total;
+  if (p >= 0.85) return 3;
+  if (p >= 0.65) return 2;
+  if (p >= 0.4) return 1;
+  return 0;
 }
 
-let actx = null;
-function tone(fs, d, type, v) {
-  try {
-    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
-    const t0 = actx.currentTime;
-    fs.forEach((f, k) => {
-      const o = actx.createOscillator(), g = actx.createGain();
-      o.type = type; o.frequency.value = f;
-      g.gain.setValueAtTime(0.0001, t0 + k * d);
-      g.gain.exponentialRampToValueAtTime(v, t0 + k * d + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, t0 + (k + 1) * d);
-      o.connect(g); g.connect(actx.destination);
-      o.start(t0 + k * d); o.stop(t0 + (k + 1) * d + 0.05);
-    });
-  } catch (e) {}
-}
-const ding = () => tone([660, 880, 1175], 0.1, 'sine', 0.3);
-const buzz = () => tone([220, 165], 0.16, 'triangle', 0.3);
-function confetti() {
-  for (let i = 0; i < 16; i++) {
-    const s = document.createElement('span'); s.className = 'conf';
-    s.textContent = ['⭐', '🎉', '✨', '🌟'][i % 4];
-    s.style.left = Math.random() * 100 + 'vw';
-    document.body.appendChild(s); setTimeout(() => s.remove(), 1800);
-  }
+function coverageBanner() {
+  const modes = D.modes.map(m => m.id);
+  const triedAll = modes.every(id => store.tried[id]);
+  const starSum = modes.reduce((s, id) => s + getStar(id), 0);
+  const allGood = modes.every(id => getStar(id) >= 2);
+  if (triedAll && allGood) return { cls: 'great', text: '🎉 सभी भाग पूरे — शानदार सितारे! आप अच्छा पढ़ते हैं।' };
+  if (triedAll) return { cls: 'ok', text: '✅ आपने सभी भाग आज़माए। कमज़ोर मोड दोबारा खेलें।' };
+  if (starSum >= 8) return { cls: 'great', text: '🌟 अच्छे सितारे! बाकी भाग भी पूरे करें।' };
+  const any = modes.some(id => store.tried[id]);
+  if (any) return { cls: 'practice', text: '📚 और अभ्यास चाहिए — फिर पढ़ें, 3 सितारे पाएँ।' };
+  return { cls: 'start', text: '👋 स्वयं पढ़ें, फिर उत्तर चुनें। यहाँ कोई स्पीकर नहीं!' };
 }
 
 function home() {
-  const got = PACKS.reduce((s, p) => s + packStars(p), 0);
-  const tot = PACKS.length * packTotal();
+  const b = coverageBanner();
+  const modes = D.modes;
+  const starSum = modes.reduce((s, m) => s + getStar(m.id), 0);
   app.innerHTML = `
     <div class="top">
-      <a href="${M.back}" title="Back">🏠</a>
-      <div class="tt"><small>${M.subject} · Class ${M.grade}</small><b>${M.emoji} ${esc(M.title)}</b></div>
-      <span class="chip">⭐ ${got}/${tot}</span>
-      <button class="slow ${slow ? 'on' : ''}" onclick="toggleSlow()">🐢 Slow</button>
+      <a href="../../index.html" title="Home">🏠</a>
+      <button type="button" class="ib" onclick="history.back()" title="Back">←</button>
+      <div class="tt"><small>${esc(M.grade)}</small><b>${M.emoji} ${esc(M.title)}</b></div>
+      <span class="chip">${starSum}/${modes.length * 3}★</span>
     </div>
-    <div class="hero"><div class="big">${M.emoji}</div><h1>${esc(M.title)}</h1>
-      <p>${M.grade <= 3 ? 'Big words · hear every word · read together' : 'Follow the line · tap hard words · build fluency'}</p></div>
+    <div class="hero"><div class="big">${M.emoji}</div><h1>${esc(M.title)}</h1><p>मौन पठन · आप पढ़ें, फिर उत्तर दें</p></div>
+    <div class="banner ${b.cls}">${esc(b.text)}</div>
     <div class="hint">💡 ${esc(M.hint)}</div>
-    <div class="sizebar">
-      <button class="${fontN === 0 ? 'on' : ''}" onclick="setFs(0)">A</button>
-      <button class="${fontN === 1 ? 'on' : ''}" onclick="setFs(1)">A+</button>
-      <button class="${fontN === 2 ? 'on' : ''}" onclick="setFs(2)">A++</button>
-    </div>
-    <div class="packs">${PACKS.map(p => {
-      const st = packStars(p);
-      return `<button class="pcard" onclick="openPack('${p.id}')"><span class="em">${p.emoji}</span>
-        <div class="inf"><b>${esc(p.title)}</b><small>${p.lines.length} lines · ${p.words.length} words</small></div>
-        <span class="st">${starStr(Math.min(3, Math.round(st / 3)))}</span></button>`;
-    }).join('')}</div>`;
-  setFs(fontN);
+    <div class="gtiles">${modes.map(m => `
+      <button type="button" class="gt" style="--b:${m.color}" onclick="openMode('${m.id}')">
+        <span class="i">${m.emoji}</span><b>${esc(m.title)}</b><small>${esc(m.sub)}</small>
+        <span class="st">${starStr(getStar(m.id))}</span>
+      </button>`).join('')}</div>`;
 }
 
-const ov = document.getElementById('ov'), ovb = () => document.getElementById('ovb');
 let G = null;
-function openOv(title) {
-  stopAudio();
+function openOv(title, score) {
   document.getElementById('ovt').textContent = title;
-  document.getElementById('ovs').textContent = '';
-  ov.classList.add('show'); document.body.style.overflow = 'hidden';
+  document.getElementById('ovs').textContent = score || '';
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
-function closeOv() { stopAudio(); ov.classList.remove('show'); document.body.style.overflow = ''; G = null; home(); }
-const setScore = t => document.getElementById('ovs').innerHTML = t;
+function closeOv() { ov.classList.remove('show'); document.body.style.overflow = ''; G = null; home(); }
+function setScore(t) { document.getElementById('ovs').textContent = t; }
 
-function openPack(pid) {
-  const p = PACKS.find(x => x.id === pid);
-  G = {p};
-  openOv(p.emoji + ' ' + p.title);
+function openMode(id) {
+  G = { mode: id, correct: 0, total: 0, qi: 0 };
+  const m = D.modes.find(x => x.id === id);
+  openOv(m.emoji + ' ' + m.title, '');
+  if (id === 'words') { G.items = shuffle(D.words); G.i = 0; showWordQ(); }
+  else if (id === 'sentences') { G.items = shuffle(D.sentences); G.i = 0; showSentQ(); }
+  else if (id === 'passage') showPassagePick();
+  else if (id === 'poem') showPoemPick();
+}
+
+function showWordQ() {
+  if (G.i >= G.items.length) return finishMode('words');
+  const item = G.items[G.i];
+  const opts = shuffle(item.options.map((t, i) => ({ t, i })));
   ovb().innerHTML = `<div class="card">
-    <div class="gtiles">
-      <button class="gt" style="--b:linear-gradient(135deg,#4361ee,#7b2cbf)" onclick="startRead()">
-        <span class="i">🔊</span><b>${M.lang === 'hi' ? 'साथ में पढ़ो' : M.lang === 'ml' ? 'കൂടെ വായിക്കാം' : 'Read with me'}</b>
-        <small>${M.lang === 'en' ? 'Hear each word, follow the highlight' : 'വാക്ക് തിരിച്ചറിഞ്ഞ് വായിക്കുക / शब्द सुनकर पढ़ें'}</small></button>
-      <button class="gt" style="--b:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startTap()">
-        <span class="i">👆</span><b>${M.lang === 'hi' ? 'सुनो और चुनो' : M.lang === 'ml' ? 'കേൾക്കൂ, തിരഞ്ഞെടുക്കൂ' : 'Hear & find'}</b>
-        <small>${M.lang === 'en' ? 'Listen, then tap the right word' : 'ശരിയായ വാക്ക് കണ്ടെത്തുക'}</small></button>
-      <button class="gt" style="--b:linear-gradient(135deg,#ff9f1c,#e76f51)" onclick="startBuild()">
-        <span class="i">🧩</span><b>${M.lang === 'hi' ? 'वाक्य बनाओ' : M.lang === 'ml' ? 'വാക്യം ഉണ്ടാക്കൂ' : 'Build the line'}</b>
-        <small>${M.lang === 'en' ? 'Put the words in order' : 'വാക്കുകൾ ക്രമത്തിൽ വയ്ക്കുക'}</small></button>
-      ${p.words.length ? `<button class="gt" style="--b:linear-gradient(135deg,#ef476f,#b5179e)" onclick="startWords()">
-        <span class="i">🃏</span><b>${M.lang === 'hi' ? 'शब्द कार्ड' : M.lang === 'ml' ? 'വാക്ക് കാർഡ്' : 'Word cards'}</b>
-        <small>${M.lang === 'en' ? 'Tap cards to hear hard words' : 'കഠിന വാക്കുകൾ കേൾക്കുക'}</small></button>` : ''}
+    <div class="prog">${G.i + 1} / ${G.items.length}</div>
+    <div class="prompt">यह शब्द पढ़ें</div>
+    <div class="bigtext">${esc(item.w)}</div>
+    <div class="prompt">सही अंग्रेज़ी अर्थ चुनें</div>
+    <div class="opts" id="opts">${opts.map(o => `<button type="button" class="opt en" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  bindOpts(item.a, () => { G.i++; showWordQ(); });
+}
+
+function showSentQ() {
+  if (G.i >= G.items.length) return finishMode('sentences');
+  const item = G.items[G.i];
+  const opts = shuffle(item.options.map((t, i) => ({ t, i })));
+  ovb().innerHTML = `<div class="card">
+    <div class="prog">${G.i + 1} / ${G.items.length}</div>
+    <div class="prompt">यह वाक्य पढ़ें</div>
+    <div class="readbox">${esc(item.s)}</div>
+    <div class="prompt">सही अंग्रेज़ी अर्थ चुनें</div>
+    <div class="opts" id="opts">${opts.map(o => `<button type="button" class="opt en" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  bindOpts(item.a, () => { G.i++; showSentQ(); });
+}
+
+function showPassagePick() {
+  ovb().innerHTML = `<div class="card">
+    <p class="prompt">गद्यांश स्वयं पढ़ें, फिर प्रश्न हल करें।</p>
+    <div class="pick">
+      <button type="button" class="pbtn" onclick="startPassage(0)">📄 ${esc(D.passages[0].title)}<small>३+ प्रश्न</small></button>
+      <button type="button" class="pbtn" onclick="startPassage(1)">📄 ${esc(D.passages[1].title)}<small>३+ प्रश्न</small></button>
+      <button type="button" class="pbtn" onclick="startPassage('all')">📚 दोनों गद्यांश<small>पूरा अभ्यास</small></button>
     </div>
-    <div style="text-align:center;margin-top:12px"><button class="nx alt" onclick="closeOv()">✕ Close</button></div>
+    <div class="navl"><button type="button" class="nx alt" onclick="closeOv()">← मुख्य पृष्ठ</button></div>
   </div>`;
 }
 
-function toks(line) {
-  // Keep punctuation attached lightly; split on spaces
-  return line.trim().split(/\s+/).filter(Boolean);
+function startPassage(which) {
+  G.passages = which === 'all' ? [0, 1] : [which];
+  G.pi = 0; G.correct = 0; G.total = 0; G.qi = 0;
+  showPassageRead();
 }
 
-function startRead() {
-  const p = G.p;
-  G.mode = 'read'; G.i = 0; G.done = 0;
-  openOv('🔊 ' + p.title);
-  showRead();
-}
-function showRead() {
-  const p = G.p;
-  if (G.i >= p.lines.length) {
-    award(p.id + '-read', 3); confetti(); ding();
-    ovb().innerHTML = `<div class="card end"><div class="big">🏆</div><h2>${M.lang === 'ml' ? 'കൊള്ളാം!' : M.lang === 'hi' ? 'शाबाश!' : 'Great reading!'}</h2>
-      <div class="stars">⭐⭐⭐</div>
-      <button class="nx" onclick="startRead()">🔁 Again</button>
-      <button class="nx alt" onclick="openPack('${p.id}')">← Back</button></div>`;
-    return;
-  }
-  const line = p.lines[G.i];
-  const words = toks(line);
-  setScore(`${G.i + 1}/${p.lines.length}`);
+function showPassageRead() {
+  const p = D.passages[G.passages[G.pi]];
   ovb().innerHTML = `<div class="card">
-    <div class="tools">
-      <button class="pill" id="playAll">▶ ${M.lang === 'ml' ? 'പ്ലേ' : M.lang === 'hi' ? 'चलाएँ' : 'Play line'}</button>
-      <button class="pill alt" onclick="stopAudio()">⏸ Stop</button>
+    <div class="prog">गद्यांश ${G.pi + 1} / ${G.passages.length}</div>
+    <div class="readbox"><h3>${esc(p.title)}</h3>${esc(p.text)}</div>
+    <p style="text-align:center;font-weight:800;color:#5b5f86">ध्यान से पढ़ें, फिर आगे बढ़ें।</p>
+    <div class="navl"><button type="button" class="nx" onclick="G.qi=0;showPassageQ()">पढ़ लिया →</button></div>
+  </div>`;
+}
+
+function showPassageQ() {
+  const p = D.passages[G.passages[G.pi]];
+  if (G.qi >= p.questions.length) {
+    G.pi++;
+    if (G.pi >= G.passages.length) return finishMode('passage');
+    G.qi = 0;
+    return showPassageRead();
+  }
+  const q = p.questions[G.qi];
+  const opts = shuffle(q.options.map((t, i) => ({ t, i })));
+  ovb().innerHTML = `<div class="card">
+    <div class="prog">${esc(p.title)} · प्रश्न ${G.qi + 1}/${p.questions.length}</div>
+    <div class="qtext">${esc(q.q)}</div>
+    <div class="opts" id="opts">${opts.map(o => `<button type="button" class="opt en" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  bindOpts(q.a, () => { G.qi++; showPassageQ(); });
+}
+
+function showPoemPick() {
+  ovb().innerHTML = `<div class="card">
+    <p class="prompt">कविता स्वयं पढ़ें, फिर प्रश्न हल करें।</p>
+    <div class="pick">
+      <button type="button" class="pbtn" onclick="startPoem(0)">🎵 ${esc(D.poems[0].title)}<small>३+ प्रश्न</small></button>
+      <button type="button" class="pbtn" onclick="startPoem(1)">🎵 ${esc(D.poems[1].title)}<small>३+ प्रश्न</small></button>
+      <button type="button" class="pbtn" onclick="startPoem('all')">📚 दोनों कविताएँ<small>पूरा अभ्यास</small></button>
     </div>
-    <div class="linebox" id="lb">${words.map((w, k) => `<button class="w" data-k="${k}" data-id="${p.lineAudio[G.i][k]}">${esc(w)}</button>`).join('')}</div>
-    <p style="text-align:center;color:#6b6f93;font-weight:700;margin:10px 0 0">💡 ${M.lang === 'en' ? 'Tap any word to hear it alone' : 'ഓരോ വാക്കും ടാപ്പ് ചെയ്ത് കേൾക്കാം / किसी भी शब्द पर टैप करें'}</p>
+    <div class="navl"><button type="button" class="nx alt" onclick="closeOv()">← मुख्य पृष्ठ</button></div>
+  </div>`;
+}
+
+function startPoem(which) {
+  G.poems = which === 'all' ? [0, 1] : [which];
+  G.pi = 0; G.correct = 0; G.total = 0; G.qi = 0;
+  showPoemRead();
+}
+
+function showPoemRead() {
+  const p = D.poems[G.poems[G.pi]];
+  ovb().innerHTML = `<div class="card">
+    <div class="prog">कविता ${G.pi + 1} / ${G.poems.length}</div>
+    <div class="readbox poem"><h3>${esc(p.title)}</h3>${esc(p.text)}</div>
+    <p style="text-align:center;font-weight:800;color:#5b5f86">भाव के साथ पढ़ें, फिर आगे बढ़ें।</p>
+    <div class="navl"><button type="button" class="nx" onclick="G.qi=0;showPoemQ()">पढ़ लिया →</button></div>
+  </div>`;
+}
+
+function showPoemQ() {
+  const p = D.poems[G.poems[G.pi]];
+  if (G.qi >= p.questions.length) {
+    G.pi++;
+    if (G.pi >= G.poems.length) return finishMode('poem');
+    G.qi = 0;
+    return showPoemRead();
+  }
+  const q = p.questions[G.qi];
+  const opts = shuffle(q.options.map((t, i) => ({ t, i })));
+  ovb().innerHTML = `<div class="card">
+    <div class="prog">${esc(p.title)} · प्रश्न ${G.qi + 1}/${p.questions.length}</div>
+    <div class="qtext">${esc(q.q)}</div>
+    <div class="opts" id="opts">${opts.map(o => `<button type="button" class="opt en" data-i="${o.i}">${esc(o.t)}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>
+  </div>`;
+  bindOpts(q.a, () => { G.qi++; showPoemQ(); });
+}
+
+function bindOpts(correctIdx, next) {
+  let locked = false;
+  document.querySelectorAll('#opts .opt').forEach(btn => {
+    btn.onclick = () => {
+      if (locked) return;
+      locked = true;
+      const pick = +btn.dataset.i;
+      const ok = pick === correctIdx;
+      G.total++;
+      if (ok) G.correct++;
+      document.querySelectorAll('#opts .opt').forEach(b => {
+        b.disabled = true;
+        if (+b.dataset.i === correctIdx) b.classList.add('ok');
+        else if (+b.dataset.i === pick) b.classList.add('bad');
+      });
+      const fb = document.getElementById('fb');
+      fb.className = 'fb ' + (ok ? 'good' : 'bad');
+      fb.textContent = ok ? 'शाबाश! 🌟' : 'फिर से पढ़ें और याद रखें।';
+      setScore(G.correct + '/' + G.total);
+      setTimeout(next, ok ? 700 : 1200);
+    };
+  });
+}
+
+function finishMode(modeId) {
+  markTried(modeId);
+  const stars = starsFromAccuracy(G.correct, G.total);
+  const improved = setStar(modeId, stars);
+  ovb().innerHTML = `<div class="card end">
+    <div class="big">${stars >= 2 ? '🏆' : '📕'}</div>
+    <h2 style="color:var(--c2);margin:8px 0">राउंड पूरा!</h2>
+    <p style="font-weight:800;font-size:18px">${G.correct} / ${G.total} सही</p>
+    <div class="stars">${starStr(stars)}</div>
+    <p style="color:#5b5f86;font-weight:700">${improved ? 'इस मोड में नए सितारे!' : 'और अभ्यास से सितारे बढ़ेंगे।'}</p>
     <div class="navl">
-      <button class="nx alt" ${G.i === 0 ? 'disabled' : ''} onclick="G.i--;showRead()">← Prev</button>
-      <span class="prog">${G.i + 1} / ${p.lines.length}</span>
-      <button class="nx" onclick="G.i++;showRead()">Next →</button>
+      <button type="button" class="nx" onclick="openMode('${modeId}')">🔁 फिर से</button>
+      <button type="button" class="nx alt" onclick="closeOv()">← मुख्य पृष्ठ</button>
     </div>
   </div>`;
-  document.body.style.setProperty('--fs', FS[fontN] + 'px');
-  document.getElementById('lb').onclick = e => {
-    const b = e.target.closest('.w'); if (!b) return;
-    playId(b.dataset.id, b);
-  };
-  document.getElementById('playAll').onclick = () => {
-    const btns = [...document.querySelectorAll('.w')];
-    playSeq(btns.map(b => ({id: b.dataset.id, el: b})));
-  };
-  // auto-play the line once for struggling readers
-  setTimeout(() => document.getElementById('playAll').click(), 250);
-}
-
-function startTap() {
-  const p = G.p;
-  const items = [];
-  p.lines.forEach((line, li) => toks(line).forEach((w, wi) => {
-    if (w.length >= (M.grade <= 3 ? 2 : 3)) items.push({w, id: p.lineAudio[li][wi], line});
-  }));
-  G.mode = 'tap'; G.queue = shuffle(items).slice(0, Math.min(12, items.length)); G.i = 0; G.ok = 0; G.miss = 0;
-  openOv('👆 Hear & find');
-  showTap();
-}
-function showTap() {
-  if (G.i >= G.queue.length) {
-    const s = G.miss === 0 ? 3 : G.miss <= 3 ? 2 : 1;
-    award(G.p.id + '-tap', s); confetti(); ding();
-    ovb().innerHTML = `<div class="card end"><div class="big">${s === 3 ? '🏆' : '🥳'}</div>
-      <h2>${G.ok}/${G.queue.length} ${M.lang === 'en' ? 'correct' : 'ശരി / सही'}</h2>
-      <div class="stars">${starStr(s)}</div>
-      <button class="nx" onclick="startTap()">🔁 Again</button>
-      <button class="nx alt" onclick="openPack('${G.p.id}')">← Back</button></div>`;
-    return;
-  }
-  const x = G.queue[G.i];
-  const pool = shuffle(G.queue.map(q => q.w).filter((w, i, a) => a.indexOf(w) === i && w !== x.w)).slice(0, 3);
-  const opts = shuffle([x.w, ...pool]);
-  G.answered = false;
-  setScore(`${G.i + 1}/${G.queue.length}`);
-  ovb().innerHTML = `<div class="card" style="text-align:center">
-    <button class="pill" style="width:80px;height:80px;border-radius:50%;font-size:32px" onclick="playId('${x.id}',this)">🔊</button>
-    <p class="fb" style="color:#5b5f86">${M.lang === 'en' ? 'Which word did you hear?' : M.lang === 'hi' ? 'कौन-सा शब्द सुना?' : 'ഏത് വാക്ക് കേട്ടു?'}</p>
-    <div class="opts">${opts.map(o => `<button class="opt" data-w="${esc(o)}" onclick="pickTap(this)">${esc(o)}</button>`).join('')}</div>
-    <div id="after"></div>
-  </div>`;
-  playId(x.id);
-}
-function pickTap(btn) {
-  if (G.answered) return;
-  G.answered = true;
-  const x = G.queue[G.i];
-  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
-  if (btn.dataset.w === x.w) {
-    btn.classList.add('ok'); ding(); G.ok++;
-    document.getElementById('after').innerHTML = `<div class="fb good">${M.lang === 'en' ? 'Yes!' : 'ശരി! / सही!'}</div><button class="nx" onclick="G.i++;showTap()">Next →</button>`;
-  } else {
-    btn.classList.add('bad'); buzz(); G.miss++;
-    document.querySelectorAll('.opt').forEach(b => { if (b.dataset.w === x.w) b.classList.add('ok'); });
-    document.getElementById('after').innerHTML = `<div class="fb bad">${M.lang === 'en' ? 'The green one is right' : 'പച്ച നിറമുള്ളത് ശരി / हरा सही है'}</div><button class="nx" onclick="G.i++;showTap()">Next →</button>`;
-  }
-}
-
-function startBuild() {
-  const p = G.p;
-  G.mode = 'build'; G.queue = shuffle(p.lines.map((line, li) => ({line, ids: p.lineAudio[li]}))); G.i = 0; G.miss = 0;
-  openOv('🧩 Build the line');
-  showBuild();
-}
-function showBuild() {
-  if (G.i >= G.queue.length) {
-    const s = G.miss === 0 ? 3 : G.miss <= 2 ? 2 : 1;
-    award(G.p.id + '-build', s); confetti(); ding();
-    ovb().innerHTML = `<div class="card end"><div class="big">🏆</div><div class="stars">${starStr(s)}</div>
-      <button class="nx" onclick="startBuild()">🔁 Again</button>
-      <button class="nx alt" onclick="openPack('${G.p.id}')">← Back</button></div>`;
-    return;
-  }
-  const x = G.queue[G.i];
-  G.parts = toks(x.line); G.pos = 0;
-  setScore(`${G.i + 1}/${G.queue.length}`);
-  G.curIds = x.ids;
-  const tiles = shuffle(G.parts.map((w, i) => ({w, i, id: x.ids[i]})));
-  ovb().innerHTML = `<div class="card">
-    <p class="fb" style="color:#5b5f86">${M.lang === 'en' ? 'Tap the words in the right order' : 'ശരിയായ ക്രമത്തിൽ ടാപ്പ് ചെയ്യുക / सही क्रम में टैप करें'}</p>
-    <button class="pill alt" onclick="playSeq(G.curIds.map(id=>({id})))">🔊 ${M.lang === 'en' ? 'Hear the line first' : 'ആദ്യം കേൾക്കുക / पहले सुनें'}</button>
-    <div class="built" id="built"></div>
-    <div class="pool">${tiles.map(t => `<button class="chipb" data-i="${t.i}" data-w="${esc(t.w)}" data-id="${t.id}" onclick="pickBuild(this)">${esc(t.w)}</button>`).join('')}</div>
-    <div id="after"></div>
-  </div>`;
-}
-function pickBuild(btn) {
-  if (+btn.dataset.i === G.pos) {
-    document.getElementById('built').insertAdjacentHTML('beforeend', `<span>${esc(btn.dataset.w)}</span>`);
-    playId(btn.dataset.id);
-    btn.remove(); G.pos++;
-    if (G.pos === G.parts.length) {
-      ding(); confetti();
-      document.getElementById('after').innerHTML = `<div class="fb good">${M.lang === 'en' ? 'Perfect!' : 'കൊള്ളാം! / शाबाश!'}</div><button class="nx" onclick="G.i++;showBuild()">Next →</button>`;
-    }
-  } else {
-    G.miss++; buzz(); btn.classList.add('bad'); setTimeout(() => btn.classList.remove('bad'), 350);
-  }
-}
-
-function startWords() {
-  const p = G.p;
-  openOv('🃏 Word cards');
-  ovb().innerHTML = `<div class="card"><div class="wgrid">${p.words.map((w, k) => {
-    const id = p.wordAudio[k];
-    return `<button class="wcard" onclick="playId('${id}',this)"><div class="e">${esc(w[1] || '🔤')}</div><div class="ww">${esc(w[0])}</div></button>`;
-  }).join('')}</div>
-  <div style="text-align:center;margin-top:14px"><button class="nx alt" onclick="openPack('${p.id}')">← Back</button></div></div>`;
 }
 
 home();

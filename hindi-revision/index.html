@@ -24,8 +24,27 @@
     font-family: "Kohinoor Devanagari", "Devanagari Sangam MN", "Noto Sans Devanagari", "Mangal", sans-serif;
     line-height: 1.55;
   }
+  .page-nav {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; gap: 8px; align-items: center;
+    padding: 10px 12px;
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e8e4f5;
+  }
+  .page-nav a, .page-nav button {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 44px; height: 40px; padding: 0 12px; border-radius: 99px;
+    background: #4361ee; color: #fff; text-decoration: none; border: 0;
+    font: inherit; font-weight: 800; font-size: 14px; cursor: pointer;
+    box-shadow: 0 3px 0 #3a0ca3;
+  }
+  .page-nav button.back {
+    background: #fff; color: #4361ee; border: 2px solid #cfd6ff; box-shadow: 0 3px 0 #e3e0f7;
+  }
+  .page-nav .grow { flex: 1; font-weight: 800; color: #4a4f7a; font-size: 14px; }
   header {
-    position: sticky; top: 0; z-index: 5;
+    position: sticky; top: 52px; z-index: 5;
     background: #1f6b45;
     color: #fff;
     padding: 14px 16px 10px;
@@ -234,6 +253,11 @@
 </style>
 </head>
 <body>
+<div class="page-nav">
+  <a href="../index.html" title="Home">🏠 Home</a>
+  <button type="button" class="back" onclick="if(history.length>1)history.back();else location.href='../hindi/'">← Back</button>
+  <span class="grow">हिंदी रिवीज़न</span>
+</div>
 <header>
   <h1>कल की हिंदी परीक्षा · मल्हार</h1>
   <p>Class 8 · tap Play on one box at a time</p>
