@@ -85,7 +85,14 @@ button{font-family:inherit;cursor:pointer}
 .end h2{margin:8px 0;color:#0f766e}
 .end .stars{font-size:32px;letter-spacing:3px}
 .done-tag{display:inline-block;background:#d1fae5;color:#065f46;font-size:12px;font-weight:800;padding:3px 10px;border-radius:99px;margin-left:6px}
+
+.la-say{border:0;background:#efeaff;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;vertical-align:middle;margin-left:6px;box-shadow:0 3px 0 #e3e0f7}
+.la-say.playing,.la-say:active{background:#ffb703}
+.la-row{display:flex;gap:8px;align-items:flex-start}
+.la-row .la-say{margin-top:2px}
+
 </style>
+<script src="../assets/learn-audio.js"></script>
 </head>
 <body>
 <div id="root"></div>
@@ -345,10 +352,13 @@ function renderLearn(L) {
   const r = lessonRec(L.id);
   return L.learn.map((c, i) => `
     <div class="lcard2 flip" onclick="this.classList.toggle('open');markLearn('${L.id}')">
-      <h3>${esc(c.t)}</h3>
+      <div class="la-row" style="align-items:center" onclick="event.stopPropagation()">
+        <h3 style="flex:1;margin:0">${esc(c.t)}</h3>
+        ${LearnAudio.btn(c.t + '. ' + c.b, 'en-IN')}
+      </div>
       <small>Tap to see more ▼</small>
       <div class="back">${esc(c.b)}</div>
-    </div>`).join('') + `<div class="keyval">🔑 Key value: ${esc(L.key)}</div>`;
+    </div>`).join('') + `<div class="keyval la-row"><span style="flex:1">🔑 Key value: ${esc(L.key)}</span>${LearnAudio.btn(L.key,'en-IN')}</div>`;
 }
 
 window.markLearn = function(id) {
@@ -361,13 +371,13 @@ function renderActivity(L, act) {
   const r = lessonRec(L.id);
   const done = r.acts[act.id];
   let inner = `<h3>${esc(act.title)}${done ? '<span class="done-tag">Done</span>' : ''}</h3>`;
-  if (act.intro) inner += `<p>${esc(act.intro)}</p>`;
+  if (act.intro) inner += `<p class="la-row"><span style="flex:1">${esc(act.intro)}</span>${LearnAudio.btn(act.intro,'en-IN')}</p>`;
   if (act.type === 'mcq' || act.type === 'pick') {
-    inner += `<p class="qq">${esc(act.q)}</p><div class="opts" id="act-${act.id}">` +
+    inner += `<p class="qq la-row"><span style="flex:1">${esc(act.q)}</span>${LearnAudio.btn(act.q,'en-IN')}</p><div class="opts" id="act-${act.id}">` +
       act.opts.map((o, i) => `<button type="button" class="opt" data-i="${i}" onclick="actMcq('${L.id}','${act.id}',${i},${act.a})">${esc(o)}</button>`).join('') +
       `</div><div id="feed-${act.id}"></div>`;
   } else if (act.type === 'fill') {
-    inner += `<p class="qq">${esc(act.q)}</p>
+    inner += `<p class="qq la-row"><span style="flex:1">${esc(act.q)}</span>${LearnAudio.btn(act.q,'en-IN')}</p>
       <input class="inp" id="inp-${act.id}" placeholder="Type your answer">
       <button type="button" class="pill" onclick="actFill('${L.id}','${act.id}')">Check</button>
       <div id="feed-${act.id}"></div>`;
@@ -386,6 +396,7 @@ window.actMcq = function(lid, aid, pick, ans) {
   const box = document.getElementById('act-' + aid);
   if (!box || box.dataset.lock) return;
   const ok = pick === ans;
+  LearnAudio.result(ok);
   box.querySelectorAll('.opt').forEach((b, i) => {
     b.disabled = true;
     if (i === ans) b.classList.add('ok');
@@ -402,6 +413,7 @@ window.actFill = function(lid, aid) {
   const act = LESSONS.find(x => x.id === lid).activities.find(a => a.id === aid);
   const v = (document.getElementById('inp-' + aid).value || '').trim().toLowerCase();
   const ok = act.answers.some(a => a.toLowerCase() === v);
+  LearnAudio.result(ok);
   const fd = document.getElementById('feed-' + aid);
   fd.innerHTML = `<div class="feed ${ok ? 'good' : 'bad'}">${ok ? 'Correct!' : 'Answer: ' + act.answers[0]}</div>`;
   if (ok) { lessonRec(lid).acts[aid] = true; save(); setTimeout(render, 600); }
@@ -425,6 +437,7 @@ window.matchPick = function(lid, aid, el) {
   const leftIdx = side === 'L' ? idx : st.sel.idx;
   const rightIdx = side === 'R' ? idx : st.sel.idx;
   const pairOk = st.pairs.some(p => p[0] === leftIdx && p[1] === rightIdx);
+  LearnAudio.result(pairOk);
   st.sel.el.classList.remove('sel');
   if (pairOk) {
     el.classList.add('done'); st.sel.el.classList.add('done');
@@ -436,6 +449,7 @@ window.matchPick = function(lid, aid, el) {
   st.sel = null;
   const act = LESSONS.find(x => x.id === lid).activities.find(a => a.id === aid);
   if (st.matched.size === act.pairs.length) {
+    LearnAudio.ding();
     document.getElementById('feed-' + aid).innerHTML = '<div class="feed good">All matched! 🎉</div>';
     lessonRec(lid).acts[aid] = true;
     save();
@@ -476,15 +490,17 @@ function renderQuizQ() {
   document.getElementById('quiz-body').innerHTML = `
     <div class="qhead"><span>Question ${quizRun.i + 1}/${quizRun.total}</span><span>Score: ${quizRun.score}</span></div>
     <div class="bar"><i style="width:${pct}%"></i></div>
-    <div class="qq">${esc(q.q)}</div>
+    <div class="qq la-row"><span style="flex:1">${esc(q.q)}</span>${LearnAudio.btn(q.q,'en-IN')}</div>
     <div class="opts" id="q-opts">${q.o.map((t, i) => `<button type="button" class="opt" onclick="quizPick(${i},${q.a})">${esc(t)}</button>`).join('')}</div>
     <div id="q-feed"></div>`;
+  LearnAudio.speak(q.q, 'en-IN');
 }
 
 window.quizPick = function(pick, ans) {
   const box = document.getElementById('q-opts');
   if (!box || box.dataset.lock) return;
   const ok = pick === ans;
+  LearnAudio.result(ok);
   if (ok) quizRun.score++;
   box.querySelectorAll('.opt').forEach((b, i) => {
     b.disabled = true;
