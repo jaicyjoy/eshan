@@ -81,7 +81,7 @@ button,input{font-family:inherit}
 .la-row{display:flex;gap:8px;align-items:flex-start}
 
 </style>
-<script src="../../assets/learn-audio.js"></script>
+<script src="../../assets/learn-audio.js?v=2"></script>
 </head>
 <body class="ml">
 <div id="app"></div>
@@ -106,33 +106,43 @@ const gotStars = () => WORDS.reduce((s, x) => s + (S[x.w] || 0), 0);
 const totalStars = () => WORDS.length * 3;
 const norm = s => String(s).trim().replace(/\s+/g, ' ');
 
-let speakTok = 0;
 const rate = () => slow ? 0.72 : 0.95;
+let remoteAudio = null;
 function stopAudio() {
-  speakTok++;
-  if (window.speechSynthesis) speechSynthesis.cancel();
+  if (window.LearnAudio) LearnAudio.stop();
+  else {
+    try { speechSynthesis.cancel(); } catch (e) {}
+  }
+  if (remoteAudio) {
+    try { remoteAudio.pause(); remoteAudio.removeAttribute('src'); remoteAudio.load(); } catch (e) {}
+    remoteAudio = null;
+  }
   document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
 }
+/** Malayalam: use online TTS (most phones have no ml voice). Same fallback as revision. */
 function playW(text, el) {
   stopAudio();
-  const mine = speakTok;
   if (el) el.classList.add('playing');
-  if (!window.speechSynthesis) {
-    if (el) el.classList.remove('playing');
-    return Promise.resolve(false);
+  // Prefer shared LearnAudio (Google TTS for Malayalam)
+  if (window.LearnAudio) {
+    return LearnAudio.speak(text, 'ml-IN', rate(), el);
   }
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'ml-IN';
-  u.rate = rate();
-  const voices = speechSynthesis.getVoices();
-  const ml = voices.find(v => v.lang && v.lang.replace('_', '-').toLowerCase().startsWith('ml'));
-  if (ml) u.voice = ml;
-  u.onend = () => { if (el && mine === speakTok) el.classList.remove('playing'); };
-  u.onerror = () => { if (el && mine === speakTok) el.classList.remove('playing'); };
-  speechSynthesis.speak(u);
-  return new Promise(res => { u.onend = () => { if (el && mine === speakTok) el.classList.remove('playing'); res(true); }; });
+  // Fallback if LearnAudio missing
+  return new Promise(resolve => {
+    try {
+      remoteAudio = new Audio(
+        'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ml&q='
+        + encodeURIComponent(String(text).slice(0, 180))
+      );
+      remoteAudio.onended = () => { if (el) el.classList.remove('playing'); resolve(true); };
+      remoteAudio.onerror = () => { if (el) el.classList.remove('playing'); resolve(false); };
+      remoteAudio.play().catch(() => { if (el) el.classList.remove('playing'); resolve(false); });
+    } catch (e) {
+      if (el) el.classList.remove('playing');
+      resolve(false);
+    }
+  });
 }
-if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
 function toggleSlow() {
   slow = !slow;
   localStorage.setItem(SKEY + '-slow', slow ? '1' : '0');
