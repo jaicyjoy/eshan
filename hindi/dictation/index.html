@@ -109,35 +109,47 @@ const starStr = n => '⭐'.repeat(n) + '☆'.repeat(3 - n);
 const gotStars = () => WORDS.reduce((s, x) => s + (S[x.w] || 0), 0);
 const totalStars = () => WORDS.length * 3;
 
-const sp = new Audio();
+let sp = null;
 let ptok = 0;
 const rate = () => slow ? 0.75 : 1;
-function stopAudio() { ptok++; sp.pause(); document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing')); }
+function stopAudio() {
+  ptok++;
+  if (sp) {
+    try { sp.onended = null; sp.onerror = null; sp.pause(); } catch (e) {}
+    sp = null;
+  }
+  document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
+}
 function play(id, el) {
   stopAudio();
   const mine = ptok;
   if (el) el.classList.add('playing');
+  const tl = M.lang === 'hi' ? 'hi' : 'en-IN';
+  sp = new Audio('voice/' + id + '.mp3');
+  sp.defaultPlaybackRate = sp.playbackRate = rate();
   return new Promise(res => {
     let remote = false;
-    const tl = M.lang === 'hi' ? 'hi' : 'en-IN';
     sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
     sp.onerror = () => {
       if (mine !== ptok || remote) return res(false);
       remote = true;
       const t = TXT[id] || '';
-      sp.src = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=' + tl + '&q=' + encodeURIComponent(t);
+      sp = new Audio('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=' + tl + '&q=' + encodeURIComponent(t));
       sp.defaultPlaybackRate = sp.playbackRate = rate();
-      sp.play().catch(() => {});
+      sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+      sp.onerror = () => { if (el && mine === ptok) el.classList.remove('playing'); res(false); };
+      sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
     };
-    sp.src = 'voice/' + id + '.mp3';
-    sp.defaultPlaybackRate = sp.playbackRate = rate();
-    sp.play().catch(e => { if (e.name === 'NotAllowedError') res(false); });
+    sp.play().catch(e => {
+      if (el && mine === ptok) el.classList.remove('playing');
+      if (e.name === 'NotAllowedError') res(false);
+    });
   });
 }
 function toggleSlow() {
   slow = !slow;
   localStorage.setItem(SKEY + '-slow', slow ? '1' : '0');
-  sp.defaultPlaybackRate = sp.playbackRate = rate();
+  if (sp) { sp.defaultPlaybackRate = sp.playbackRate = rate(); }
   document.querySelectorAll('.slow').forEach(b => b.classList.toggle('on', slow));
 }
 
@@ -251,15 +263,13 @@ function showQ() {
       <input class="typein" id="tin" autocomplete="off" autocapitalize="none" spellcheck="false"
         placeholder="${M.lang === 'hi' ? 'यहाँ लिखो…' : 'type here…'}"
         onkeydown="if(event.key==='Enter')checkType()">
-      <div><button class="nx" onclick="checkType()">✔ ${M.lang === 'hi' ? 'जाँचो' : 'Check'}</button>
-      <button class="nx alt" onclick="play('${x.vid}')">🔁 ${M.lang === 'hi' ? 'फिर सुनो' : 'Hear again'}</button></div>
+      <div><button class="nx" onclick="checkType()">✔ ${M.lang === 'hi' ? 'जाँचो' : 'Check'}</button></div>
       <div id="after"></div>`;
   } else {
     body = `<button class="say" onclick="play('${x.vid}',this)">🔊</button>
       <div class="clue">💡 ${esc(x.clue)}</div>
       <p class="clue">${M.lang === 'hi' ? 'कौन-सा शब्द सही है?' : 'Which spelling is correct?'}</p>
       <div class="opts">${shuffle(x.opts).map(o => `<button class="opt" data-w="${esc(o)}" onclick="pickOpt(this)">${esc(o)}</button>`).join('')}</div>
-      <div><button class="nx alt" onclick="play('${x.vid}')">🔁 ${M.lang === 'hi' ? 'फिर सुनो' : 'Hear again'}</button></div>
       <div id="after"></div>`;
   }
   ovb().innerHTML = `<div class="prog"><div class="bar"><i style="width:${pct}%"></i></div><span>${G.i + 1}/${G.total}</span></div><div class="card">${body}</div>`;

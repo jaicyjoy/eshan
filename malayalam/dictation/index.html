@@ -108,25 +108,28 @@ const norm = s => String(s).trim().replace(/\s+/g, ' ');
 
 const rate = () => slow ? 0.75 : 1;
 const VID = Object.fromEntries(WORDS.map(x => [x.w, x.vid]));
-const sp = new Audio();
+let sp = null;
 let ptok = 0;
 function stopAudio() {
   ptok++;
-  try { sp.pause(); } catch (e) {}
+  if (sp) {
+    try { sp.onended = null; sp.onerror = null; sp.pause(); } catch (e) {}
+    sp = null;
+  }
   document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
 }
-/** Play local mp3 from voice/ (reliable offline-after-cache; no browser ml-voice needed). */
+/** Fresh Audio each click so 🔊 replays reliably (same src would otherwise be a no-op). */
 function playW(textOrVid, el) {
   stopAudio();
   const mine = ptok;
   if (el) el.classList.add('playing');
   const id = VID[textOrVid] || textOrVid;
+  sp = new Audio('voice/' + id + '.mp3');
+  sp.defaultPlaybackRate = sp.playbackRate = rate();
   return new Promise(res => {
     sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
     sp.onerror = () => { if (el && mine === ptok) el.classList.remove('playing'); res(false); };
-    sp.src = 'voice/' + id + '.mp3';
-    sp.defaultPlaybackRate = sp.playbackRate = rate();
-    sp.play().catch(e => {
+    sp.play().catch(() => {
       if (el && mine === ptok) el.classList.remove('playing');
       res(false);
     });
@@ -246,15 +249,13 @@ function showQ() {
       <input class="typein" id="tin" autocomplete="off" autocapitalize="none" spellcheck="false"
         placeholder="ഇവിടെ ടൈപ്പ് ചെയ്യുക…"
         onkeydown="if(event.key==='Enter')checkType()">
-      <div><button type="button" class="nx" onclick="checkType()">✔ Check</button>
-      <button type="button" class="nx alt" onclick="playW(${JSON.stringify(x.w)})">🔁 Hear again</button></div>
+      <div><button type="button" class="nx" onclick="checkType()">✔ Check</button></div>
       <div id="after"></div>`;
   } else {
     body = `<button type="button" class="say" onclick="playW(${JSON.stringify(x.w)},this)">🔊</button>
       <div class="clue">💡 ${esc(x.clue)}</div>
       <p class="clue">Which spelling is correct? / ശരിയായ വർണ്ണന?</p>
       <div class="opts">${shuffle(x.opts).map(o => `<button type="button" class="opt" data-w="${esc(o)}" onclick="pickOpt(this)">${esc(o)}</button>`).join('')}</div>
-      <div><button type="button" class="nx alt" onclick="playW(${JSON.stringify(x.w)})">🔁 Hear again</button></div>
       <div id="after"></div>`;
   }
   ovb().innerHTML = `<div class="prog"><div class="bar"><i style="width:${pct}%"></i></div><span>${G.i + 1}/${G.total}</span></div><div class="card">${body}</div>`;
@@ -350,8 +351,7 @@ function flashRevealLetters() {
   const after = document.getElementById('after');
   after.innerHTML = '<p class="clue">Revealing letters…</p>';
   revealFlashLetters(x.w, () => {
-    after.innerHTML = `<button type="button" class="nx" onclick="flashRevealWord()">👀 Show full word</button>
-      <button type="button" class="nx alt" onclick="playW(${JSON.stringify(x.w)})">🔁 Hear again</button>`;
+    after.innerHTML = `<button type="button" class="nx" onclick="flashRevealWord()">👀 Show full word</button>`;
   });
 }
 
