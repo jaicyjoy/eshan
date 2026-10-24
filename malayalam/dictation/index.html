@@ -201,7 +201,7 @@ function home() {
     <div class="sec"><h3>📋 All words — tap to hear / എല്ലാ വാക്കുകളും</h3>
       <div class="wlist">${WORDS.map(x => `<button type="button" class="${S[x.w] >= 3 ? 'got' : ''}" onclick="playW(${JSON.stringify(x.w)},this)">${esc(x.w)} ${'⭐'.repeat(S[x.w] || 0)}</button>`).join('')}</div>
     </div>
-    <p class="foot">Audio: browser speech (ml-IN) · Stars saved in <b>eshan-dict-ml</b></p>`;
+    <p class="foot">Audio: recorded Malayalam voice · Stars saved in <b>eshan-dict-ml</b></p>`;
 }
 
 const ov = document.getElementById('ov'), ovb = () => document.getElementById('ovb');
