@@ -3,25 +3,338 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coming soon · Eshan</title>
+<title>GK · Class 8 · Eshan</title>
 <style>
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:linear-gradient(160deg,#e0f0ff,#fff3e0);color:#1f2340;text-align:center;padding:24px}
-.box{background:#fff;border-radius:28px;padding:36px 28px;box-shadow:0 10px 0 #e6dff7;max-width:420px}
-.em{font-size:64px}h1{margin:8px 0 6px;font-size:28px}p{margin:0;color:#6a5f8f;font-size:17px}
-a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#4361ee,#7b2cbf);color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:99px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#dce9ff 0%,#f3e9ff 45%,#fff0e0 100%);min-height:100vh;line-height:1.4}
+button,a{font-family:inherit}
+#app{max-width:920px;margin:0 auto;padding:12px 14px 80px}
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,#4361ee,#7b2cbf);box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top a,.top button.icon{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#333;flex:none;cursor:pointer}
+.top .tt{flex:1;min-width:0}.top .tt small{display:block;font-size:12px;font-weight:700;opacity:.92}.top .tt b{display:block;font-size:18px}
+.chip{background:rgba(255,255,255,.28);border-radius:99px;padding:4px 10px;font-weight:800;font-size:13px;white-space:nowrap}
+.hero{text-align:center;padding:14px 8px 6px}.hero .big{font-size:56px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px) rotate(-4deg)}}
+.hero h1{margin:4px 0;font-size:30px;color:#4361ee}.hero p{margin:0;color:#6a5f8f;font-size:16px}
+.starbox{background:#fff;border-radius:22px;padding:14px 16px;margin:12px 0;box-shadow:0 6px 0 #dce9ff}
+.starbox .row{display:flex;justify-content:space-between;font-weight:800;font-size:16px}
+.bar{height:14px;background:#f3e6dc;border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd60a,#06d6a0);border-radius:99px;width:0;transition:width .35s}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.16);cursor:pointer;width:100%}
+.gt .i{font-size:34px;display:block}.gt b{display:block;font-size:17px;margin-top:4px;line-height:1.2}.gt small{display:block;opacity:.95;font-size:12px;margin-top:2px}
+.gt .st{display:inline-block;margin-top:8px;background:rgba(0,0,0,.18);padding:3px 10px;border-radius:99px;font-weight:800;font-size:13px}
+.ov{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(165deg,#eef2ff,#fff8ef)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,#4361ee,#7b2cbf)}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;cursor:pointer}
+.ovtop .t{flex:1;font-weight:800;font-size:15px}.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800}
+.ovb{flex:1;overflow-y:auto;padding:14px;max-width:860px;width:100%;margin:0 auto}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.mode{border:0;border-radius:20px;padding:18px 14px;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.14);text-align:left}
+.mode .x{font-size:32px;display:block}.mode small{display:block;font-weight:700;opacity:.95;margin-top:4px}
+.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 7px 0 #dce9ff;text-align:center;margin-bottom:12px}
+.card .em{font-size:64px;line-height:1}.card h2{margin:8px 0 4px;font-size:24px;color:#4361ee}.card p{margin:0;color:#4a4f7a;font-size:17px;font-weight:700}
+.say{border:0;width:78px;height:78px;border-radius:50%;font-size:34px;background:#e8e0ff;cursor:pointer;box-shadow:0 5px 0 #dce9ff;margin:6px}
+.say.playing,.say:active{background:#ffb703;transform:scale(.96)}
+.say.sm{width:48px;height:48px;font-size:22px;margin:0 4px;vertical-align:middle}
+.qtext{font-size:20px;font-weight:800;margin:10px 0;color:#1f2340;display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:left}
+.opts{display:grid;gap:10px;margin-top:12px;text-align:left}
+.opt{border:2px solid #dce9ff;background:#f5f3ff;border-radius:16px;padding:14px;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #dce9ff;width:100%;display:flex;align-items:center;gap:8px}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71}.opt.bad{background:#ffd3d3;border-color:#e5484d}
+.opt .say.sm{flex:none}
+.fb{margin-top:12px;font-weight:800;font-size:18px}.fb.good{color:#1f9d55}.fb.bad{color:#d9480f}
+.nx{display:inline-block;margin:12px 6px 0;border:0;border-radius:99px;padding:12px 26px;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#4361ee,#7b2cbf);cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.14)}
+.nx.alt{background:#fff;color:#4361ee;border:2px solid #cfd6ff;box-shadow:0 5px 0 #dce9ff}
+.prog{font-weight:800;color:#5b5f86;margin-bottom:8px}
+.learn-nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px;flex-wrap:wrap}
+.dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#dce9ff}.dots i.on{background:#f77f00}
+.end{text-align:center}.end .big{font-size:64px}.stars{font-size:36px;letter-spacing:3px}
+.tip{text-align:center;color:#6a5f8f;font-size:14px;margin-top:16px}
 </style>
+<script src="../assets/learn-audio.js?v=3"></script>
 </head>
 <body>
-<div class="box">
-  <div class="em" id="em">🚧</div>
-  <h1 id="t">Coming soon</h1>
-  <p>This subject will be added next. Until then, try English, Hindi or Social!</p>
-  <a href="../">🏠 Back to subjects</a>
+<div id="app"></div>
+<div class="ov" id="ov">
+  <div class="ovtop">
+    <button type="button" onclick="closeOv()">✕</button>
+    <div class="t" id="ovt"></div>
+    <div class="sc" id="ovs"></div>
+  </div>
+  <div class="ovb" id="ovb"></div>
 </div>
+<script type="application/json" id="data">{"topics":[{"id":"laughter","title":"Joy of Laughter","emoji":"😂","grad":"linear-gradient(135deg,#f72585,#7209b7)","blurb":"Life skills · why laughter helps","learn":[{"em":"👨‍👩‍👧‍👦","t":"Happy memories","s":"Laughing together spreads happiness and creates happy memories with others.","vid":"v-c71978a570"},{"em":"🧠","t":"Happy hormones","s":"When we laugh, our brain releases happy hormones that improve our mood and relax us.","vid":"v-77116b2edd"},{"em":"💪","t":"Stronger immunity","s":"Laughing makes us stronger. It improves our immune system.","vid":"v-8c67857dfd"},{"em":"😊","t":"Life skill","s":"Start your day with a smile. Recall a happy memory before bed and fall asleep with a smile.","vid":"v-3bbf1cceac"}],"quiz":[{"q":"If we want laughter in our lives, we should…","o":["Avoid friends","Start our day with a frown","Watch sad movies","Recall a funny memory"],"a":3,"qVid":"v-d834f64695","oVids":["v-ffcc7bdf3f","v-e81f4ec73c","v-02a672d351","v-580a8e521a"],"aVid":"v-3edd76f7f5"},{"q":"Starting our day with a smile…","o":["Makes others sad","Encourages others to be happy","Has no effect","Makes us tired"],"a":1,"qVid":"v-f5dea8b6f0","oVids":["v-aadd800789","v-be2165fc7b","v-5712d3cedd","v-4f2c644d66"],"aVid":"v-bbbf47242b"},{"q":"Laughter keeps us healthy by…","o":["Making us sweat","Making us tired","Making us sad","Improving our immunity"],"a":3,"qVid":"v-75f8b38a68","oVids":["v-0d67448250","v-a27e961ce9","v-f6e9268a25","v-cb122f74f7"],"aVid":"v-002ff4395a"},{"q":"Laughter helps improve relationships because it…","o":["Creates distance","Helps express anger","Spreads happiness","Makes people more serious"],"a":2,"qVid":"v-b04b7607d4","oVids":["v-bf80b4f64a","v-877e709302","v-9e4860ea62","v-5d21f5894c"],"aVid":"v-196340fff7"}],"titleVid":"v-4fe1f95a38","blurbVid":"v-263667bda7"},{"id":"sunlight","title":"Sunlight Therapy","emoji":"☀️","grad":"linear-gradient(135deg,#ffd60a,#f77f00)","blurb":"How the sun helps your body","learn":[{"em":"🦴","t":"Vitamin D","s":"When exposed to the sun, our bodies produce vitamin D which helps us absorb calcium from food and maintain bone health.","vid":"v-3bf038a05b"},{"em":"😊","t":"Serotonin","s":"When we are out in the sun, our body produces serotonin which makes us feel happier and more energetic.","vid":"v-6b9aea987e"},{"em":"🩹","t":"Skin & heart","s":"Regulated sunlight helps cure skin problems and strengthens the cardiovascular system.","vid":"v-6868bb365f"},{"em":"🔥","t":"Warmth","s":"The sun helps warm our muscles which eases stiffness and reduces pain from bone diseases.","vid":"v-24dabd8539"},{"em":"🛡️","t":"Preventing cancer","s":"Regular and controlled exposure to the sun can help in preventing some forms of cancer.","vid":"v-246760e998"},{"em":"💧","t":"Excretory system","s":"Playing in the sun makes us sweat. This helps our body remove wastes through our skin.","vid":"v-a3dcd0582f"},{"em":"😴","t":"Melatonin fact","s":"Melatonin helps regulate sleep. Daytime sunlight increases melatonin production at night.","vid":"v-717a068257"}],"quiz":[{"q":"Sun exposure helps our body produce… for bone health.","o":["Vitamin C","Vitamin D","Iron","Salt"],"a":1,"qVid":"v-dc93ac583e","oVids":["v-c7a44543d2","v-0b2acdc858","v-cefa8a9606","v-af334c7b6e"],"aVid":"v-d84bc66300"},{"q":"The happy hormone boosted by sunlight is…","o":["Adrenaline","Serotonin","Insulin","Melanin"],"a":1,"qVid":"v-84203ad5cc","oVids":["v-abe1a4aabc","v-ea1279d54f","v-38ef854e1e","v-448e72b843"],"aVid":"v-ea780beada"},{"q":"Sun rays improve liver functioning and help treat…","o":["Rabies","Dengue","Jaundice","Tuberculosis"],"a":2,"qVid":"v-3e38c5c0d3","oVids":["v-9f380780b8","v-58555fc155","v-72ff486076","v-432448829b"],"aVid":"v-4f9ff27f82"},{"q":"Sunlight therapy also helps us feel…","o":["Hungry","Sad","Feverish","Calm"],"a":3,"qVid":"v-e4a6006e96","oVids":["v-3263c2c152","v-debd770bb8","v-a64201d9b5","v-75b58bbe3e"],"aVid":"v-1d153daee1"}],"titleVid":"v-71a481d0f5","blurbVid":"v-9f5d396235"},{"id":"universities","title":"World Universities","emoji":"🎓","grad":"linear-gradient(135deg,#4361ee,#3a0ca3)","blurb":"Famous campuses & alumni","learn":[{"em":"🇺🇸","t":"Stanford University","s":"Stanford was founded in 1885. Famous alumnus Larry Page helped create Google. Popular subjects include social sciences and computer sciences.","vid":"v-5d2da44450"},{"em":"🇬🇧","t":"University of Cambridge","s":"Cambridge was founded around 1209. Famous alumnus Charles Babbage was a great mathematician. Popular subjects include archaeology and modern languages.","vid":"v-083b38e582"},{"em":"🧑‍🔬","t":"Charles Darwin","s":"Charles Darwin attended the University of Cambridge.","vid":"v-b7dc25628e"},{"em":"🇺🇸","t":"Barack Obama","s":"Barack Obama attended Harvard University.","vid":"v-12b7616b40"},{"em":"🔍","t":"Sergey Brin","s":"Sergey Brin attended Stanford University.","vid":"v-06a7ce5aed"}],"quiz":[{"q":"Larry Page, a Google creator, is an alumnus of…","o":["Oxford","Stanford","Cambridge","Harvard"],"a":1,"qVid":"v-b6829b44cc","oVids":["v-f0dddde0d0","v-45ebe6bd83","v-90944204e4","v-6808dd0e73"],"aVid":"v-36caeb06c5"},{"q":"Charles Babbage is linked with…","o":["Stanford","Cambridge","Harvard","Oxford"],"a":1,"qVid":"v-bd3b645a8c","oVids":["v-45ebe6bd83","v-90944204e4","v-6808dd0e73","v-f0dddde0d0"],"aVid":"v-a14b284253"},{"q":"Which university did Charles Darwin attend?","o":["Stanford","Harvard","Cambridge","Oxford"],"a":2,"qVid":"v-4dd20272b0","oVids":["v-45ebe6bd83","v-6808dd0e73","v-90944204e4","v-f0dddde0d0"],"aVid":"v-a14b284253"},{"q":"Which university did Barack Obama attend?","o":["Harvard","Cambridge","Stanford","Oxford"],"a":0,"qVid":"v-8e16a4aec2","oVids":["v-6808dd0e73","v-90944204e4","v-45ebe6bd83","v-f0dddde0d0"],"aVid":"v-4a9d99d6d7"},{"q":"Sergey Brin attended…","o":["Harvard","Oxford","Stanford","Cambridge"],"a":2,"qVid":"v-94286589f8","oVids":["v-6808dd0e73","v-f0dddde0d0","v-45ebe6bd83","v-90944204e4"],"aVid":"v-36caeb06c5"}],"titleVid":"v-66046b11d7","blurbVid":"v-ca82af7040"},{"id":"animals","title":"Amazing Animals","emoji":"🦊","grad":"linear-gradient(135deg,#2a9d8f,#264653)","blurb":"Unique creatures & life lessons","learn":[{"em":"👀","t":"Tarsier","s":"Tarsiers have extremely large eyes for excellent night vision. They are great jumpers. They teach us to work on our strengths.","vid":"v-2acab6d42c"},{"em":"🦈","t":"Carpet shark","s":"Carpet sharks have patterns that help them blend with the ocean floor. They wait patiently to hunt. They teach us the importance of patience.","vid":"v-492afea5d8"},{"em":"🥸","t":"Emperor tamarin","s":"The emperor tamarin is an animal with a long moustache.","vid":"v-a62e6f763e"},{"em":"🐐","t":"Markhor goat","s":"The markhor goat is known for its twisted horns.","vid":"v-54f73b6341"},{"em":"🦶","t":"Booby","s":"The booby is a bird with bright blue feet.","vid":"v-66fc4405b5"}],"quiz":[{"q":"Which animal has extremely large eyes for night vision?","o":["Carpet shark","Tarsier","Booby","Markhor"],"a":1,"qVid":"v-bb88d046f0","oVids":["v-efd5a8b5b2","v-edfc5f6df4","v-6d8392b77c","v-3955324873"],"aVid":"v-1f4288781c"},{"q":"Which animal teaches patience by waiting on the ocean floor?","o":["Tarsier","Carpet shark","Emperor tamarin","Booby"],"a":1,"qVid":"v-7a79286dda","oVids":["v-edfc5f6df4","v-efd5a8b5b2","v-9d66716593","v-6d8392b77c"],"aVid":"v-b7e26271b3"},{"q":"Animal with a long moustache?","o":["Markhor goat","Emperor tamarin","Booby","Tarsier"],"a":1,"qVid":"v-a47034d485","oVids":["v-5827e6a83c","v-9d66716593","v-6d8392b77c","v-edfc5f6df4"],"aVid":"v-0d0997ad2f"},{"q":"Animal with twisted horns?","o":["Markhor goat","Booby","Carpet shark","Tarsier"],"a":0,"qVid":"v-309697f362","oVids":["v-5827e6a83c","v-6d8392b77c","v-efd5a8b5b2","v-edfc5f6df4"],"aVid":"v-8e0dc818ed"},{"q":"Bird with blue feet?","o":["Booby","Tarsier","Markhor","Emperor tamarin"],"a":0,"qVid":"v-03b5c1b2c6","oVids":["v-6d8392b77c","v-edfc5f6df4","v-3955324873","v-9d66716593"],"aVid":"v-f49ec6c6c7"}],"titleVid":"v-2f8e936bb6","blurbVid":"v-b50a76b290"},{"id":"marine","title":"Marine Morals","emoji":"🐬","grad":"linear-gradient(135deg,#00b4d8,#0077b6)","blurb":"Ocean animals & values","learn":[{"em":"🐬","t":"Dolphin","s":"Dolphins protect humans and other animals in danger. They teach us the importance of helping others in need.","vid":"v-e57f46a580"},{"em":"🐙","t":"Octopus","s":"An octopus can change colour and skin texture to hide from predators. It teaches flexibility and adaptability.","vid":"v-263f2b4a68"},{"em":"🦈","t":"Shark","s":"Sharks help maintain the balance of marine ecosystems by eating small fish. They teach us to play our role responsibly. Sharks have been on Earth for over 400 million years.","vid":"v-6b06308e48"},{"em":"🐢","t":"Sea turtle","s":"Sea turtles migrate to lay eggs on the same beach where they were born. They teach perseverance and returning to our roots.","vid":"v-9182ed96f0"},{"em":"🦐","t":"Amazing facts","s":"Tongues of blue whales weigh as much as an elephant. Blobfish collapse when pulled out of water. Mantis shrimps punch so fast they boil water. Some nudibranchs keep predators' poison for defence.","vid":"v-bfb9b5c29f"}],"quiz":[{"q":"Tongues of ______ weigh as much as an elephant.","o":["Mantis shrimps","Blue whales","Nudibranch","Blobfish"],"a":1,"qVid":"v-bcb54bc660","oVids":["v-d6fcc79af8","v-8258c6e44b","v-4ed168408b","v-7ca536bd4a"],"aVid":"v-0b1f4d28ca"},{"q":"______ collapse into mush when pulled out of water.","o":["Blue whales","Blobfish","Sharks","Dolphins"],"a":1,"qVid":"v-8e5bcc9916","oVids":["v-8258c6e44b","v-7ca536bd4a","v-0c4604ab5e","v-8f3490a556"],"aVid":"v-eb2c239404"},{"q":"The ______ punches so fast it boils water around its fist.","o":["Nudibranch","Mantis shrimp","Blobfish","Octopus"],"a":1,"qVid":"v-3b06dbd3ea","oVids":["v-4ed168408b","v-3362b33c6c","v-7ca536bd4a","v-f4f71aeb5f"],"aVid":"v-2de51a8ad5"},{"q":"When we show kindness to people, it…","o":["Makes them trust and respect us","Does not matter","Makes people unhappy","Makes people suspicious"],"a":0,"qVid":"v-f73757c627","oVids":["v-a1a9f9a5f1","v-ceca49b85e","v-38af5b541e","v-c4a6e66a80"],"aVid":"v-13c6ff2f33"},{"q":"If we are determined in school, it…","o":["Makes studies difficult","Helps us stay focussed","Is not useful","Makes us make mistakes"],"a":1,"qVid":"v-a072b9c08d","oVids":["v-53475f5fe3","v-3dc1aece10","v-d8bd9b394e","v-fd85e1e84a"],"aVid":"v-83cb3e45a7"},{"q":"Solving a problem with a new idea means we are…","o":["Sticking to old habits","Using creative thinking","Following old methods","Avoiding new ideas"],"a":1,"qVid":"v-410f80b9d1","oVids":["v-56387ada7f","v-db57fd33d3","v-c7af3f6830","v-222ca3757b"],"aVid":"v-5a608dcbcb"}],"titleVid":"v-60aadd23d6","blurbVid":"v-de949eeb2d"},{"id":"kabaddi","title":"Outdoor Game: Kabaddi","emoji":"🤼","grad":"linear-gradient(135deg,#06d6a0,#118ab2)","blurb":"Moves, teamwork & fitness","learn":[{"em":"🦶","t":"Toe touch","s":"Raiders touch the defenders with their toes. Toe touch improves balance and flexibility.","vid":"v-0a9da3a9fa"},{"em":"🦂","t":"Scorpion kick","s":"A scorpion kick is a backward kick to catch defenders off guard. It improves core strength and speed.","vid":"v-68e49bf9f0"},{"em":"🤝","t":"Chain tackle","s":"Defenders link arms to tackle the raiders. Chain tackle improves teamwork and upper body strength.","vid":"v-95cb316534"},{"em":"🦵","t":"Ankle hold","s":"Defenders catch raiders by grabbing their ankles. Ankle hold improves leg strength and hand-eye coordination.","vid":"v-9031eee8f5"}],"quiz":[{"q":"Raiders touch defenders with their toes. This move is…","o":["Ankle hold","Toe touch","Chain tackle","Scorpion kick"],"a":1,"qVid":"v-18b99068f6","oVids":["v-8a0225815c","v-30486fb0d8","v-aeb2b1bffe","v-450c7eff0b"],"aVid":"v-3626235574"},{"q":"A backward kick to catch defenders off guard is…","o":["Toe touch","Scorpion kick","Chain tackle","Ankle hold"],"a":1,"qVid":"v-39031bd16d","oVids":["v-30486fb0d8","v-450c7eff0b","v-aeb2b1bffe","v-8a0225815c"],"aVid":"v-1dd0ab8a48"},{"q":"Defenders link arms to tackle. This is…","o":["Chain tackle","Toe touch","Ankle hold","Scorpion kick"],"a":0,"qVid":"v-bd8263e82a","oVids":["v-aeb2b1bffe","v-30486fb0d8","v-8a0225815c","v-450c7eff0b"],"aVid":"v-16b2d702af"},{"q":"Grabbing a raider's ankles is called…","o":["Toe touch","Chain tackle","Ankle hold","Scorpion kick"],"a":2,"qVid":"v-3fe9ea6c5c","oVids":["v-30486fb0d8","v-aeb2b1bffe","v-8a0225815c","v-450c7eff0b"],"aVid":"v-9adfe40874"},{"q":"Which food group should be the smallest portion for a Kabaddi player?","o":["Carbohydrates","Proteins","Fats","Vitamins and minerals"],"a":2,"qVid":"v-3751b2215f","oVids":["v-0256d4157a","v-728b880f02","v-a652a244ed","v-72bd414d04"],"aVid":"v-9f06fbdc61"},{"q":"Which quality is essential for effective teamwork?","o":["Individual achievement","Open communication","No one taking the lead","Generating conflict"],"a":1,"qVid":"v-9a5afe5017","oVids":["v-9e6c69e466","v-707dca5bc1","v-e09415c184","v-258c42c996"],"aVid":"v-511a23d890"},{"q":"Which Kabaddi player is a famous captain often shown in textbooks?","o":["Pardeep Narwal","Anup Kumar","Vinesh Phogat","Ajay Thakur"],"a":1,"qVid":"v-e5f5d18247","oVids":["v-12abfdbf42","v-fdfb16e704","v-b1d50bbf2d","v-06d5ffad72"],"aVid":"v-1daa2fa345"}],"titleVid":"v-21a24caf8d","blurbVid":"v-ceb989e668"},{"id":"positivity","title":"Power of Positivity","emoji":"🌈","grad":"linear-gradient(135deg,#ff9f1c,#e76f51)","blurb":"Stay calm · 3 A's of positivity","learn":[{"em":"🦵","t":"Physical activity","s":"Engage in sports or dancing. Practise deep breathing to calm the mind and body.","vid":"v-ec318941ac"},{"em":"📋","t":"Plan tasks","s":"Plan your tasks wisely. Break big tasks into smaller ones and prioritise them.","vid":"v-14ea7dcc36"},{"em":"🥗","t":"Nutritious food","s":"Eat nutritious food and drink plenty of water.","vid":"v-13d822e029"},{"em":"💬","t":"Talk it out","s":"Talk to your family and friends. Sharing your feelings makes you feel good.","vid":"v-2322687732"},{"em":"😴","t":"Sleep well","s":"Get 7 to 8 hours of sleep each night. Lack of sleep reduces concentration.","vid":"v-35231a72d8"},{"em":"🅰️","t":"The 3 A's","s":"Avoid self-doubt and negative feelings. Accept mistakes and use positive self-talk. Adapt to situations with positive thoughts.","vid":"v-352974b9e4"}],"quiz":[{"q":"Healthy lifestyle — good for positivity?","o":["Yes ✓","No ✗","Only weekends"],"a":0,"qVid":"v-308e0cf46c","oVids":["v-f36b1dd0c2","v-38104ac90e","v-5ba878bb39"],"aVid":"v-8b90dafc49"},{"q":"Increasing screen time — effective way to stay happy?","o":["Yes ✓","No ✗","Always"],"a":1,"qVid":"v-d0545a2e52","oVids":["v-f36b1dd0c2","v-38104ac90e","v-68eec46437"],"aVid":"v-970b83d749"},{"q":"Being lazy all day — effective?","o":["Yes","No ✗","Sometimes"],"a":1,"qVid":"v-c708985f1a","oVids":["v-93cba07454","v-38104ac90e","v-40f887f066"],"aVid":"v-970b83d749"},{"q":"Talking to loved ones — effective?","o":["Yes ✓","No","Never"],"a":0,"qVid":"v-9b21823e67","oVids":["v-f36b1dd0c2","v-bafd7322c6","v-6e7b34fa59"],"aVid":"v-8b90dafc49"},{"q":"Shouting at others — effective?","o":["Yes","No ✗","Only at school"],"a":1,"qVid":"v-a4bb05df2e","oVids":["v-93cba07454","v-38104ac90e","v-a22f1c4afe"],"aVid":"v-970b83d749"}],"titleVid":"v-d56716fee6","blurbVid":"v-d489e8fff7"},{"id":"seating","title":"Seating Arrangement","emoji":"🪑","grad":"linear-gradient(135deg,#7b2cbf,#c77dff)","blurb":"Logic puzzles · bench & circle","learn":[{"em":"🪑","t":"Bench tip","s":"Read clues carefully. Mark ends first, then place people who sit next to each other.","vid":"v-81ea5466dc"},{"em":"5️⃣","t":"Bench order","s":"On the bench from left to right: Chitra, Dev, Arya, Bhavya, Esha. Arya sits between Bhavya and Dev.","vid":"v-fdcd5e6590"},{"em":"⭕","t":"Circle tip","s":"In a circle facing the centre, 'right' means clockwise for the people facing inward. Track neighbours step by step.","vid":"v-6ab6082732"},{"em":"✅","t":"Circle answer","s":"In the circle puzzle, Qasim and Waseem are neighbours.","vid":"v-0090cef9e1"}],"quiz":[{"q":"Arya, Bhavya, Chitra, Dev and Esha sit on a bench. In which position is Arya sitting?","o":["Between Bhavya and Dev","Between Dev and Chitra","Between Esha and Bhavya","Next to Chitra"],"a":0,"qVid":"v-40e3161d18","oVids":["v-38bf700eaa","v-fe434a7176","v-faac4ae33d","v-055b5e16db"],"aVid":"v-3a20bd3443"},{"q":"In the circle of eight friends, which two are neighbours?","o":["Rina and Qasim","Umang and Varun","Rina and Priya","Qasim and Waseem"],"a":3,"qVid":"v-3c730319de","oVids":["v-332396dfd1","v-29cb331e8d","v-83986310a2","v-9c087ce21e"],"aVid":"v-13b1bad7c4"}],"titleVid":"v-2848b703aa","blurbVid":"v-698d47681d"},{"id":"eco-inventions","title":"Eco-Friendly Inventions","emoji":"🌱","grad":"linear-gradient(135deg,#2d6a4f,#95d5b2)","blurb":"Green gadgets that help Earth","learn":[{"em":"🎒","t":"Solar bags","s":"Solar bags absorb sunlight through panels and store electricity to charge devices.","vid":"v-a6e990722e"},{"em":"🧴","t":"Biodegradable bottles","s":"Biodegradable water bottles were developed in India by DFRL-DRDO in Mysuru. Every part, including caps, can biodegrade.","vid":"v-a66ed67a39"},{"em":"🌿","t":"Vertical gardens","s":"Vertical gardens grow plants in vertical space. They improve air quality and can provide fresh produce.","vid":"v-b0ff03b3cf"},{"em":"🪥","t":"Bamboo toothbrushes","s":"Bamboo toothbrushes help reduce plastic pollution because they decompose naturally.","vid":"v-1fa21c9d5d"}],"quiz":[{"q":"Bags that charge devices using sunlight are…","o":["Vertical gardens","Solar bags","Bamboo brushes","Plastic bags"],"a":1,"qVid":"v-78694be14b","oVids":["v-9385626ad2","v-1e0e6c6b58","v-e204d86406","v-b56e531789"],"aVid":"v-1edb8c9c6e"},{"q":"Biodegradable water bottles help by…","o":["Promoting single-use plastic","Reducing the use of plastic bottles","Using more plastic","Polluting oceans"],"a":1,"qVid":"v-c8e599be29","oVids":["v-a86ca406a1","v-902c1cb15e","v-5d09d4449c","v-a1475cd32c"],"aVid":"v-be7661a878"},{"q":"Bamboo toothbrushes are eco-friendly because they…","o":["Decompose naturally","Clean teeth better","Are made of metal","Never break"],"a":0,"qVid":"v-5ffaf38e17","oVids":["v-29ee77e092","v-c9ebe1fd76","v-5540ea3461","v-822a4c5db5"],"aVid":"v-2bfab46c94"},{"q":"Growing plants on a wall is called…","o":["Solar bags","Vertical gardens","Bamboo brush","DRDO bags"],"a":1,"qVid":"v-1562750f65","oVids":["v-1e0e6c6b58","v-9385626ad2","v-c26297704d","v-11483aed63"],"aVid":"v-375e5a0714"}],"titleVid":"v-b9b184a8c5","blurbVid":"v-eaa0017fc8"},{"id":"festivals","title":"Green Music Festivals","emoji":"🎵","grad":"linear-gradient(135deg,#e63946,#f4a261)","blurb":"Festivals that care for Earth","learn":[{"em":"🇮🇩","t":"BaliSpirit Festival","s":"In Indonesia, BaliSpirit Festival promotes acoustic performances, uses bamboo bins for waste segregation, and uses natural and recycled materials.","vid":"v-a1611d5b0e"},{"em":"🏴󠁧󠁢󠁷󠁬󠁳󠁿","t":"Green Man Festival","s":"In Wales, Green Man Festival runs some stages on solar or hydro energy, encourages environmental themes, and sells local food in compostable utensils.","vid":"v-74bcbb5d63"},{"em":"🇵🇹","t":"Boom Festival","s":"In Portugal, Boom Festival uses energy-saving sound systems, holds sustainability workshops, and uses sustainable materials for stages.","vid":"v-4bd5e6ae10"},{"em":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","t":"Glastonbury Festival","s":"In England, Glastonbury uses solar energy for the main stage, biodiesel generators, and food from local farms.","vid":"v-cc29a4fd8e"}],"quiz":[{"q":"Acoustic performances and bamboo bins — which festival (Indonesia)?","o":["Green Man","Glastonbury","Boom","BaliSpirit"],"a":3,"qVid":"v-2e071c571a","oVids":["v-96dd2c431d","v-b99bd6d349","v-e68a20cce2","v-03d0be1988"],"aVid":"v-21b3360b77"},{"q":"Solar and hydro stages in Wales?","o":["Green Man Festival","Boom Festival","BaliSpirit","Glastonbury"],"a":0,"qVid":"v-7f16247cd9","oVids":["v-6ca8e85339","v-4e12350ee0","v-03d0be1988","v-b99bd6d349"],"aVid":"v-800d1c1041"},{"q":"Energy-saving systems and workshops in Portugal?","o":["Boom Festival","Green Man","BaliSpirit","Glastonbury"],"a":0,"qVid":"v-521d5a24a1","oVids":["v-4e12350ee0","v-96dd2c431d","v-03d0be1988","v-b99bd6d349"],"aVid":"v-1a45bb6e4d"},{"q":"Solar main stage and biodiesel in England?","o":["BaliSpirit","Boom","Glastonbury","Green Man"],"a":2,"qVid":"v-65520e01ed","oVids":["v-03d0be1988","v-e68a20cce2","v-b99bd6d349","v-96dd2c431d"],"aVid":"v-6421d199f2"},{"q":"We should carpool to a festival to…","o":["Increase traffic","Reduce pollution","Use more fuel","Make travel expensive"],"a":1,"qVid":"v-ecd127447a","oVids":["v-87d7e05d66","v-5dfe6cba82","v-ce03903238","v-3ed37ce913"],"aVid":"v-d9dd31690a"},{"q":"The benefit of digital tickets is that they…","o":["Save paper","Are hard to carry","Are hard to keep","Increase phone dependence only"],"a":0,"qVid":"v-0a61d945e7","oVids":["v-2ecbcbfab6","v-e32103022a","v-5df448ab34","v-f9e084eae6"],"aVid":"v-650f3ef485"}],"titleVid":"v-363329805d","blurbVid":"v-38bed4cd89"},{"id":"ecowarriors","title":"Making the World Green","emoji":"🌳","grad":"linear-gradient(135deg,#40916c,#1b4332)","blurb":"Eco-warriors who planted hope","learn":[{"em":"🇦🇺","t":"Tony Rinaudo","s":"Tony Rinaudo is called The Forest Maker. He restored degraded lands by nurturing existing vegetation across Africa and won the Right Livelihood Award in 2018.","vid":"v-f81aa2cace"},{"em":"🇩🇪","t":"Felix Finkbeiner","s":"Felix Finkbeiner founded Plant-for-the-Planet at age 9. He aims to plant one trillion trees by 2050 and received the Federal Cross of Merit in 2018.","vid":"v-c39cd9ee5c"},{"em":"🇮🇳","t":"Jadav Payeng","s":"Jadav Payeng is the Forest Man of India. He created Molai Forest on a sandbar in the Brahmaputra and received the Padma Shri in 2015.","vid":"v-774eb92f62"}],"quiz":[{"q":"Who is known as The Forest Maker?","o":["Felix Finkbeiner","Tony Rinaudo","Jadav Payeng","Larry Page"],"a":1,"qVid":"v-7defb763d8","oVids":["v-8a0d4a0af9","v-0ea0d1356e","v-88e4c766d8","v-bee2c2336d"],"aVid":"v-24b8e7647c"},{"q":"Who founded Plant-for-the-Planet at age 9?","o":["Tony Rinaudo","Felix Finkbeiner","Jadav Payeng","Anup Kumar"],"a":1,"qVid":"v-f39a5446de","oVids":["v-0ea0d1356e","v-8a0d4a0af9","v-88e4c766d8","v-fdfb16e704"],"aVid":"v-4c924daae4"},{"q":"Who is the Forest Man of India?","o":["Jadav Payeng","Tony Rinaudo","Felix Finkbeiner","SN Bose"],"a":0,"qVid":"v-e68473b26c","oVids":["v-88e4c766d8","v-0ea0d1356e","v-8a0d4a0af9","v-d54a75511a"],"aVid":"v-3b13688269"},{"q":"Molai Forest was created by…","o":["Felix","Tony Rinaudo","Jadav Payeng","Darwin"],"a":2,"qVid":"v-0a34d8c92e","oVids":["v-2c3baf26f7","v-0ea0d1356e","v-88e4c766d8","v-a4bd015934"],"aVid":"v-3b13688269"}],"titleVid":"v-3a537bc63b","blurbVid":"v-f1e278e938"},{"id":"money","title":"Money Can't Buy Everything","emoji":"💎","grad":"linear-gradient(135deg,#fb8500,#dc2f02)","blurb":"What truly matters in life","learn":[{"em":"❤️","t":"Good health","s":"Once lost, you cannot regain good health just by spending money. Never neglect it. It is the real wealth.","vid":"v-99e8ed57bb"},{"em":"👨‍👩‍👧","t":"Family and friends","s":"Family and friends support you when everything else fails. They make your world better. No one likes to be alone all the time.","vid":"v-26f8fadbc4"},{"em":"⏰","t":"Time","s":"Time is the most precious gift. No amount of money can buy a moment that has passed.","vid":"v-003d5d0a94"},{"em":"🎨","t":"Talent","s":"Talent comes from hard work, intelligence, wisdom and experience. Money can buy a painting but cannot make you a painter.","vid":"v-2b59572e0f"}],"quiz":[{"q":"Once lost, expensive medicines may not fully restore…","o":["Time","Good health","Talent","A clock"],"a":1,"qVid":"v-ca200b90aa","oVids":["v-a76d4ef5f3","v-2a1bb13504","v-6d43c13d7f","v-528d3c35a2"],"aVid":"v-43700a6f23"},{"q":"People who support you when everything fails are…","o":["Strangers","Family and friends","Only money","Only screens"],"a":1,"qVid":"v-0b0766d615","oVids":["v-6e927cdd1b","v-1c82680f84","v-feab0e2e9b","v-4f7d140e53"],"aVid":"v-d547a98530"},{"q":"No amount of money can buy a moment that has passed. This is about…","o":["Talent","Time","Health","Food"],"a":1,"qVid":"v-a353124c93","oVids":["v-6d43c13d7f","v-a76d4ef5f3","v-605669cab9","v-0a38e7286e"],"aVid":"v-b2405d4f94"},{"q":"Money can buy a painting but not make you a painter. This is about…","o":["Talent","Time","Health","Tickets"],"a":0,"qVid":"v-5e02b16254","oVids":["v-6d43c13d7f","v-a76d4ef5f3","v-605669cab9","v-c1c694bd84"],"aVid":"v-44aea2220d"},{"q":"How can people use wealth for a positive impact?","o":["Keep it only to themselves","Help people in need","Use it only for power","Only for enjoyment"],"a":1,"qVid":"v-488d604ce8","oVids":["v-1f9624cdd9","v-4a24880f3f","v-b6f0ede970","v-54607943a6"],"aVid":"v-f75680fff8"},{"q":"Main message of 'The best things in life are free'?","o":["Expensive things are best","Happiness is only material","Important things like friendship do not require money","Everything good is costly"],"a":2,"qVid":"v-3b8ac12397","oVids":["v-7e5b79cbc3","v-6e4239a652","v-43eaea6f11","v-4a2d08bc5e"],"aVid":"v-85f5125693"}],"titleVid":"v-77c51601f9","blurbVid":"v-030de377f4"},{"id":"yoga","title":"Yoga Asanas","emoji":"🧘","grad":"linear-gradient(135deg,#4cc9f0,#4895ef)","blurb":"Body · mind · famous poses","learn":[{"em":"🏹","t":"Dhanurasana","s":"Dhanurasana, or Bow Pose, strengthens back muscles, stretches chest, back, shoulders and thighs, and improves digestion.","vid":"v-e1349985e6"},{"em":"🐪","t":"Ustrasana","s":"Ustrasana, or Camel Pose, stretches the spine, stimulates blood circulation, and helps correct rounded shoulders.","vid":"v-579e8a43fc"},{"em":"🐄","t":"Gomukhasana","s":"Gomukhasana, or Cow Face Pose, strengthens neck, shoulders, arms, knees and feet, removes shoulder stiffness, and helps maintain normal blood pressure.","vid":"v-1e05c7c1c2"},{"em":"🌙","t":"Anjaneyasana","s":"Anjaneyasana strengthens upper and lower thighs, stretches the back, reduces sleepiness, and can help with sciatica pain.","vid":"v-8b78bf9740"}],"quiz":[{"q":"Bow Pose that strengthens the back is…","o":["Ustrasana","Dhanurasana","Gomukhasana","Anjaneyasana"],"a":1,"qVid":"v-6c06064b8e","oVids":["v-66f9261139","v-7bde4c7e68","v-05dce13f2d","v-985d8e6076"],"aVid":"v-72b7372ea4"},{"q":"Camel Pose that corrects rounded shoulders is…","o":["Dhanurasana","Ustrasana","Gomukhasana","Anjaneyasana"],"a":1,"qVid":"v-8238525e74","oVids":["v-7bde4c7e68","v-66f9261139","v-05dce13f2d","v-985d8e6076"],"aVid":"v-85b99ca6eb"},{"q":"Cow Face Pose that helps blood pressure is…","o":["Gomukhasana","Ustrasana","Dhanurasana","Anjaneyasana"],"a":0,"qVid":"v-c2b96f555b","oVids":["v-05dce13f2d","v-66f9261139","v-7bde4c7e68","v-985d8e6076"],"aVid":"v-4ff9925356"},{"q":"Low lunge that may help sciatica pain is…","o":["Dhanurasana","Ustrasana","Gomukhasana","Anjaneyasana"],"a":3,"qVid":"v-f6d2ba618e","oVids":["v-7bde4c7e68","v-66f9261139","v-05dce13f2d","v-985d8e6076"],"aVid":"v-f959ef72a9"}],"titleVid":"v-70e8b034ed","blurbVid":"v-92ebe78ff5"},{"id":"maths","title":"Great Indian Mathematicians","emoji":"∞","grad":"linear-gradient(135deg,#7b2cbf,#4361ee)","blurb":"Ramanujan · Shakuntala · Bose","learn":[{"em":"♾️","t":"Srinivasa Ramanujan","s":"Ramanujan's notebooks are still studied worldwide. He was called the man who knew infinity. He contributed to number theory and infinite series. He teaches hard work and determination.","vid":"v-bbefca5419"},{"em":"🧮","t":"Shakuntala Devi","s":"Shakuntala Devi was a mathematical prodigy known as the human computer. She wrote books to make math easy. She teaches passion and self-belief.","vid":"v-96f664a57e"},{"em":"⚛️","t":"Satyendra Nath Bose","s":"SN Bose worked with ideas that led to Bose-Einstein condensate theory with Einstein. He teaches collaboration and open-mindedness.","vid":"v-503f87432b"}],"quiz":[{"q":"Who was called the man who knew infinity?","o":["SN Bose","Srinivasa Ramanujan","Shakuntala Devi","Einstein"],"a":1,"qVid":"v-e18750b531","oVids":["v-d54a75511a","v-3c5cf8c8f4","v-32353edca9","v-654a967246"],"aVid":"v-f1c410bb21"},{"q":"Who was known as the human computer?","o":["Ramanujan","Shakuntala Devi","SN Bose","Babbage"],"a":1,"qVid":"v-d1f515f610","oVids":["v-747963a989","v-32353edca9","v-d54a75511a","v-1303179dbb"],"aVid":"v-289999ea3a"},{"q":"SN Bose's life teaches us to…","o":["Avoid difficult subjects","Work only when asked","Pursue studies with passion and not give up","Only study easy subjects"],"a":2,"qVid":"v-d35b516b6f","oVids":["v-ab9d5e21e7","v-b467f1c6d9","v-a0ce93a477","v-ca70c7a4ee"],"aVid":"v-9e68dae14e"},{"q":"We can apply Shakuntala Devi's approach by…","o":["Memorising without understanding","Finding fun ways to learn difficult topics","Avoiding group study","Only doing easy parts"],"a":1,"qVid":"v-e4ba53fdd4","oVids":["v-c48b768917","v-055d90e53e","v-cc6f701205","v-c03715e7c6"],"aVid":"v-7bef9ef62a"}],"titleVid":"v-bc622eb9eb","blurbVid":"v-cf639302e0"},{"id":"narges","title":"Narges Mohammadi","emoji":"🕊️","grad":"linear-gradient(135deg,#c9184a,#ff758f)","blurb":"Symbol of strength · Nobel Peace","learn":[{"em":"🇮🇷","t":"Who she is","s":"Narges Mohammadi is a courageous woman from Iran who works for the betterment of women and stands up for what is right.","vid":"v-c05aec3f20"},{"em":"🏆","t":"Nobel Peace Prize","s":"She won the Nobel Peace Prize in 2023. She studied physics and engineering and worked as a journalist.","vid":"v-c46945cd66"},{"em":"💪","t":"Life lessons","s":"Fight for what is right even when it is hard. Never give up. Work together. Use knowledge to help others. Speak up if you see something wrong.","vid":"v-f2b711979e"}],"quiz":[{"q":"What did Narges Mohammadi win for her work?","o":["An Olympic medal","The Nobel Peace Prize","A sports trophy","A math prize"],"a":1,"qVid":"v-0f582e1b78","oVids":["v-93cce430dd","v-9bb4c5816e","v-6b6ccdf9a8","v-f25c2f90e4"],"aVid":"v-9a1ac90a05"},{"q":"Her work is important for young people because it…","o":["Inspires them to help make their country better","Only shows exam marks","Is about sports only","Discourages education"],"a":0,"qVid":"v-9e369d8702","oVids":["v-a5f268a534","v-35a45dcaa7","v-dd2b73779d","v-23cd808a07"],"aVid":"v-385cf09341"}],"titleVid":"v-05cc2dd7fe","blurbVid":"v-91041b5b03"}]}</script>
 <script>
-const map={malayalam:['📗','Malayalam'],science:['🔬','Science'],computer:['💻','Computer'],gk:['🧠','GK']};
-const key=location.pathname.replace(/\/+$/,'').split('/').pop();
-if(map[key]){document.getElementById('em').textContent=map[key][0];document.getElementById('t').textContent=map[key][1]+' — Coming soon';document.title=map[key][1]+' · Coming soon'}
+const D = JSON.parse(document.getElementById('data').textContent);
+const TOPICS = D.topics;
+const SKEY = 'eshan-gk-v1';
+let S = JSON.parse(localStorage.getItem(SKEY) || '{}');
+const save = () => localStorage.setItem(SKEY, JSON.stringify(S));
+const app = document.getElementById('app');
+const ov = document.getElementById('ov');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+let sp = null, ptok = 0;
+function stopAudio() {
+  ptok++;
+  if (sp) { try { sp.onended = null; sp.onerror = null; sp.pause(); } catch (e) {} sp = null; }
+  try { if (window.LearnAudio) LearnAudio.stop(); } catch (e) {}
+  document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
+}
+/** Fresh Audio each click — local mp3 first, then online TTS fallback. */
+function say(vidOrText, el) {
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  const isVid = typeof vidOrText === 'string' && /^v-[a-f0-9]+$/.test(vidOrText);
+  const text = isVid ? null : String(vidOrText || '');
+  const url = isVid ? ('voice/' + vidOrText + '.mp3') : null;
+
+  const playUrl = (src, remoteText) => new Promise(res => {
+    sp = new Audio(src);
+    sp.playbackRate = 0.95;
+    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (remoteText && window.LearnAudio) {
+        LearnAudio.speak(remoteText, 'en-IN', 0.92, el).then(ok => res(!!ok));
+      } else if (remoteText) {
+        const g = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en&q=' + encodeURIComponent(remoteText.slice(0, 180));
+        sp = new Audio(g);
+        sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+        sp.onerror = () => { if (el && mine === ptok) el.classList.remove('playing'); res(false); };
+        sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
+      } else {
+        if (el && mine === ptok) el.classList.remove('playing');
+        res(false);
+      }
+    };
+    sp.play().catch(() => { if (el && mine === ptok) el.classList.remove('playing'); res(false); });
+  });
+
+  if (url) return playUrl(url, null);
+  if (window.LearnAudio) return LearnAudio.speak(text, 'en-IN', 0.92, el);
+  return playUrl('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en&q=' + encodeURIComponent(text.slice(0, 180)), text);
+}
+function sayVid(vid, text, el) {
+  // Prefer local vid; keep text for fallback via LearnAudio path inside onerror — patch:
+  stopAudio();
+  const mine = ptok;
+  if (el) el.classList.add('playing');
+  if (!vid) return say(text, el);
+  sp = new Audio('voice/' + vid + '.mp3');
+  sp.playbackRate = 0.95;
+  return new Promise(res => {
+    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text || '', 'en-IN', 0.92, el).then(ok => res(!!ok));
+      if (el) el.classList.remove('playing');
+      res(false);
+    };
+    sp.play().catch(() => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text || '', 'en-IN', 0.92, el).then(ok => res(!!ok));
+      if (el) el.classList.remove('playing');
+      res(false);
+    });
+  });
+}
+const ding = () => { if (window.LearnAudio) LearnAudio.ding(); };
+const buzz = () => { if (window.LearnAudio) LearnAudio.buzz(); };
+
+function topicStars(id) { return Math.min(3, +(S[id] || 0)); }
+function awardTopic(id, stars) {
+  stars = Math.max(0, Math.min(3, stars));
+  if ((S[id] || 0) < stars) { S[id] = stars; save(); return true; }
+  return false;
+}
+function gotStars() { return TOPICS.reduce((n, t) => n + topicStars(t.id), 0); }
+function totalStars() { return TOPICS.length * 3; }
+function starStr(n) { return '⭐'.repeat(n) + '☆'.repeat(Math.max(0, 3 - n)); }
+
+function home() {
+  stopAudio();
+  const g = gotStars(), t = totalStars(), pct = t ? Math.round(g / t * 100) : 0;
+  app.innerHTML = `
+  <div class="top">
+    <a class="icon" href="../index.html" title="Home">🏠</a>
+    <button type="button" class="icon" onclick="history.back()" title="Back">←</button>
+    <div class="tt"><small>Class 8 · Eshan</small><b>🧠 General Knowledge</b></div>
+    <span class="chip">⭐ ${g}/${t}</span>
+  </div>
+  <div class="hero">
+    <div class="big">🧠</div>
+    <h1>GK Adventure</h1>
+    <p>Tap a topic · Listen · Earn stars!</p>
+  </div>
+  <div class="starbox">
+    <div class="row"><span>⭐ My GK stars</span><span>${g}/${t} · ${pct}%</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+  </div>
+  <div class="gtiles">
+    ${TOPICS.map(t => `
+      <button type="button" class="gt" style="--b:${t.grad}" onclick="openTopic('${t.id}')">
+        <span class="i">${t.emoji}</span>
+        <b>${esc(t.title)}</b>
+        <small>${esc(t.blurb)}</small>
+        <span class="st">${starStr(topicStars(t.id))}</span>
+      </button>`).join('')}
+  </div>
+  <p class="tip">Tap 🔊 anytime — you can hear it again and again.</p>`;
+}
+
+let CUR = null, G = null;
+
+function openTopic(id) {
+  CUR = TOPICS.find(t => t.id === id);
+  if (!CUR) return;
+  document.getElementById('ovt').textContent = CUR.emoji + ' ' + CUR.title;
+  document.getElementById('ovs').textContent = starStr(topicStars(CUR.id));
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  showTopicHome();
+}
+function closeOv() {
+  stopAudio();
+  ov.classList.remove('show');
+  document.body.style.overflow = '';
+  CUR = null; G = null;
+  home();
+}
+function showTopicHome() {
+  stopAudio();
+  const t = CUR;
+  document.getElementById('ovb').innerHTML = `
+    <div class="card">
+      <div class="em">${t.emoji}</div>
+      <h2>${esc(t.title)}</h2>
+      <p>${esc(t.blurb)}</p>
+      <button type="button" class="say" onclick="sayVid('${t.titleVid}','${esc(t.title)}. ${esc(t.blurb)}',this)">🔊</button>
+    </div>
+    <div class="modes">
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="startLearn()">
+        <span class="x">🎧</span>Learn<small>Listen to each fact</small>
+      </button>
+      <button type="button" class="mode" style="background:linear-gradient(135deg,#f77f00,#e63946)" onclick="startQuiz()">
+        <span class="x">🎯</span>Quiz<small>Earn up to 3 stars</small>
+      </button>
+    </div>`;
+  sayVid(t.titleVid, t.title + '. ' + t.blurb);
+}
+
+function startLearn() {
+  G = { mode: 'learn', i: 0 };
+  showLearn();
+}
+function showLearn() {
+  const t = CUR, L = t.learn, i = G.i, card = L[i];
+  document.getElementById('ovs').textContent = (i + 1) + '/' + L.length;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Fact ${i + 1} of ${L.length}</div>
+    <div class="card">
+      <div class="em">${card.em}</div>
+      <h2>${esc(card.t)}</h2>
+      <button type="button" class="say" onclick="sayVid('${card.vid}','${esc(card.t)}. ${esc(card.s)}',this)">🔊</button>
+      <p style="margin-top:12px">${esc(card.s)}</p>
+      <div class="dots">${L.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>
+      <div class="learn-nav">
+        <button type="button" class="nx alt" ${i === 0 ? 'disabled style="opacity:.4"' : ''} onclick="G.i--;showLearn()">← Back</button>
+        ${i < L.length - 1
+          ? `<button type="button" class="nx" onclick="G.i++;showLearn()">Next ➜</button>`
+          : `<button type="button" class="nx" onclick="showTopicHome()">✅ Done</button>`}
+      </div>
+    </div>`;
+  sayVid(card.vid, card.t + '. ' + card.s);
+}
+
+function startQuiz() {
+  const q = shuffle(CUR.quiz.map((x, i) => ({ ...x, _i: i })));
+  G = { mode: 'quiz', queue: q, i: 0, right: 0, done: false };
+  showQuiz();
+}
+function showQuiz() {
+  if (G.i >= G.queue.length) return endQuiz();
+  const x = G.queue[G.i];
+  G.done = false;
+  document.getElementById('ovs').textContent = (G.i + 1) + '/' + G.queue.length + ' · ✓' + G.right;
+  // shuffle options but track answer
+  const opts = x.o.map((t, i) => ({ t, i, vid: x.oVids[i] }));
+  const shuffled = shuffle(opts);
+  G._ans = x.a;
+  G._cur = x;
+  document.getElementById('ovb').innerHTML = `
+    <div class="prog">Question ${G.i + 1} of ${G.queue.length}</div>
+    <div class="card">
+      <div class="qtext">
+        <button type="button" class="say sm" onclick="sayVid('${x.qVid}','${esc(x.q)}',this)">🔊</button>
+        <span>${esc(x.q)}</span>
+      </div>
+      <div class="opts" id="opts">
+        ${shuffled.map((o, k) => `
+          <div class="opt" data-i="${o.i}" role="button" tabindex="0" onclick="pickOpt(this)">
+            <button type="button" class="say sm" onclick="event.stopPropagation();sayVid('${o.vid}','${esc(o.t)}',this)">🔊</button>
+            <span>${esc(o.t)}</span>
+          </div>`).join('')}
+      </div>
+      <div class="fb" id="fb"></div>
+      <div id="after"></div>
+    </div>`;
+  sayVid(x.qVid, x.q);
+}
+
+function pickOpt(btn) {
+  if (!G || G.done) return;
+  G.done = true;
+  const chosen = +btn.getAttribute('data-i');
+  const ok = chosen === G._ans;
+  document.querySelectorAll('.opt').forEach(b => {
+    b.style.pointerEvents = 'none';
+    if (+b.getAttribute('data-i') === G._ans) b.classList.add('ok');
+  });
+  if (ok) {
+    btn.classList.add('ok');
+    G.right++;
+    ding();
+    document.getElementById('fb').className = 'fb good';
+    document.getElementById('fb').textContent = 'Yes! 🌟';
+  } else {
+    btn.classList.add('bad');
+    buzz();
+    document.getElementById('fb').className = 'fb bad';
+    document.getElementById('fb').textContent = 'Almost — listen to the right one';
+  }
+  const x = G._cur;
+  document.getElementById('after').innerHTML = `
+    <button type="button" class="say sm" onclick="sayVid('${x.aVid}','The answer is ${esc(x.o[x.a])}',this)">🔊</button>
+    <button type="button" class="nx" onclick="G.i++;showQuiz()">Next ➜</button>`;
+  sayVid(x.aVid, 'The answer is ' + x.o[x.a]);
+}
+
+function endQuiz() {
+  const total = G.queue.length;
+  const ratio = total ? G.right / total : 0;
+  const stars = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : ratio >= 0.35 ? 1 : 0;
+  const nb = awardTopic(CUR.id, stars);
+  document.getElementById('ovs').textContent = starStr(topicStars(CUR.id));
+  ding();
+  document.getElementById('ovb').innerHTML = `
+    <div class="card end">
+      <div class="big">${stars === 3 ? '🏆' : stars ? '🥳' : '💪'}</div>
+      <h2>Quiz done!</h2>
+      <p style="font-size:18px">You got <b>${G.right}</b> / ${total} right</p>
+      <div class="stars">${starStr(stars)}</div>
+      <p style="margin-top:8px">${nb ? 'New best for this topic!' : 'Keep practising!'}</p>
+      <div>
+        <button type="button" class="nx" onclick="startQuiz()">🔁 Play again</button>
+        <button type="button" class="nx alt" onclick="showTopicHome()">Topics</button>
+      </div>
+    </div>`;
+}
+
+home();
 </script>
 </body>
 </html>
