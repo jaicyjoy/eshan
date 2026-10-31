@@ -56,6 +56,10 @@ button,input{font-family:inherit}
 .typein{display:block;width:100%;max-width:420px;margin:12px auto 0;font-size:26px;font-weight:800;text-align:center;padding:12px;border:4px solid #7ecbc0;border-radius:16px}
 .typein.ok{border-color:#2fbf71;background:#e7fbef}
 .typein.bad{border-color:#e5484d;animation:shake .35s}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
+.tile{min-width:48px;height:52px;border:0;border-radius:14px;font-size:26px;font-weight:900;color:#fff;background:linear-gradient(140deg,#2a9d8f,#1d3557);box-shadow:0 5px 0 #14532d;cursor:pointer;font-family:"Malayalam Sangam MN","Malayalam MN","Noto Sans Malayalam",sans-serif}
+.tile.used{visibility:hidden}
+.tile.bad{background:#e5484d;animation:shake .35s}
 .opts{display:grid;gap:10px;margin-top:14px;text-align:left}
 .opt{border:2px solid #b8ddd6;background:#f4fbf9;border-radius:16px;padding:12px 14px;font-size:20px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #cce8e3}
 .opt.ok{background:#c9f7d6;border-color:#2fbf71;box-shadow:0 4px 0 #2fbf71}
@@ -118,20 +122,35 @@ function stopAudio() {
   }
   document.querySelectorAll('.playing').forEach(e => e.classList.remove('playing'));
 }
-/** Fresh Audio each click so 🔊 replays reliably (same src would otherwise be a no-op). */
+/** Fresh Audio + cache-buster every tap so 🔊 always replays. */
 function playW(textOrVid, el) {
   stopAudio();
   const mine = ptok;
   if (el) el.classList.add('playing');
   const id = VID[textOrVid] || textOrVid;
-  sp = new Audio('voice/' + id + '.mp3');
-  sp.defaultPlaybackRate = sp.playbackRate = rate();
+  const word = WORDS.find(x => x.w === textOrVid || x.vid === id);
+  const text = word ? word.w : String(textOrVid);
+  const done = (ok) => { if (el && mine === ptok) el.classList.remove('playing'); return ok && mine === ptok; };
   return new Promise(res => {
-    sp.onended = () => { if (el && mine === ptok) el.classList.remove('playing'); res(mine === ptok); };
-    sp.onerror = () => { if (el && mine === ptok) el.classList.remove('playing'); res(false); };
+    sp = new Audio('voice/' + id + '.mp3?r=' + Date.now());
+    sp.defaultPlaybackRate = sp.playbackRate = rate();
+    sp.onended = () => res(done(true));
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) {
+        LearnAudio.speak(text, 'ml-IN', rate(), el).then(ok => res(done(!!ok)));
+        return;
+      }
+      sp = new Audio('https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ml&q=' + encodeURIComponent(text.slice(0, 160)));
+      sp.defaultPlaybackRate = sp.playbackRate = rate();
+      sp.onended = () => res(done(true));
+      sp.onerror = () => res(done(false));
+      sp.play().catch(() => res(done(false)));
+    };
     sp.play().catch(() => {
-      if (el && mine === ptok) el.classList.remove('playing');
-      res(false);
+      if (mine !== ptok) return res(false);
+      if (window.LearnAudio) return LearnAudio.speak(text, 'ml-IN', rate(), el).then(ok => res(done(!!ok)));
+      res(done(false));
     });
   });
 }
@@ -183,7 +202,7 @@ function home() {
     </div>
     <div class="hero"><div class="big">${M.emoji}</div>
       <h1>${esc(M.title)}</h1>
-      <p>Order: Flash → Pick spelling → Type · ഫ്ലാഷ് → തിരഞ്ഞെടുക്കുക → ടൈപ്പ്</p>
+      <p>Order: Flash → Pick → Letters · ഫ്ലാഷ് → തിരഞ്ഞെടുക്കുക → അക്ഷരങ്ങൾ</p>
     </div>
     <div class="starbox"><div class="row"><span>⭐ My stars / എന്റെ നക്ഷത്രങ്ങൾ</span><span>${g} / ${t} · ${pct}%</span></div>
       <div class="bar"><i style="width:${pct}%"></i></div></div>
@@ -196,9 +215,9 @@ function home() {
         <span class="i">🎯</span><b>2 · Pick</b>
         <small>Hear it, then choose the correct spelling</small>
       </button>
-      <button class="gt" style="--b:linear-gradient(135deg,#2a9d8f,#1d3557)" onclick="startDrill('type')">
-        <span class="i">⌨️</span><b>3 · Type</b>
-        <small>Listen and type (like the real test)</small>
+      <button class="gt" style="--b:linear-gradient(135deg,#2a9d8f,#1d3557)" onclick="startDrill('tiles')">
+        <span class="i">🔤</span><b>3 · Letters</b>
+        <small>Listen · tap only the needed letters</small>
       </button>
     </div>
     <div class="sec"><h3>📋 All words — tap to hear / എല്ലാ വാക്കുകളും</h3>
@@ -221,7 +240,7 @@ const setScore = t => document.getElementById('ovs').innerHTML = t;
 
 function startDrill(mode) {
   G = {mode, queue: shuffle(WORDS), i: 0, got: 0, total: WORDS.length};
-  const titles = { type: '⌨️ 3 · Type', mcq: '🎯 2 · Pick', flash: '🃏 1 · Flash' };
+  const titles = { tiles: '🔤 3 · Letters', mcq: '🎯 2 · Pick', flash: '🃏 1 · Flash' };
   openOv(titles[mode]);
   if (mode === 'flash') showFlash();
   else showQ();
@@ -242,14 +261,15 @@ function showQ() {
   setScore(`${G.i + 1}/${G.total} · ⭐ ${G.got}`);
   const pct = G.i / G.total * 100;
   let body;
-  if (G.mode === 'type') {
+  if (G.mode === 'tiles') {
+    const needed = x.w.split('').filter(c => c !== ' ');
+    let letters = needed.slice();
+    do { letters = shuffle(letters); } while (letters.join('') === needed.join('') && needed.length > 1);
+    G.pos = 0;
     body = `<button type="button" class="say" onclick="playW(${JSON.stringify(x.w)},this)">🔊</button>
-      <div class="clue">💡 ${esc(x.clue)}</div>
+      <div class="clue">💡 ${esc(x.clue)} · അക്ഷരങ്ങൾ തൊടുക</div>
       <div class="slots">${slotHtml(x.w, 'sl', true)}</div>
-      <input class="typein" id="tin" autocomplete="off" autocapitalize="none" spellcheck="false"
-        placeholder="ഇവിടെ ടൈപ്പ് ചെയ്യുക…"
-        onkeydown="if(event.key==='Enter')checkType()">
-      <div><button type="button" class="nx" onclick="checkType()">✔ Check</button></div>
+      <div class="tiles">${letters.map(l => `<button type="button" class="tile" data-l="${esc(l)}" onclick="pickTile(this)">${esc(l)}</button>`).join('')}</div>
       <div id="after"></div>`;
   } else {
     body = `<button type="button" class="say" onclick="playW(${JSON.stringify(x.w)},this)">🔊</button>
@@ -260,7 +280,6 @@ function showQ() {
   }
   ovb().innerHTML = `<div class="prog"><div class="bar"><i style="width:${pct}%"></i></div><span>${G.i + 1}/${G.total}</span></div><div class="card">${body}</div>`;
   playW(x.w);
-  if (G.mode === 'type') setTimeout(() => { const t = document.getElementById('tin'); if (t) t.focus(); }, 100);
 }
 
 function fillSlots(w, prefix) {
@@ -268,6 +287,31 @@ function fillSlots(w, prefix) {
     const el = document.getElementById((prefix || 'sl') + i);
     if (el) { el.textContent = ch === ' ' ? '·' : ch; el.classList.add('f'); }
   });
+}
+
+
+function pickTile(btn) {
+  if (!G || G.fin) return;
+  const x = G.queue[G.i], w = x.w;
+  while (G.pos < w.length && w[G.pos] === ' ') {
+    const el = document.getElementById('sl' + G.pos);
+    if (el) { el.textContent = '·'; el.classList.add('f'); }
+    G.pos++;
+  }
+  if (btn.dataset.l === w[G.pos]) {
+    const el = document.getElementById('sl' + G.pos);
+    if (el) { el.textContent = w[G.pos]; el.classList.add('f'); }
+    G.pos++; btn.classList.add('used');
+    while (G.pos < w.length && w[G.pos] === ' ') {
+      const el2 = document.getElementById('sl' + G.pos);
+      if (el2) { el2.textContent = '·'; el2.classList.add('f'); }
+      G.pos++;
+    }
+    if (G.pos >= w.length) finishWord(true);
+  } else {
+    G.miss++; buzz(); btn.classList.add('bad');
+    setTimeout(() => btn.classList.remove('bad'), 350);
+  }
 }
 
 function checkType() {
