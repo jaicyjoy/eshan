@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>एक टोकरी भर मिट्टी · हिंदी</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Noto Sans Devanagari","Kohinoor Devanagari","Avenir Next","Segoe UI",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#e0f2ff 0%,#f6efff 50%,#fff6e8 100%);min-height:100vh;line-height:1.5}
+button{font-family:inherit;color:inherit;cursor:pointer}
+#app{max-width:900px;margin:0 auto;padding:12px 14px 70px}
+
+.hero{text-align:center;padding:18px 8px 6px}
+.hero .big{font-size:58px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-5deg)}}
+.hero h1{margin:4px 0 0;font-size:32px;background:linear-gradient(90deg,#4361ee,#b5179e,#f77f00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:2px 0 0;color:#5b5f86;font-size:17px}
+.tracker{background:#fff;border-radius:22px;padding:14px 16px;margin:14px 0;box-shadow:0 6px 0 #e3e0f7}
+.tracker .row{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:18px}
+.bar{height:16px;background:#ece9fb;border-radius:99px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#ffd60a,#06d6a0);transition:width .5s}
+.tracker small{display:block;color:#6b6f93;margin-top:6px;font-size:14px}
+
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.ccard{border:0;border-radius:24px;padding:16px;text-align:left;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 7px 0 rgba(0,0,0,.15);transition:transform .12s}
+.ccard:active{transform:translateY(4px);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.ccard .sub{font-size:14px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.9}
+.ccard .em{font-size:48px;float:right;line-height:1}
+.ccard h2{margin:4px 0 10px;font-size:22px;line-height:1.25}
+.ccard .bar{background:rgba(255,255,255,.3)}
+.ccard .st{font-weight:700;font-size:14px;margin-top:6px}
+.quick{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:14px}
+.qbtn{border:0;border-radius:20px;padding:14px;text-align:left;font-weight:800;font-size:17px;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.15)}
+.qbtn small{display:block;font-weight:600;font-size:13px;opacity:.95}
+.foot{text-align:center;margin-top:26px;font-size:14px;color:#6b6f93}
+.foot a{color:#4361ee}
+
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top .home{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;flex:none}
+.top .tt{flex:1;min-width:0}
+.top .tt small{display:block;font-size:13px;font-weight:700;opacity:.9;text-transform:uppercase;letter-spacing:.4px}
+.top .tt b{display:block;font-size:19px;line-height:1.2}
+.chip{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:14px;white-space:nowrap}
+.slowbtn{border:0;border-radius:99px;padding:7px 10px;font-weight:800;font-size:14px;background:rgba(255,255,255,.25);color:#fff;white-space:nowrap}
+.slowbtn.on{background:#ffd60a;color:#3a2b00}
+
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.tab{border:0;border-radius:16px;padding:11px 4px;font-weight:800;font-size:15px;background:#fff;box-shadow:0 5px 0 #dedbf3}
+.tab.on{background:var(--c1);color:#fff;box-shadow:0 5px 0 var(--c2)}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 12px}
+.pill{border:0;border-radius:99px;padding:10px 18px;font-weight:800;font-size:15px;color:#fff;background:var(--c1);box-shadow:0 4px 0 var(--c2)}
+.pill.alt{background:#fff;color:#1f2340;box-shadow:0 4px 0 #dedbf3}
+
+.scard{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:18px;padding:12px;margin-bottom:10px;box-shadow:0 4px 0 #e6e3f7;border-left:6px solid var(--c1)}
+.num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--c1);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:3px}
+.ln.on{background:#fff6cc}
+.scard.ln.on{background:#fff6cc}
+.mini{flex:none;width:36px;height:36px;border-radius:50%;border:2px solid #e3e0f7;background:#fff;font-size:14px;margin-top:1px}
+.ln.on .mini{background:#ffb703;border-color:#f48c06;color:#fff}
+.scard span.tx{flex:1;font-size:17px}
+
+.topic{background:#fff;border-radius:22px;padding:14px;margin-bottom:16px;box-shadow:0 6px 0 #e6e3f7;border-top:6px solid var(--c1)}
+.topic.done{border-top-color:#06d6a0}
+.th{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.th h3{margin:0;font-size:19px;line-height:1.3;color:var(--c2)}
+.tstars{display:flex;gap:6px;flex:none}
+.tstars span{background:#f4f2ff;border-radius:99px;padding:3px 8px;font-size:14px;font-weight:700;white-space:nowrap}
+.topic h4{margin:12px 0 4px;font-size:16px;color:#4a4f7a}
+.topic .ln{display:flex;gap:8px;align-items:flex-start;padding:6px;border-radius:12px}
+.topic .ln span.tx{flex:1;font-size:16.5px}
+.topic .ln.li span.tx::before{content:"•";color:var(--c1);font-weight:900;margin-right:6px}
+.topic table{width:100%;border-collapse:collapse;margin:8px 0;font-size:15px}
+.topic th{background:var(--c1);color:#fff;text-align:left;padding:8px}
+.topic td{padding:8px;border-bottom:1px solid #eee;vertical-align:top}
+.topic tr.ln td:first-child{white-space:nowrap}
+.topic tr.ln td:first-child .mini{margin-right:6px;vertical-align:middle}
+.tbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tbtns button{border:0;border-radius:99px;padding:9px 14px;font-weight:800;font-size:14px;background:#f1efff;box-shadow:0 3px 0 #dedbf3}
+.tbtns button.read{background:#06d6a0;color:#fff;box-shadow:0 3px 0 #04a57b}
+b.k{color:var(--c2)}
+
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.18)}
+.gt .i{font-size:30px;display:block}
+.gt b{display:block;font-size:17px;line-height:1.25}
+.gt small{display:block;font-size:13px;opacity:.95;margin-top:2px}
+.ghead{font-weight:800;color:#4a4f7a;margin:16px 2px 8px;font-size:16px}
+
+.check{background:#fff;border-radius:16px;padding:10px 12px;margin-bottom:8px;display:flex;gap:10px;align-items:center;box-shadow:0 3px 0 #e6e3f7}
+.check .ct{flex:1;font-weight:700;font-size:15px}
+.check .ct small{display:block;color:#6b6f93;font-weight:600}
+.check .s{font-size:20px}
+.check button{border:0;border-radius:99px;padding:7px 12px;font-weight:800;font-size:13px;background:#f1efff}
+
+.ov{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;background:linear-gradient(160deg,#eef0ff,#fff0f7 55%,#fff8e6)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,var(--c1,#4361ee),var(--c2,#b5179e))}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;color:#333;flex:none}
+.ovtop .t{flex:1;font-weight:800;font-size:17px}
+.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 12px;font-weight:800;white-space:nowrap}
+.ovb{flex:1;overflow-y:auto;padding:16px 14px 40px;max-width:820px;width:100%;margin:0 auto}
+.qprog{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-weight:800;color:#4a4f7a;font-size:14px}
+.qprog .bar{flex:1;margin:0}
+.qc{background:#fff;border-radius:22px;padding:16px;box-shadow:0 7px 0 #e6e3f7}
+.badge{display:inline-block;border-radius:99px;padding:3px 12px;color:#fff;font-size:13px;font-weight:800;background:var(--bb,#4361ee)}
+.qq{display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:20px;font-weight:800;line-height:1.45}
+.qq span{flex:1}
+.blank{display:inline-block;min-width:70px;border-bottom:3px solid #7b2cbf;margin:0 4px}
+.say{border:0;background:#efeaff;border-radius:50%;width:42px;height:42px;font-size:17px;flex:none}
+.opts{display:grid;gap:10px;margin-top:14px}
+.opt{border:2px solid #e3e0f7;background:#f8f7ff;border-radius:16px;padding:12px 14px;font-size:17px;text-align:left;line-height:1.4;box-shadow:0 4px 0 #e3e0f7}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71;box-shadow:0 4px 0 #2fbf71;animation:pop .35s}
+.opt.bad{background:#ffd3d3;border-color:#e5484d;box-shadow:0 4px 0 #e5484d;animation:shake .35s}
+.opt:disabled{cursor:default}
+@keyframes pop{50%{transform:scale(1.03)}}
+@keyframes shake{25%,75%{transform:translateX(-7px)}50%{transform:translateX(7px)}}
+.note{margin-top:12px;font-weight:800;text-align:center}
+.note.good{color:#1f9d55}.note.bad{color:#d9480f}
+.nx{display:block;margin:14px auto 0;border:0;border-radius:99px;padding:12px 34px;font-size:17px;font-weight:800;color:#fff;background:linear-gradient(135deg,#4361ee,#b5179e);box-shadow:0 5px 0 rgba(67,97,238,.35)}
+.row2{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.row2 .nx{margin:0}
+.nx.alt{background:#fff;color:#4361ee;border:2px solid #cfd6ff;box-shadow:0 5px 0 #e3e0f7}
+.end{text-align:center;background:#fff;border-radius:24px;padding:22px 16px;box-shadow:0 7px 0 #e6e3f7}
+.end .bigem{font-size:64px}
+.end h2{margin:4px 0;font-size:24px;color:#4361ee}
+.end .stars{font-size:30px;letter-spacing:2px}
+.review{text-align:left;margin-top:14px}
+.review h3{margin:0 0 8px;color:#d9480f;font-size:17px}
+.review div{background:#fff7e0;border-radius:12px;padding:9px 12px;margin-bottom:8px;font-size:15px}
+.review div b{color:#1f9d55}
+.lives{font-size:20px;letter-spacing:2px}
+
+.flash{perspective:1000px;height:300px;margin:6px 0 14px;cursor:pointer}
+.flash .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flash.fl .in{transform:rotateY(180deg)}
+.flash .f{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;box-shadow:0 8px 0 rgba(0,0,0,.12)}
+.flash .fr{background:#fff;border:4px solid var(--c1,#4361ee);font-size:26px;font-weight:800;color:var(--c2,#333)}
+.flash .bk{background:linear-gradient(140deg,var(--c1,#4361ee),var(--c2,#b5179e));color:#fff;transform:rotateY(180deg);font-size:20px;font-weight:700;line-height:1.5}
+.flash small{display:block;font-size:14px;font-weight:600;opacity:.75;margin-top:10px}
+
+.mh{text-align:center;font-weight:800;color:#4a4f7a;margin-bottom:12px}
+.mcols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcol{display:flex;flex-direction:column;gap:9px}
+.mcol h4{margin:0;text-align:center;color:#4a4f7a}
+.mb{border:2px solid #e3e0f7;background:#fff;border-radius:14px;padding:11px 9px;font-size:15px;line-height:1.35;box-shadow:0 4px 0 #e3e0f7}
+.mb.sel{background:#fff1b8;border-color:#ffb703;box-shadow:0 4px 0 #ffb703}
+.mb.done{background:#c9f7d6;border-color:#2fbf71;box-shadow:0 4px 0 #2fbf71;opacity:.75}
+.mb.bad{background:#ffd3d3;border-color:#e5484d;animation:shake .35s}
+
+.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px;min-height:46px}
+.chipb{border:2px solid #e3e0f7;background:#fff;border-radius:99px;padding:9px 14px;font-size:15px;font-weight:700;box-shadow:0 4px 0 #e3e0f7}
+.chipb.sel{background:#fff1b8;border-color:#ffb703;box-shadow:0 4px 0 #ffb703;transform:scale(1.05)}
+.chipb.bad{background:#ffd3d3;animation:shake .35s}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.bucket{border:3px dashed #cfc8f5;border-radius:18px;background:#fff;padding:10px;min-height:120px;text-align:center;cursor:pointer}
+.bucket h4{margin:0 0 8px;font-size:16px}
+.bucket div{background:#c9f7d6;border-radius:10px;padding:5px 8px;margin:5px 0;font-size:14px;font-weight:700}
+.bucket.flashok{border-color:#2fbf71}
+
+.oans{min-height:56px;background:#fff;border:3px dashed #cfc8f5;border-radius:16px;padding:8px;margin:12px 0}
+.oans div{background:#c9f7d6;border-radius:10px;padding:8px 10px;margin:5px 0;font-size:15px;font-weight:700}
+.oleft{display:grid;gap:9px}
+
+.conf{position:fixed;top:-40px;font-size:28px;pointer-events:none;z-index:60;animation:fall 1.6s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(520deg);opacity:.6}}
+@media (max-width:560px){.tab{font-size:13px}.top .tt b{font-size:16px}.mb{font-size:14px}}
+
+.la-say{border:0;background:#efeaff;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;vertical-align:middle;margin-left:6px;box-shadow:0 3px 0 #e3e0f7}
+.la-say:active{background:#ffb703}
+.la-row{display:flex;gap:8px;align-items:flex-start}
+
+</style>
+<script src="../assets/learn-audio.js?v=2"></script>
+</head>
+<body>
+<div id="app"></div>
+<div class="ov" id="ov"><div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div><div class="ovb" id="ovb"></div></div>
+<script type="application/json" id="data">{"chapters":[{"id":"tok","subject":"हिंदी","title":"एक टोकरी भर मिट्टी","short":"पाठ 6 · मल्हार","emoji":"🧺","c1":"#9d0208","c2":"#6a040f","summary":["ज़मींदार के महल के पास एक गरीब वृद्धा की झोंपड़ी थी। वह महल का अहाता उसी झोंपड़ी तक बढ़ाना चाहता था।","झोंपड़ी में वृद्धा के पति, इकलौता पुत्र और पतोहू की यादें थीं। पोती उसके बुढ़ापे का सहारा थी।","वृद्धा के न मानने पर ज़मींदार ने वकीलों की थैली गरम कर अदालत से झोंपड़ी पर कब्जा कर लिया।","घर छूटते ही पोती ने खाना-पीना छोड़ दिया। वह अपनी झोंपड़ी में ही रोटी खाना चाहती थी।","वृद्धा विनती करके एक टोकरी मिट्टी ले गई, ताकि उसी मिट्टी का चूल्हा बनाकर पोती के लिए रोटी पकाए।","ज़मींदार टोकरी नहीं उठा सका। वृद्धा ने कहा, एक टोकरी मिट्टी नहीं उठती तो पूरी झोंपड़ी का भार कैसे उठाओगे?","ज़मींदार को अपने किए पर पश्चाताप हुआ। उसने क्षमा माँगी और झोंपड़ी वापस कर दी।"],"topics":[{"id":"h1","title":"कहानी संक्षेप में","blocks":[{"p":"किसी श्रीमान ज़मींदार के महल के पास एक गरीब, अनाथ वृद्धा की झोंपड़ी थी।","a":["tok-a0"]},{"p":"ज़मींदार अपने महल का अहाता उस झोंपड़ी तक बढ़ाना चाहता था।","a":["tok-a1"]},{"p":"वृद्धा कई ज़मानों से वहीं बसी थी। उसी झोंपड़ी में उसका पति और इकलौता पुत्र मर चुके थे।","a":["tok-a2"]},{"p":"पतोहू भी पाँच बरस की कन्या को छोड़कर चल बसी थी। अब वही पोती उसके बुढ़ापे का सहारा थी।","a":["tok-a3"]},{"p":"जब वृद्धा नहीं मानी, तो ज़मींदार ने ज़मींदारी चाल चली। वकीलों की थैली गरम करके उसने अदालत से झोंपड़ी पर कब्जा कर लिया।","a":["tok-a4"]},{"p":"झोंपड़ी छूटते ही पोती ने खाना-पीना छोड़ दिया। वह कहती रही, अपने घर चल, वहीं रोटी खाऊँगी।","a":["tok-a5"]},{"p":"वृद्धा हाथ में टोकरी लेकर आई और विनती की, एक टोकरी भर मिट्टी ले जाने दीजिए, उसी का चूल्हा बनाकर रोटी पकाऊँगी।","a":["tok-a6"]},{"p":"ज़मींदार ने आज्ञा दे दी। मिट्टी भरने के बाद वृद्धा ने कहा, टोकरी को ज़रा हाथ लगा दीजिए ताकि मैं सिर पर रख लूँ।","a":["tok-a7"]},{"p":"ज़मींदार ने पूरी ताकत लगाई, पर टोकरी एक हाथ भी ऊँची न हुई।","a":["tok-a8"]},{"p":"वृद्धा ने कहा, जब एक टोकरी मिट्टी नहीं उठती, तो इस झोंपड़ी की हज़ारों टोकरियों मिट्टी का भार आप जन्म भर कैसे उठाएँगे?","a":["tok-a9"]},{"p":"धन के मद में डूबे ज़मींदार की आँखें खुल गईं। उसे पश्चाताप हुआ। उसने क्षमा माँगी और झोंपड़ी वापस दे दी।","a":["tok-a10"]}]},{"id":"h2","title":"कठिन शब्द","blocks":[{"ul":["टोकरी — डलिया, मिट्टी या सामान रखने का बर्तन","ज़मींदार — जमीन का मालिक","झोंपड़ी — घास-फूस या मिट्टी की छोटी कुटिया","अहाता — चारदीवारी के अंदर का घेरा, आँगन","इकलौता — एकमात्र, अकेला","पतोहू — पुत्रवधू, बहू","चूल्हा — अँगीठी, जहाँ रोटी पकती है","आंतरिक — भीतरी, मन के अंदर का","कृतकर्म — किया हुआ काम","ताकत — शक्ति","विनती — नम्र प्रार्थना","पश्चाताप — किए पर पछतावा"],"a":[["tok-a11"],["tok-a12"],["tok-a13"],["tok-a14"],["tok-a15"],["tok-a16"],["tok-a17"],["tok-a18"],["tok-a19"],["tok-a20"],["tok-a21"],["tok-a22"]]}]},{"id":"h3","title":"विलोम और पर्यायवाची","blocks":[{"h":"विलोम शब्द"},{"ul":["गरीब × अमीर","अनाथ × सनाथ","निष्फल × सफल","आंतरिक × बाहरी"],"a":[["tok-a23"],["tok-a24"],["tok-a25"],["tok-a26"]]},{"h":"पर्यायवाची शब्द"},{"ul":["झोंपड़ी — कुटी, कुटिया, कुटीर","गरीब — निर्धन, दरिद्र, दीन","वृद्धा — बुढ़िया, बूढ़ी","कन्या — लड़की, बेटी, बालिका","ज़मीन — मिट्टी, धरती","मिट्टी — माटी, मृत्तिका"],"a":[["tok-a27"],["tok-a28"],["tok-a29"],["tok-a30"],["tok-a31"],["tok-a32"]]}]},{"id":"h4","title":"प्रश्नोत्तर","blocks":[{"p":"ज़मींदार को झोंपड़ी हटाने की आवश्यकता क्यों लगी? वह अपने महल का अहाता बढ़ाना चाहता था।","a":["tok-a33"]},{"p":"वृद्धा ने मिट्टी ले जाने की अनुमति कैसे माँगी? विनती और नम्रता से। उसने हाथ जोड़कर प्रार्थना की।","a":["tok-a34"]},{"p":"वृद्धा की पोती का व्यवहार किस भाव को दर्शाता है? लगाव। वह अपनी झोंपड़ी से इतनी जुड़ी थी कि खाना-पीना छोड़ दिया।","a":["tok-a35"]},{"p":"कहानी का अंत कैसा है? सुखद, प्रेरणादायक और सकारात्मक। ज़मींदार को अपनी गलती दिखी और उसने झोंपड़ी लौटा दी।","a":["tok-a36"]},{"p":"सबसे प्रभावशाली पात्र वृद्धा है। उसकी समझ और साहस ने ज़मींदार के मन को बदल दिया।","a":["tok-a37"]},{"p":"पोती ने खाना इसलिए छोड़ा क्योंकि वह अपनी झोंपड़ी में ही रोटी खाना चाहती थी।","a":["tok-a38"]},{"p":"ज़मींदार ने वकीलों की थैली गरम करके अदालत से झोंपड़ी पर कब्जा कर लिया।","a":["tok-a39"]},{"p":"टोकरी न उठने पर वृद्धा ने अन्याय का भार समझाया। ज़मींदार को पश्चाताप हुआ।","a":["tok-a40"]}]},{"id":"h5","title":"की, के और कि","blocks":[{"p":"वृद्धा ने कहा कि वह झोंपड़ी लेने नहीं आई है। यहाँ कि का प्रयोग हुआ है।","a":["tok-a41"]},{"p":"वह अपनी पोती की चिंता में दुखी हो गई थी। यहाँ की का प्रयोग हुआ है।","a":["tok-a42"]},{"p":"वृद्धा ने प्रार्थना की कि टोकरी को ज़रा उठा दीजिए।","a":["tok-a43"]},{"p":"पोती कहती थी कि वह अपने घर में ही खाना खाएगी।","a":["tok-a44"]},{"p":"झोंपड़ी की मिट्टी से वृद्धा चूल्हा बनाना चाहती थी।","a":["tok-a45"]},{"p":"उसे विश्वास था कि मिट्टी का चूल्हा देखकर पोती खाना खाने लगेगी।","a":["tok-a46"]},{"p":"ज़मींदार के महल के पास एक छोटी झोंपड़ी थी। यहाँ के का प्रयोग हुआ है।","a":["tok-a47"]}]},{"id":"h6","title":"वचन की पहचान","blocks":[{"p":"वृद्धा झोंपड़ी के भीतर गई। वृद्धा और झोंपड़ी दोनों एकवचन हैं।","a":["tok-a48"]},{"p":"वृद्धा ने गिड़गिड़ाकर बोली। क्रिया एकवचन स्त्री के लिए बोली है।","a":["tok-a49"]},{"p":"पोती ने खाना-पीना छोड़ दिया। पोती एकवचन है।","a":["tok-a50"]},{"p":"वकीलों की थैली गरम की गई। वकील का बहुवचन वकीलों है।","a":["tok-a51"]}]}],"quiz":[{"topic":"h1","type":"mcq","q":"ज़मींदार झोंपड़ी क्यों हटवाना चाहता था?","a":"महल का अहाता बढ़ाना चाहता था","opts":["महल का अहाता बढ़ाना चाहता था","झोंपड़ी बहुत नई थी","पोती ने मना किया था स्कूल जाने से","वृद्धा अमीर थी"],"id":"tok-q0"},{"topic":"h1","type":"mcq","q":"वृद्धा के बुढ़ापे का सहारा कौन थी?","a":"उसकी पोती","opts":["उसकी पोती","ज़मींदार","वकील","एक व्यापारी"],"id":"tok-q1"},{"topic":"h1","type":"mcq","q":"ज़मींदार ने झोंपड़ी पर कब्जा कैसे किया?","a":"वकीलों की थैली गरम कर अदालत से","opts":["वकीलों की थैली गरम कर अदालत से","खुद टोकरी उठाकर","पोती को समझाकर","मिट्टी उपहार देकर"],"id":"tok-q2"},{"topic":"h2","type":"mcq","q":"ज़मींदार का अर्थ है ____।","a":"जमीन का मालिक","opts":["जमीन का मालिक","छोटी कुटिया","पुत्रवधू","पछतावा"],"id":"tok-q3"},{"topic":"h2","type":"mcq","q":"पतोहू का अर्थ है ____।","a":"पुत्रवधू","opts":["पुत्रवधू","टोकरी","अहाता","ताकत"],"id":"tok-q4"},{"topic":"h2","type":"mcq","q":"अहाता का अर्थ है ____।","a":"चारदीवारी के अंदर का घेरा","opts":["चारदीवारी के अंदर का घेरा","बूढ़ी स्त्री","किया हुआ काम","भीतरी मन"],"id":"tok-q5"},{"topic":"h2","type":"mcq","q":"पश्चाताप का अर्थ है ____।","a":"किए पर पछतावा","opts":["किए पर पछतावा","जमीन का मालिक","छोटी झोपड़ी","एकमात्र पुत्र"],"id":"tok-q6"},{"topic":"h3","type":"mcq","q":"गरीब का विलोम है ____।","a":"अमीर","opts":["अमीर","दीन","कुटी","माटी"],"id":"tok-q7"},{"topic":"h3","type":"mcq","q":"निष्फल का विलोम है ____।","a":"सफल","opts":["सफल","अनाथ","बाहरी","दरिद्र"],"id":"tok-q8"},{"topic":"h3","type":"mcq","q":"झोंपड़ी का पर्याय है ____।","a":"कुटिया","opts":["कुटिया","अमीर","सफल","बाहरी"],"id":"tok-q9"},{"topic":"h3","type":"mcq","q":"वृद्धा का पर्याय है ____।","a":"बुढ़िया","opts":["बुढ़िया","बालिका केवल","अहाता","वकील"],"id":"tok-q10"},{"topic":"h4","type":"mcq","q":"वृद्धा ने मिट्टी की अनुमति कैसे माँगी?","a":"विनती और नम्रता से","opts":["विनती और नम्रता से","क्रोध और झगड़े से","अदालत में मुकदमा करके","चुपचाप उठाकर"],"id":"tok-q11"},{"topic":"h4","type":"mcq","q":"पोती का व्यवहार किस भाव को दर्शाता है?","a":"अपने घर से लगाव","opts":["अपने घर से लगाव","ज़मींदार से दोस्ती","पढ़ाई का शौक","यात्रा का चाव"],"id":"tok-q12"},{"topic":"h4","type":"mcq","q":"कहानी का अंत कैसा है?","a":"सकारात्मक और प्रेरणादायक","opts":["सकारात्मक और प्रेरणादायक","केवल दुखद","अधूरा","हास्य बिना सीख के"],"id":"tok-q13"},{"topic":"h4","type":"mcq","q":"टोकरी न उठने पर ज़मींदार को क्या हुआ?","a":"पश्चाताप हुआ और उसने झोंपड़ी लौटा दी","opts":["पश्चाताप हुआ और उसने झोंपड़ी लौटा दी","वह और क्रोधित हो गया","उसने पोती को बाहर भेज दिया","उसने टोकरी फेंक दी"],"id":"tok-q14"},{"topic":"h5","type":"mcq","q":"“अपनी पोती ___ चिंता” — खाली स्थान में क्या आएगा?","a":"की","opts":["की","के","कि","का"],"id":"tok-q15"},{"topic":"h5","type":"mcq","q":"“ज़मींदार ___ महल के पास” — खाली स्थान में क्या आएगा?","a":"के","opts":["के","की","कि","को"],"id":"tok-q16"},{"topic":"h5","type":"mcq","q":"“वृद्धा ने कहा ___ वह लेने नहीं आई” — खाली स्थान में क्या आएगा?","a":"कि","opts":["कि","की","के","का"],"id":"tok-q17"},{"topic":"h6","type":"mcq","q":"“पोती” कौन-सा वचन है?","a":"एकवचन","opts":["एकवचन","बहुवचन","दोनों एक साथ","वचन नहीं"],"id":"tok-q18"},{"topic":"h6","type":"mcq","q":"“वकील” का बहुवचन है ____।","a":"वकीलों","opts":["वकीलों","वकीलें","पोती","झोंपड़ी"],"id":"tok-q19"}],"match":[{"title":"शब्द ↔ अर्थ","left":"शब्द","right":"अर्थ","pairs":[["ज़मींदार","जमीन का मालिक"],["झोंपड़ी","छोटी कुटिया"],["पतोहू","पुत्रवधू"],["अहाता","चारदीवारी के अंदर का घेरा"],["पश्चाताप","किए पर पछतावा"],["विनती","नम्र प्रार्थना"]]}],"sort":[{"title":"व्यक्ति या चीज़?","buckets":["👤 व्यक्ति","🧺 चीज़"],"items":[["ज़मींदार",0],["वृद्धा",0],["पोती",0],["पतोहू",0],["टोकरी",1],["झोंपड़ी",1],["चूल्हा",1],["मिट्टी",1]]}],"order":[],"flash":[["अहाता","चारदीवारी के अंदर का घेरा। ज़मींदार इसे बढ़ाना चाहता था।"],["टोकरी","वृद्धा इसी में झोंपड़ी की मिट्टी ले जाना चाहती थी।"],["लगाव","पोती अपनी झोंपड़ी से इतनी जुड़ी थी कि खाना छोड़ दिया।"],["थैली गरम करना","पैसे देकर वकीलों से काम निकालना।"],["एक टोकरी का भार","ज़मींदार उसे नहीं उठा सका, और अन्याय का भार समझ गया।"],["पश्चाताप","ज़मींदार को अपनी गलती का पछतावा हुआ।"],["गरीब × अमीर","ये एक-दूसरे के विलोम हैं।"],["झोंपड़ी","कुटी, कुटिया और कुटीर इसके पर्याय हैं।"]],"summaryAudio":[["tok-a52"],["tok-a53"],["tok-a54"],["tok-a55"],["tok-a56"],["tok-a57"],["tok-a58"]]}],"voice":[["tok-a0","किसी श्रीमान ज़मींदार के महल के पास एक गरीब, अनाथ वृद्धा की झोंपड़ी थी।"],["tok-a1","ज़मींदार अपने महल का अहाता उस झोंपड़ी तक बढ़ाना चाहता था।"],["tok-a2","वृद्धा कई ज़मानों से वहीं बसी थी। उसी झोंपड़ी में उसका पति और इकलौता पुत्र मर चुके थे।"],["tok-a3","पतोहू भी पाँच बरस की कन्या को छोड़कर चल बसी थी। अब वही पोती उसके बुढ़ापे का सहारा थी।"],["tok-a4","जब वृद्धा नहीं मानी, तो ज़मींदार ने ज़मींदारी चाल चली। वकीलों की थैली गरम करके उसने अदालत से झोंपड़ी पर कब्जा कर लिया।"],["tok-a5","झोंपड़ी छूटते ही पोती ने खाना-पीना छोड़ दिया। वह कहती रही, अपने घर चल, वहीं रोटी खाऊँगी।"],["tok-a6","वृद्धा हाथ में टोकरी लेकर आई और विनती की, एक टोकरी भर मिट्टी ले जाने दीजिए, उसी का चूल्हा बनाकर रोटी पकाऊँगी।"],["tok-a7","ज़मींदार ने आज्ञा दे दी। मिट्टी भरने के बाद वृद्धा ने कहा, टोकरी को ज़रा हाथ लगा दीजिए ताकि मैं सिर पर रख लूँ।"],["tok-a8","ज़मींदार ने पूरी ताकत लगाई, पर टोकरी एक हाथ भी ऊँची न हुई।"],["tok-a9","वृद्धा ने कहा, जब एक टोकरी मिट्टी नहीं उठती, तो इस झोंपड़ी की हज़ारों टोकरियों मिट्टी का भार आप जन्म भर कैसे उठाएँगे?"],["tok-a10","धन के मद में डूबे ज़मींदार की आँखें खुल गईं। उसे पश्चाताप हुआ। उसने क्षमा माँगी और झोंपड़ी वापस दे दी।"],["tok-a11","टोकरी — डलिया, मिट्टी या सामान रखने का बर्तन"],["tok-a12","ज़मींदार — जमीन का मालिक"],["tok-a13","झोंपड़ी — घास-फूस या मिट्टी की छोटी कुटिया"],["tok-a14","अहाता — चारदीवारी के अंदर का घेरा, आँगन"],["tok-a15","इकलौता — एकमात्र, अकेला"],["tok-a16","पतोहू — पुत्रवधू, बहू"],["tok-a17","चूल्हा — अँगीठी, जहाँ रोटी पकती है"],["tok-a18","आंतरिक — भीतरी, मन के अंदर का"],["tok-a19","कृतकर्म — किया हुआ काम"],["tok-a20","ताकत — शक्ति"],["tok-a21","विनती — नम्र प्रार्थना"],["tok-a22","पश्चाताप — किए पर पछतावा"],["tok-a23","गरीब × अमीर"],["tok-a24","अनाथ × सनाथ"],["tok-a25","निष्फल × सफल"],["tok-a26","आंतरिक × बाहरी"],["tok-a27","झोंपड़ी — कुटी, कुटिया, कुटीर"],["tok-a28","गरीब — निर्धन, दरिद्र, दीन"],["tok-a29","वृद्धा — बुढ़िया, बूढ़ी"],["tok-a30","कन्या — लड़की, बेटी, बालिका"],["tok-a31","ज़मीन — मिट्टी, धरती"],["tok-a32","मिट्टी — माटी, मृत्तिका"],["tok-a33","ज़मींदार को झोंपड़ी हटाने की आवश्यकता क्यों लगी? वह अपने महल का अहाता बढ़ाना चाहता था।"],["tok-a34","वृद्धा ने मिट्टी ले जाने की अनुमति कैसे माँगी? विनती और नम्रता से। उसने हाथ जोड़कर प्रार्थना की।"],["tok-a35","वृद्धा की पोती का व्यवहार किस भाव को दर्शाता है? लगाव। वह अपनी झोंपड़ी से इतनी जुड़ी थी कि खाना-पीना छोड़ दिया।"],["tok-a36","कहानी का अंत कैसा है? सुखद, प्रेरणादायक और सकारात्मक। ज़मींदार को अपनी गलती दिखी और उसने झोंपड़ी लौटा दी।"],["tok-a37","सबसे प्रभावशाली पात्र वृद्धा है। उसकी समझ और साहस ने ज़मींदार के मन को बदल दिया।"],["tok-a38","पोती ने खाना इसलिए छोड़ा क्योंकि वह अपनी झोंपड़ी में ही रोटी खाना चाहती थी।"],["tok-a39","ज़मींदार ने वकीलों की थैली गरम करके अदालत से झोंपड़ी पर कब्जा कर लिया।"],["tok-a40","टोकरी न उठने पर वृद्धा ने अन्याय का भार समझाया। ज़मींदार को पश्चाताप हुआ।"],["tok-a41","वृद्धा ने कहा कि वह झोंपड़ी लेने नहीं आई है। यहाँ कि का प्रयोग हुआ है।"],["tok-a42","वह अपनी पोती की चिंता में दुखी हो गई थी। यहाँ की का प्रयोग हुआ है।"],["tok-a43","वृद्धा ने प्रार्थना की कि टोकरी को ज़रा उठा दीजिए।"],["tok-a44","पोती कहती थी कि वह अपने घर में ही खाना खाएगी।"],["tok-a45","झोंपड़ी की मिट्टी से वृद्धा चूल्हा बनाना चाहती थी।"],["tok-a46","उसे विश्वास था कि मिट्टी का चूल्हा देखकर पोती खाना खाने लगेगी।"],["tok-a47","ज़मींदार के महल के पास एक छोटी झोंपड़ी थी। यहाँ के का प्रयोग हुआ है।"],["tok-a48","वृद्धा झोंपड़ी के भीतर गई। वृद्धा और झोंपड़ी दोनों एकवचन हैं।"],["tok-a49","वृद्धा ने गिड़गिड़ाकर बोली। क्रिया एकवचन स्त्री के लिए बोली है।"],["tok-a50","पोती ने खाना-पीना छोड़ दिया। पोती एकवचन है।"],["tok-a51","वकीलों की थैली गरम की गई। वकील का बहुवचन वकीलों है।"],["tok-a52","ज़मींदार के महल के पास एक गरीब वृद्धा की झोंपड़ी थी। वह महल का अहाता उसी झोंपड़ी तक बढ़ाना चाहता था।"],["tok-a53","झोंपड़ी में वृद्धा के पति, इकलौता पुत्र और पतोहू की यादें थीं। पोती उसके बुढ़ापे का सहारा थी।"],["tok-a54","वृद्धा के न मानने पर ज़मींदार ने वकीलों की थैली गरम कर अदालत से झोंपड़ी पर कब्जा कर लिया।"],["tok-a55","घर छूटते ही पोती ने खाना-पीना छोड़ दिया। वह अपनी झोंपड़ी में ही रोटी खाना चाहती थी।"],["tok-a56","वृद्धा विनती करके एक टोकरी मिट्टी ले गई, ताकि उसी मिट्टी का चूल्हा बनाकर पोती के लिए रोटी पकाए।"],["tok-a57","ज़मींदार टोकरी नहीं उठा सका। वृद्धा ने कहा, एक टोकरी मिट्टी नहीं उठती तो पूरी झोंपड़ी का भार कैसे उठाओगे?"],["tok-a58","ज़मींदार को अपने किए पर पश्चाताप हुआ। उसने क्षमा माँगी और झोंपड़ी वापस कर दी।"]]}</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const TXT = Object.fromEntries(D.voice);
+const CH = Object.fromEntries(D.chapters.map(c => [c.id, c]));
+const app = document.getElementById('app');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const load = k => new Set(JSON.parse(localStorage.getItem(k) || '[]'));
+const readSet = load('hi8-read'), okSet = load('hi8-ok');
+const save = () => { localStorage.setItem('hi8-read', JSON.stringify([...readSet])); localStorage.setItem('hi8-ok', JSON.stringify([...okSet])); };
+let slow = localStorage.getItem('hi8-slow') === '1';
+
+const qsOf = (c, tid) => c.quiz.filter(q => q.topic === tid);
+const mastered = (c, tid) => qsOf(c, tid).every(q => okSet.has(q.id));
+function starsOf(c) {
+  let got = 0;
+  c.topics.forEach(t => { if (readSet.has(t.id)) got++; if (mastered(c, t.id)) got++; });
+  return {got, total: c.topics.length * 2};
+}
+function allStars() {
+  return D.chapters.reduce((s, c) => { const x = starsOf(c); return {got: s.got + x.got, total: s.total + x.total}; }, {got: 0, total: 0});
+}
+
+const sp = new Audio();
+let ptok = 0, cur = null;
+const rate = () => slow ? 0.75 : 1;
+function clearOn() {
+  document.querySelectorAll('.ln.on').forEach(e => e.classList.remove('on'));
+  document.querySelectorAll('.mini').forEach(b => b.textContent = '▶');
+}
+function stopAll() { ptok++; sp.pause(); clearOn(); cur = null; }
+function playClip(id, mine, text) {
+  return new Promise(res => {
+    if (mine !== ptok) return res(false);
+    let remote = false;
+    sp.onended = () => res(mine === ptok);
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      const t = text || TXT[id];
+      if (!remote && t) {
+        remote = true;
+        sp.src = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=hi&q=' + encodeURIComponent(t.slice(0, 190));
+        sp.defaultPlaybackRate = sp.playbackRate = rate();
+        sp.play().catch(() => {});
+      } else res(false);
+    };
+    sp.src = id ? 'voice/' + id + '.mp3' : 'about:blank';
+    sp.defaultPlaybackRate = sp.playbackRate = rate();
+    sp.play().catch(e => { if (e.name === 'NotAllowedError') res(false); });
+  });
+}
+async function playLines(els, after) {
+  stopAll();
+  const mine = ptok;
+  for (const el of els) {
+    if (mine !== ptok) return;
+    clearOn();
+    el.classList.add('on');
+    const b = el.querySelector('.mini');
+    if (b) b.textContent = '⏸';
+    cur = {el, paused: false};
+    el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+    for (const id of el.dataset.a.split(',')) {
+      if (!(await playClip(id, mine))) return;
+    }
+  }
+  if (mine === ptok) { stopAll(); if (after) after(); }
+}
+function sayText(t) { stopAll(); playClip(null, ptok, t.replace(/_+/g, ' blank ')); }
+document.addEventListener('click', e => {
+  const m = e.target.closest('.mini');
+  if (!m) return;
+  const el = m.closest('.ln');
+  if (cur && cur.el === el) {
+    if (cur.paused) { cur.paused = false; sp.play().catch(() => {}); m.textContent = '⏸'; }
+    else { cur.paused = true; sp.pause(); m.textContent = '▶'; }
+  } else playLines([el]);
+});
+function toggleSlow() {
+  slow = !slow;
+  localStorage.setItem('hi8-slow', slow ? '1' : '0');
+  sp.defaultPlaybackRate = sp.playbackRate = rate();
+  document.querySelectorAll('.slowbtn').forEach(b => b.classList.toggle('on', slow));
+}
+const slowBtn = () => `<button class="slowbtn ${slow ? 'on' : ''}" onclick="toggleSlow()">🐢 Slow</button>`;
+
+let view = {name: 'home'};
+function go(v) { stopAll(); view = v; render(); window.scrollTo(0, 0); }
+function render() {
+  const c = view.ch ? CH[view.ch] : null;
+  document.body.style.setProperty('--c1', c ? c.c1 : '#4361ee');
+  document.body.style.setProperty('--c2', c ? c.c2 : '#b5179e');
+  ({home, ch: chapter, rev: revision, track: tracker})[view.name]();
+}
+
+function trackerBox(x, label) {
+  const pct = x.total ? Math.round(x.got / x.total * 100) : 0;
+  return `<div class="tracker"><div class="row"><span>⭐ ${label}</span><span>${x.got} / ${x.total} stars · ${pct}%</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <small>Each topic has 2 stars: 📖 read it (listen or tap "Mark as read") and 🎯 answer all its questions correctly.</small></div>`;
+}
+
+function home() {
+  app.innerHTML = `
+    <div class="hero"><div class="big">🧺</div><h1>एक टोकरी भर मिट्टी</h1><p>पाठ 6 · सुनो, पढ़ो और खेलो</p></div>
+    ${trackerBox(allStars(), 'My Life Stars')}
+    <div class="cgrid">${D.chapters.map(c => {
+      const x = starsOf(c), pct = Math.round(x.got / x.total * 100);
+      return `<button class="ccard" style="--c1:${c.c1};--c2:${c.c2}" onclick="go({name:'ch',ch:'${c.id}',tab:'sum'})">
+        <span class="em">${c.emoji}</span><div class="sub">${c.subject}</div><h2>${esc(c.title)}</h2>
+        <div class="bar"><i style="width:${pct}%"></i></div><div class="st">⭐ ${x.got} / ${x.total} stars · ${c.topics.length} topics · ${c.quiz.length} questions</div></button>`;
+    }).join('')}</div>
+    <div class="quick">
+      <button class="qbtn" style="--b:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="go({name:'rev'})">⚡ Quick Revision<small>All summaries in one place</small></button>
+      <button class="qbtn" style="--b:linear-gradient(135deg,#ffb703,#fb8500)" onclick="startQuiz({all:true})">🏆 Mixed Practice<small>All chapters, until all correct</small></button>
+      <button class="qbtn" style="--b:linear-gradient(135deg,#ef476f,#b5179e)" onclick="startChallenge({all:true})">❤️ Challenge<small>All chapters · 3 lives</small></button>
+      <button class="qbtn" style="--b:linear-gradient(135deg,#7b2cbf,#4361ee)" onclick="go({name:'track'})">⭐ Star Tracker<small>Check what is covered</small></button>
+    </div>
+    <p class="foot"><a href="../">🏠 All subjects</a></p>`;
+}
+
+function topBar(c, small, title, right) {
+  return `<div class="top">
+    <button class="home" title="Home" onclick="location.href='../index.html'">🏠</button>
+    <button class="home" title="Back" onclick="if(history.length>1)history.back();else go({name:'home'})">←</button>
+    <div class="tt"><small>${small}</small><b>${esc(title)}</b></div>${right || ''}${slowBtn()}</div>`;
+}
+
+function blockHtml(b) {
+  const bold = t => { const i = t.indexOf(': '); return i > 0 && i < 45 ? `<b class="k">${esc(t.slice(0, i))}:</b> ${esc(t.slice(i + 2))}` : esc(t); };
+  if (b.h) return `<h4>${esc(b.h)}</h4>`;
+  if (b.p) return `<div class="ln" data-a="${b.a.join(',')}"><button class="mini">▶</button><span class="tx">${bold(b.p)}</span></div>`;
+  if (b.ul) return b.ul.map((t, i) => `<div class="ln li" data-a="${b.a[i].join(',')}"><button class="mini">▶</button><span class="tx">${bold(t)}</span></div>`).join('');
+  if (b.table) return `<table><tr>${b.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr>${b.table.rows.map((r, i) =>
+    `<tr class="ln" data-a="${b.a[i].join(',')}">${r.map((x, j) => `<td>${j === 0 ? '<button class="mini">▶</button>' : ''}${j === 0 ? `<b class="k">${esc(x)}</b>` : esc(x)}</td>`).join('')}</tr>`).join('')}</table>`;
+  return '';
+}
+
+function chapter() {
+  const c = CH[view.ch], x = starsOf(c);
+  const tabs = [['sum', '⚡ Summary'], ['notes', '📚 Notes'], ['games', '🎮 Games'], ['stars', '⭐ Stars']];
+  let body = '';
+  if (view.tab === 'sum') {
+    body = `<div class="tools"><button class="pill" onclick="playAll()">▶ Play all</button>
+      <button class="pill alt" onclick="startQuiz({ch:'${c.id}'})">🎯 Test me on this chapter</button></div>
+      <div id="sumlist">${c.summary.map((s, k) => `<div class="scard ln" data-a="${c.summaryAudio[k].join(',')}"><span class="num">${k + 1}</span><span class="tx">${esc(s)}</span><button class="mini">▶</button></div>`).join('')}</div>`;
+  } else if (view.tab === 'notes') {
+    body = `<p style="color:#5b5f86;margin:0 2px 12px">All of your notes, topic by topic. Tap ▶ to hear a line, tap again (⏸) to pause. "▶ Listen" reads the whole topic and gives you the 📖 star.</p>` +
+      c.topics.map(t => {
+        const r = readSet.has(t.id), m = mastered(c, t.id), n = qsOf(c, t.id), nok = n.filter(q => okSet.has(q.id)).length;
+        return `<div class="topic ${r && m ? 'done' : ''}" id="t-${t.id}">
+          <div class="th"><h3>${esc(t.title)}</h3><div class="tstars"><span>📖${r ? '⭐' : '☆'}</span><span>🎯${m ? '⭐' : '☆'}</span></div></div>
+          ${t.blocks.map(blockHtml).join('')}
+          <div class="tbtns"><button onclick="listenTopic('${t.id}')">▶ Listen</button>
+            <button class="${r ? 'read' : ''}" onclick="toggleRead('${t.id}')">${r ? '✅ Read' : '✓ Mark as read'}</button>
+            <button onclick="startQuiz({ch:'${c.id}',topic:'${t.id}'})">🎯 Quiz me (${nok}/${n.length})</button></div></div>`;
+      }).join('');
+  } else if (view.tab === 'games') {
+    const tile = (b, i, title, sub, fn) => `<button class="gt" style="--b:${b}" onclick="${fn}"><span class="i">${i}</span><b>${esc(title)}</b><small>${esc(sub)}</small></button>`;
+    body = `<div class="gtiles">
+        ${tile('linear-gradient(135deg,#4361ee,#7b2cbf)', '🎯', 'Practice Quiz', `All ${c.quiz.length} questions. Wrong ones come back.`, `startQuiz({ch:'${c.id}'})`)}
+        ${tile('linear-gradient(135deg,#ef476f,#b5179e)', '❤️', 'Challenge', '3 lives. How far can you go?', `startChallenge({ch:'${c.id}'})`)}
+        ${tile('linear-gradient(135deg,#ffb703,#fb8500)', '🃏', 'Flashcards', `${c.flash.length} cards to flip`, `startFlash('${c.id}')`)}
+      </div>
+      <div class="ghead">🔗 Match the following</div>
+      <div class="gtiles">${c.match.map((m, i) => tile('linear-gradient(135deg,#118ab2,#06d6a0)', '🔗', m.title, `${m.pairs.length} pairs`, `startMatch('${c.id}',${i})`)).join('')}</div>
+      <div class="ghead">🧺 Sort it into groups</div>
+      <div class="gtiles">${c.sort.map((s, i) => tile('linear-gradient(135deg,#2a9d8f,#80b918)', '🧺', s.title, `${s.items.length} items`, `startSort('${c.id}',${i})`)).join('')}</div>
+      ${c.order.length ? `<div class="ghead">🔢 Put in order</div><div class="gtiles">${c.order.map((o, i) => tile('linear-gradient(135deg,#d62828,#f77f00)', '🔢', o.title, `${o.items.length} steps`, `startOrder('${c.id}',${i})`)).join('')}</div>` : ''}`;
+  } else {
+    body = trackerBox(x, c.subject + ' stars') + checklist(c);
+  }
+  app.innerHTML = topBar(c, c.subject, c.title, `<span class="chip">⭐ ${x.got}/${x.total}</span>`) +
+    `<div class="tabs">${tabs.map(([k, l]) => `<button class="tab ${view.tab === k ? 'on' : ''}" onclick="go({name:'ch',ch:'${c.id}',tab:'${k}'})">${l}</button>`).join('')}</div>${body}`;
+}
+
+function checklist(c) {
+  return c.topics.map(t => {
+    const r = readSet.has(t.id), n = qsOf(c, t.id), nok = n.filter(q => okSet.has(q.id)).length, m = nok === n.length;
+    return `<div class="check"><span class="s">${r && m ? '🌟' : r || m ? '⭐' : '☆'}</span>
+      <div class="ct">${esc(t.title)}<small>📖 ${r ? 'Read ✓' : 'Not read yet'} · 🎯 ${nok}/${n.length} correct</small></div>
+      <button onclick="goTopic('${c.id}','${t.id}')">📖 Read</button><button onclick="startQuiz({ch:'${c.id}',topic:'${t.id}'})">🎯 Quiz</button></div>`;
+  }).join('');
+}
+function goTopic(cid, tid) {
+  go({name: 'ch', ch: cid, tab: 'notes'});
+  setTimeout(() => { const el = document.getElementById('t-' + tid); if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'}); }, 50);
+}
+function tracker() {
+  app.innerHTML = topBar(null, 'Check your coverage', 'Star Tracker') + trackerBox(allStars(), 'All chapters') +
+    D.chapters.map(c => { const x = starsOf(c); return `<div class="ghead" style="font-size:18px">${c.emoji} ${c.subject}: ${esc(c.title)} · ⭐ ${x.got}/${x.total}</div>${checklist(c)}`; }).join('');
+}
+function revision() {
+  app.innerHTML = topBar(null, 'Quick review', '⚡ Quick Revision') +
+    `<div class="tools"><button class="pill" onclick="playAll()">▶ Play all</button></div><div id="sumlist">` +
+    D.chapters.map(c => `<div class="ghead" style="font-size:18px">${c.emoji} ${c.subject}: ${esc(c.title)}</div>` +
+      c.summary.map((s, k) => `<div class="scard ln" style="--c1:${c.c1}" data-a="${c.summaryAudio[k].join(',')}"><span class="num" style="background:${c.c1}">${k + 1}</span><span class="tx">${esc(s)}</span><button class="mini">▶</button></div>`).join('')).join('') + `</div>`;
+}
+function playAll() { playLines([...document.querySelectorAll('#sumlist .ln')]); }
+function listenTopic(tid) {
+  const card = document.getElementById('t-' + tid);
+  playLines([...card.querySelectorAll('.ln')], () => { if (!readSet.has(tid)) { readSet.add(tid); save(); rerender(); confetti(); } });
+}
+function toggleRead(tid) {
+  if (readSet.has(tid)) readSet.delete(tid); else { readSet.add(tid); confetti(); ding(); }
+  save(); rerender();
+}
+function rerender() { const y = window.scrollY; render(); window.scrollTo(0, y); }
+
+let actx = null;
+function tone(fs, d, type, v) {
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const t0 = actx.currentTime;
+    fs.forEach((f, k) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t0 + k * d);
+      g.gain.exponentialRampToValueAtTime(v, t0 + k * d + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + (k + 1) * d);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t0 + k * d); o.stop(t0 + (k + 1) * d + 0.05);
+    });
+  } catch (e) {}
+}
+const ding = () => tone([660, 880, 1175], 0.1, 'sine', 0.3);
+const buzz = () => tone([220, 165], 0.16, 'triangle', 0.3);
+function confetti() {
+  const em = ['⭐', '🎉', '✨', '🌟', '🎈', '💜'];
+  for (let i = 0; i < 20; i++) {
+    const s = document.createElement('span');
+    s.className = 'conf'; s.textContent = em[i % em.length];
+    s.style.left = Math.random() * 100 + 'vw'; s.style.animationDelay = Math.random() * 0.4 + 's';
+    document.body.appendChild(s); setTimeout(() => s.remove(), 2200);
+  }
+}
+
+const ov = document.getElementById('ov'), ovb = () => document.getElementById('ovb');
+let G = null;
+function openOv(title, c) {
+  stopAll();
+  ov.style.setProperty('--c1', c ? c.c1 : '#4361ee');
+  ov.style.setProperty('--c2', c ? c.c2 : '#b5179e');
+  document.getElementById('ovt').textContent = title;
+  document.getElementById('ovs').textContent = '';
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeOv() { stopAll(); ov.classList.remove('show'); document.body.style.overflow = ''; G = null; rerender(); }
+const setScore = t => document.getElementById('ovs').innerHTML = t;
+
+function pool(o) {
+  if (o.all) return D.chapters.flatMap(c => c.quiz.map(q => ({...q, c})));
+  const c = CH[o.ch];
+  return c.quiz.filter(q => !o.topic || q.topic === o.topic).map(q => ({...q, c}));
+}
+function quizTitle(o, word) {
+  if (o.all) return word + ': All chapters';
+  const c = CH[o.ch];
+  if (o.topic) return '🎯 ' + c.topics.find(t => t.id === o.topic).title;
+  return word + ': ' + c.subject;
+}
+function startQuiz(o) {
+  const list = pool(o);
+  G = {mode: 'practice', o, queue: shuffle(list), total: list.length, learned: new Set(), first: 0, missed: new Map()};
+  openOv(quizTitle(o, '🎯 Practice'), o.ch ? CH[o.ch] : null);
+  showQ();
+}
+function startChallenge(o) {
+  const list = pool(o);
+  G = {mode: 'challenge', o, queue: shuffle(list), total: list.length, lives: 3, score: 0, streak: 0, bestStreak: 0, missed: new Map()};
+  openOv(quizTitle(o, '❤️ Challenge'), o.ch ? CH[o.ch] : null);
+  showQ();
+}
+const TYPE = {mcq: ['Choose the answer', '#4361ee'], tf: ['True or False', '#06a77d'], fill: ['Fill in the blank', '#7b2cbf']};
+function showQ() {
+  if (!G.queue.length || (G.mode === 'challenge' && G.lives <= 0)) return quizEnd();
+  const q = G.queue[0];
+  G.cur = q; G.opts = q.type === 'tf' ? q.opts : shuffle(q.opts); G.answered = false;
+  const done = G.mode === 'practice' ? G.learned.size : G.total - G.queue.length;
+  setScore(G.mode === 'practice' ? `⭐ ${G.learned.size}/${G.total}` : `<span class="lives">${'❤️'.repeat(G.lives)}${'🤍'.repeat(3 - G.lives)}</span> · ${G.score}`);
+  const qhtml = esc(q.q).replace(/_{3,}/g, '<span class="blank">&nbsp;</span>');
+  ovb().innerHTML = `
+    <div class="qprog"><div class="bar"><i style="width:${done / G.total * 100}%"></i></div><span>${G.mode === 'practice' ? `${G.learned.size}/${G.total} learned` : `Q ${done + 1}/${G.total} · 🔥 ${G.streak}`}</span></div>
+    <div class="qc">
+      <span class="badge" style="--bb:${TYPE[q.type][1]}">${TYPE[q.type][0]}</span> <span class="badge" style="--bb:${q.c.c1}">${q.c.emoji} ${q.c.subject}</span>
+      <div class="qq"><span>${qhtml}</span><button class="say" onclick="sayText(G.cur.q)">🔊</button></div>
+      <div class="opts">${G.opts.map((o, k) => `<button class="opt" onclick="answer(this,${k})">${esc(o)}</button>`).join('')}</div>
+      <div id="after"></div>
+    </div>`;
+  ovb().scrollTop = 0;
+}
+function answer(btn, k) {
+  if (G.answered) return;
+  G.answered = true;
+  const q = G.queue.shift(), btns = [...document.querySelectorAll('.opt')];
+  btns.forEach(b => b.disabled = true);
+  const ok = G.opts[k] === q.a;
+  let note;
+  if (ok) {
+    btn.classList.add('ok');
+    okSet.add(q.id); save();
+    ding(); confetti();
+    if (G.mode === 'practice') { G.learned.add(q.id); if (!G.missed.has(q.id)) G.first++; }
+    else { G.score++; G.streak++; G.bestStreak = Math.max(G.bestStreak, G.streak); }
+    note = `<div class="note good">${['Well done! 🎉', 'Super! 🌟', 'Correct! 💯', 'Brilliant! ✨'][Math.floor(Math.random() * 4)]}</div>`;
+  } else {
+    btn.classList.add('bad');
+    btns.forEach((b, j) => { if (G.opts[j] === q.a) b.classList.add('ok'); });
+    G.missed.set(q.id, {q: q.q, a: q.a});
+    buzz();
+    if (G.mode === 'practice') {
+      G.queue.splice(Math.min(G.queue.length, 3 + Math.floor(Math.random() * 3)), 0, q);
+      note = `<div class="note bad">The right answer is in green. This question will come back soon 🔁</div>`;
+    } else {
+      G.lives--; G.streak = 0;
+      note = `<div class="note bad">Oops! You lost a life 💔 The right answer is in green.</div>`;
+    }
+  }
+  setScore(G.mode === 'practice' ? `⭐ ${G.learned.size}/${G.total}` : `<span class="lives">${'❤️'.repeat(Math.max(0, G.lives))}${'🤍'.repeat(3 - Math.max(0, G.lives))}</span> · ${G.score}`);
+  document.getElementById('after').innerHTML = note + `<button class="nx" onclick="showQ()">Next ➜</button>`;
+}
+function quizEnd() {
+  const review = [...G.missed.values()];
+  let big, msg, line, stars;
+  if (G.mode === 'practice') {
+    const s = G.first, n = G.total;
+    stars = Math.max(1, Math.round(s / n * 5));
+    big = s === n ? '🏆' : s >= n * 0.7 ? '🥳' : '💪';
+    msg = s === n ? 'Perfect! All correct the first time!' : 'Great! Now you know all of them!';
+    line = `${s} of ${n} correct on the first try`;
+  } else {
+    const key = 'hi8-best-' + (G.o.all ? 'all' : G.o.ch);
+    const best = Math.max(+(localStorage.getItem(key) || 0), G.score);
+    localStorage.setItem(key, best);
+    stars = Math.max(1, Math.round(G.score / G.total * 5));
+    big = G.lives > 0 ? '🏆' : '💥';
+    msg = G.lives > 0 ? 'You finished with lives left!' : 'Game over! Try to beat your score.';
+    line = `Score: ${G.score} · Best streak: 🔥 ${G.bestStreak} · Best score: ${best}`;
+  }
+  ovb().innerHTML = `<div class="end"><div class="bigem">${big}</div><h2>${msg}</h2><p style="font-size:17px">${line}</p>
+    <div class="stars">${'⭐'.repeat(stars)}${'☆'.repeat(5 - stars)}</div>
+    ${review.length ? `<div class="review"><h3>Read these once more:</h3>${review.map(r => `<div>${esc(r.q)}<br><b>✔ ${esc(r.a)}</b></div>`).join('')}</div>` : ''}
+    <div class="row2"><button class="nx" onclick="${G.mode === 'practice' ? 'startQuiz' : 'startChallenge'}(G.o)">🔁 Play again</button><button class="nx alt" onclick="closeOv()">✕ Close</button></div></div>`;
+  confetti(); ding();
+}
+
+function startFlash(cid) {
+  const c = CH[cid];
+  G = {mode: 'flash', c, deck: shuffle(c.flash), i: 0};
+  openOv('🃏 Flashcards: ' + c.subject, c);
+  showFlash();
+}
+function showFlash() {
+  const [f, b] = G.deck[G.i];
+  setScore(`${G.i + 1} / ${G.deck.length}`);
+  ovb().innerHTML = `<p class="mh">Think of the answer, then tap the card to flip it 👆</p>
+    <div class="flash" id="fc" onclick="this.classList.toggle('fl')"><div class="in">
+      <div class="f fr">${esc(f)}<small>tap to flip</small></div><div class="f bk">${esc(b)}</div></div></div>
+    <div class="row2"><button class="nx alt" onclick="G.i=(G.i-1+G.deck.length)%G.deck.length;showFlash()">← Back</button>
+      <button class="nx alt" onclick="sayText(G.deck[G.i][0]+'. '+G.deck[G.i][1])">🔊</button>
+      <button class="nx" onclick="G.i=(G.i+1)%G.deck.length;showFlash()">Next →</button></div>
+    <div class="row2"><button class="nx alt" onclick="G.deck=shuffle(G.deck);G.i=0;showFlash()">🔀 Shuffle</button></div>`;
+}
+
+function startMatch(cid, mi) {
+  const c = CH[cid], m = c.match[mi];
+  const pairs = shuffle(m.pairs.map((p, i) => ({l: p[0], r: p[1], i})));
+  const nr = Math.ceil(pairs.length / 5), size = Math.ceil(pairs.length / nr), rounds = [];
+  for (let k = 0; k < pairs.length; k += size) rounds.push(pairs.slice(k, k + size));
+  G = {mode: 'match', c, cid, mi, m, rounds, r: 0, mistakes: 0};
+  openOv('🔗 ' + m.title, c);
+  showMatch();
+}
+function showMatch() {
+  const R = G.rounds[G.r];
+  G.done = 0; G.sel = null;
+  setScore(`Round ${G.r + 1}/${G.rounds.length}`);
+  ovb().innerHTML = `<p class="mh">Tap one on the left, then its partner on the right 👆</p><div class="mcols">
+    <div class="mcol"><h4>${esc(G.m.left)}</h4>${shuffle(R).map(p => `<button class="mb" data-i="${p.i}" onclick="pickL(this)">${esc(p.l)}</button>`).join('')}</div>
+    <div class="mcol"><h4>${esc(G.m.right)}</h4>${shuffle(R).map(p => `<button class="mb" data-i="${p.i}" onclick="pickR(this)">${esc(p.r)}</button>`).join('')}</div></div>`;
+}
+function pickL(b) {
+  if (b.classList.contains('done')) return;
+  document.querySelectorAll('.mcol:first-child .mb').forEach(x => x.classList.remove('sel'));
+  b.classList.add('sel'); G.sel = b;
+}
+function pickR(b) {
+  if (b.classList.contains('done')) return;
+  if (!G.sel) { b.classList.add('bad'); setTimeout(() => b.classList.remove('bad'), 400); return; }
+  if (b.dataset.i === G.sel.dataset.i) {
+    [b, G.sel].forEach(x => { x.classList.remove('sel'); x.classList.add('done'); });
+    G.sel = null; G.done++; ding();
+    if (G.done === G.rounds[G.r].length) setTimeout(matchEnd, 500);
+  } else {
+    const s = G.sel; [b, s].forEach(x => x.classList.add('bad'));
+    setTimeout(() => { b.classList.remove('bad'); s.classList.remove('bad'); }, 400);
+    G.mistakes++; buzz();
+  }
+}
+function matchEnd() {
+  const last = G.r + 1 >= G.rounds.length;
+  confetti();
+  ovb().innerHTML = `<div class="end"><div class="bigem">${last ? '🏆' : '🎉'}</div><h2>${last ? 'All pairs matched!' : 'Round complete!'}</h2>
+    ${last ? `<p>Mistakes: <b>${G.mistakes}</b>${G.mistakes ? '' : ' 💯'}</p>` : ''}
+    <div class="row2">${last ? `<button class="nx" onclick="startMatch(G.cid,G.mi)">🔁 Play again</button>` : `<button class="nx" onclick="G.r++;showMatch()">Next round ➜</button>`}
+    <button class="nx alt" onclick="closeOv()">✕ Close</button></div></div>`;
+}
+
+function startSort(cid, si) {
+  const c = CH[cid], s = c.sort[si];
+  G = {mode: 'sort', c, cid, si, s, left: shuffle(s.items.map((it, i) => i)), placed: s.buckets.map(() => []), sel: null, mistakes: 0};
+  openOv('🧺 ' + s.title, c);
+  showSort();
+}
+function showSort() {
+  const s = G.s;
+  setScore(`${s.items.length - G.left.length}/${s.items.length}`);
+  if (!G.left.length) {
+    confetti(); ding();
+    ovb().innerHTML = `<div class="end"><div class="bigem">🏆</div><h2>Everything sorted!</h2><p>Mistakes: <b>${G.mistakes}</b>${G.mistakes ? '' : ' 💯'}</p>
+      <div class="row2"><button class="nx" onclick="startSort(G.cid,G.si)">🔁 Play again</button><button class="nx alt" onclick="closeOv()">✕ Close</button></div></div>`;
+    return;
+  }
+  ovb().innerHTML = `<p class="mh">Tap an item, then tap the group it belongs to 👇</p>
+    <div class="pool">${G.left.map(i => `<button class="chipb ${G.sel === i ? 'sel' : ''}" data-i="${i}" onclick="G.sel=${i};showSort()">${esc(s.items[i][0])}</button>`).join('')}</div>
+    <div class="buckets">${s.buckets.map((b, k) => `<div class="bucket" onclick="dropTo(${k},this)"><h4>${esc(b)}</h4>${G.placed[k].map(i => `<div>${esc(s.items[i][0])}</div>`).join('')}</div>`).join('')}</div>`;
+}
+function dropTo(k, el) {
+  if (G.sel === null) return;
+  const i = G.sel;
+  if (G.s.items[i][1] === k) {
+    G.placed[k].push(i); G.left = G.left.filter(x => x !== i); G.sel = null; ding(); showSort();
+  } else {
+    G.mistakes++; buzz();
+    const chip = document.querySelector(`.chipb[data-i="${i}"]`);
+    if (chip) { chip.classList.add('bad'); setTimeout(() => chip.classList.remove('bad'), 400); }
+  }
+}
+
+function startOrder(cid, oi) {
+  const c = CH[cid], o = c.order[oi];
+  G = {mode: 'order', c, cid, oi, o, picked: 0, shuf: shuffle(o.items.map((_, i) => i)), mistakes: 0};
+  openOv('🔢 ' + o.title, c);
+  setScore('');
+  ovb().innerHTML = `<div class="qc"><div class="qq"><span>Tap them in the correct order: first one first!</span></div>
+    <div class="oans" id="oans"></div>
+    <div class="oleft">${G.shuf.map(i => `<button class="opt" data-i="${i}" onclick="pickO(this)">${esc(o.items[i])}</button>`).join('')}</div><div id="after"></div></div>`;
+}
+function pickO(b) {
+  if (+b.dataset.i === G.picked) {
+    G.picked++;
+    document.getElementById('oans').insertAdjacentHTML('beforeend', `<div>${G.picked}. ${esc(G.o.items[+b.dataset.i])}</div>`);
+    b.remove(); ding();
+    if (G.picked === G.o.items.length) {
+      confetti();
+      document.getElementById('after').innerHTML = `<div class="note good">Perfect order! 🎉 Mistakes: ${G.mistakes}</div>
+        <div class="row2"><button class="nx" onclick="startOrder(G.cid,G.oi)">🔁 Play again</button><button class="nx alt" onclick="closeOv()">✕ Close</button></div>`;
+    }
+  } else {
+    b.classList.add('bad'); setTimeout(() => b.classList.remove('bad'), 400); G.mistakes++; buzz();
+  }
+}
+
+render();
+</script>
+</body>
+</html>

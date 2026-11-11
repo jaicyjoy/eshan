@@ -3,25 +3,645 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coming soon · Eshan</title>
+<title>Class 8 Science · Eshan</title>
 <style>
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:linear-gradient(160deg,#e0f0ff,#fff3e0);color:#1f2340;text-align:center;padding:24px}
-.box{background:#fff;border-radius:28px;padding:36px 28px;box-shadow:0 10px 0 #e6dff7;max-width:420px}
-.em{font-size:64px}h1{margin:8px 0 6px;font-size:28px}p{margin:0;color:#6a5f8f;font-size:17px}
-a{display:inline-block;margin-top:20px;background:linear-gradient(135deg,#4361ee,#7b2cbf);color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:99px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Avenir Next","Segoe UI","Roboto",system-ui,sans-serif;color:#1f2340;background:linear-gradient(180deg,#e0f2ff 0%,#f6efff 50%,#fff6e8 100%);min-height:100vh;line-height:1.5}
+button{font-family:inherit;color:inherit;cursor:pointer}
+#app{max-width:900px;margin:0 auto;padding:12px 14px 70px}
+
+.hero{text-align:center;padding:18px 8px 6px}
+.hero .big{font-size:58px;display:inline-block;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-5deg)}}
+.hero h1{margin:4px 0 0;font-size:32px;background:linear-gradient(90deg,#4361ee,#b5179e,#f77f00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:2px 0 0;color:#5b5f86;font-size:17px}
+.tracker{background:#fff;border-radius:22px;padding:14px 16px;margin:14px 0;box-shadow:0 6px 0 #e3e0f7}
+.tracker .row{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:18px}
+.bar{height:16px;background:#ece9fb;border-radius:99px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#ffd60a,#06d6a0);transition:width .5s}
+.tracker small{display:block;color:#6b6f93;margin-top:6px;font-size:14px}
+
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.ccard{border:0;border-radius:24px;padding:16px;text-align:left;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 7px 0 rgba(0,0,0,.15);transition:transform .12s}
+.ccard:active{transform:translateY(4px);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.ccard .sub{font-size:14px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.9}
+.ccard .em{font-size:48px;float:right;line-height:1}
+.ccard h2{margin:4px 0 10px;font-size:22px;line-height:1.25}
+.ccard .bar{background:rgba(255,255,255,.3)}
+.ccard .st{font-weight:700;font-size:14px;margin-top:6px}
+.quick{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:14px}
+.qbtn{border:0;border-radius:20px;padding:14px;text-align:left;font-weight:800;font-size:17px;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.15)}
+.qbtn small{display:block;font-weight:600;font-size:13px;opacity:.95}
+.foot{text-align:center;margin-top:26px;font-size:14px;color:#6b6f93}
+.foot a{color:#4361ee}
+
+.top{position:sticky;top:6px;z-index:10;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 6px 0 rgba(0,0,0,.12)}
+.top .home{border:0;background:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;flex:none}
+.top .tt{flex:1;min-width:0}
+.top .tt small{display:block;font-size:13px;font-weight:700;opacity:.9;text-transform:uppercase;letter-spacing:.4px}
+.top .tt b{display:block;font-size:19px;line-height:1.2}
+.chip{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 10px;font-weight:800;font-size:14px;white-space:nowrap}
+.slowbtn{border:0;border-radius:99px;padding:7px 10px;font-weight:800;font-size:14px;background:rgba(255,255,255,.25);color:#fff;white-space:nowrap}
+.slowbtn.on{background:#ffd60a;color:#3a2b00}
+
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.tab{border:0;border-radius:16px;padding:11px 4px;font-weight:800;font-size:15px;background:#fff;box-shadow:0 5px 0 #dedbf3}
+.tab.on{background:var(--c1);color:#fff;box-shadow:0 5px 0 var(--c2)}
+
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 12px}
+.pill{border:0;border-radius:99px;padding:10px 18px;font-weight:800;font-size:15px;color:#fff;background:var(--c1);box-shadow:0 4px 0 var(--c2)}
+.pill.alt{background:#fff;color:#1f2340;box-shadow:0 4px 0 #dedbf3}
+
+.scard{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:18px;padding:12px;margin-bottom:10px;box-shadow:0 4px 0 #e6e3f7;border-left:6px solid var(--c1)}
+.num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--c1);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:3px}
+.ln.on{background:#fff6cc}
+.scard.ln.on{background:#fff6cc}
+.mini{flex:none;width:36px;height:36px;border-radius:50%;border:2px solid #e3e0f7;background:#fff;font-size:14px;margin-top:1px}
+.ln.on .mini{background:#ffb703;border-color:#f48c06;color:#fff}
+.scard span.tx{flex:1;font-size:17px}
+
+.topic{background:#fff;border-radius:22px;padding:14px;margin-bottom:16px;box-shadow:0 6px 0 #e6e3f7;border-top:6px solid var(--c1)}
+.topic.done{border-top-color:#06d6a0}
+.th{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.th h3{margin:0;font-size:19px;line-height:1.3;color:var(--c2)}
+.tstars{display:flex;gap:6px;flex:none}
+.tstars span{background:#f4f2ff;border-radius:99px;padding:3px 8px;font-size:14px;font-weight:700;white-space:nowrap}
+.topic h4{margin:12px 0 4px;font-size:16px;color:#4a4f7a}
+.topic .ln{display:flex;gap:8px;align-items:flex-start;padding:6px;border-radius:12px}
+.topic .ln span.tx{flex:1;font-size:16.5px}
+.topic .ln.li span.tx::before{content:"•";color:var(--c1);font-weight:900;margin-right:6px}
+.topic table{width:100%;border-collapse:collapse;margin:8px 0;font-size:15px}
+.topic th{background:var(--c1);color:#fff;text-align:left;padding:8px}
+.topic td{padding:8px;border-bottom:1px solid #eee;vertical-align:top}
+.topic tr.ln td:first-child{white-space:nowrap}
+.topic tr.ln td:first-child .mini{margin-right:6px;vertical-align:middle}
+.tbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tbtns button{border:0;border-radius:99px;padding:9px 14px;font-weight:800;font-size:14px;background:#f1efff;box-shadow:0 3px 0 #dedbf3}
+.tbtns button.read{background:#06d6a0;color:#fff;box-shadow:0 3px 0 #04a57b}
+b.k{color:var(--c2)}
+
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.gt{border:0;border-radius:20px;padding:14px;text-align:left;color:#fff;background:var(--b);box-shadow:0 6px 0 rgba(0,0,0,.18)}
+.gt .i{font-size:30px;display:block}
+.gt b{display:block;font-size:17px;line-height:1.25}
+.gt small{display:block;font-size:13px;opacity:.95;margin-top:2px}
+.ghead{font-weight:800;color:#4a4f7a;margin:16px 2px 8px;font-size:16px}
+
+.check{background:#fff;border-radius:16px;padding:10px 12px;margin-bottom:8px;display:flex;gap:10px;align-items:center;box-shadow:0 3px 0 #e6e3f7}
+.check .ct{flex:1;font-weight:700;font-size:15px}
+.check .ct small{display:block;color:#6b6f93;font-weight:600}
+.check .s{font-size:20px}
+.check button{border:0;border-radius:99px;padding:7px 12px;font-weight:800;font-size:13px;background:#f1efff}
+
+.ov{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;background:linear-gradient(160deg,#eef0ff,#fff0f7 55%,#fff8e6)}
+.ov.show{display:flex}
+.ovtop{display:flex;align-items:center;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(135deg,var(--c1,#4361ee),var(--c2,#b5179e))}
+.ovtop button{border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:18px;font-weight:900;color:#333;flex:none}
+.ovtop .t{flex:1;font-weight:800;font-size:17px}
+.ovtop .sc{background:rgba(255,255,255,.25);border-radius:99px;padding:4px 12px;font-weight:800;white-space:nowrap}
+.ovb{flex:1;overflow-y:auto;padding:16px 14px 40px;max-width:820px;width:100%;margin:0 auto}
+.qprog{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-weight:800;color:#4a4f7a;font-size:14px}
+.qprog .bar{flex:1;margin:0}
+.qc{background:#fff;border-radius:22px;padding:16px;box-shadow:0 7px 0 #e6e3f7}
+.badge{display:inline-block;border-radius:99px;padding:3px 12px;color:#fff;font-size:13px;font-weight:800;background:var(--bb,#4361ee)}
+.qq{display:flex;gap:10px;align-items:flex-start;margin-top:10px;font-size:20px;font-weight:800;line-height:1.45}
+.qq span{flex:1}
+.blank{display:inline-block;min-width:70px;border-bottom:3px solid #7b2cbf;margin:0 4px}
+.say{border:0;background:#efeaff;border-radius:50%;width:42px;height:42px;font-size:17px;flex:none}
+.opts{display:grid;gap:10px;margin-top:14px}
+.opt{border:2px solid #e3e0f7;background:#f8f7ff;border-radius:16px;padding:12px 14px;font-size:17px;text-align:left;line-height:1.4;box-shadow:0 4px 0 #e3e0f7}
+.opt.ok{background:#c9f7d6;border-color:#2fbf71;box-shadow:0 4px 0 #2fbf71;animation:pop .35s}
+.opt.bad{background:#ffd3d3;border-color:#e5484d;box-shadow:0 4px 0 #e5484d;animation:shake .35s}
+.opt:disabled{cursor:default}
+@keyframes pop{50%{transform:scale(1.03)}}
+@keyframes shake{25%,75%{transform:translateX(-7px)}50%{transform:translateX(7px)}}
+.note{margin-top:12px;font-weight:800;text-align:center}
+.note.good{color:#1f9d55}.note.bad{color:#d9480f}
+.nx{display:block;margin:14px auto 0;border:0;border-radius:99px;padding:12px 34px;font-size:17px;font-weight:800;color:#fff;background:linear-gradient(135deg,#4361ee,#b5179e);box-shadow:0 5px 0 rgba(67,97,238,.35)}
+.row2{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.row2 .nx{margin:0}
+.nx.alt{background:#fff;color:#4361ee;border:2px solid #cfd6ff;box-shadow:0 5px 0 #e3e0f7}
+.end{text-align:center;background:#fff;border-radius:24px;padding:22px 16px;box-shadow:0 7px 0 #e6e3f7}
+.end .bigem{font-size:64px}
+.end h2{margin:4px 0;font-size:24px;color:#4361ee}
+.end .stars{font-size:30px;letter-spacing:2px}
+.review{text-align:left;margin-top:14px}
+.review h3{margin:0 0 8px;color:#d9480f;font-size:17px}
+.review div{background:#fff7e0;border-radius:12px;padding:9px 12px;margin-bottom:8px;font-size:15px}
+.review div b{color:#1f9d55}
+.lives{font-size:20px;letter-spacing:2px}
+
+.flash{perspective:1000px;height:300px;margin:6px 0 14px;cursor:pointer}
+.flash .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flash.fl .in{transform:rotateY(180deg)}
+.flash .f{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;box-shadow:0 8px 0 rgba(0,0,0,.12)}
+.flash .fr{background:#fff;border:4px solid var(--c1,#4361ee);font-size:26px;font-weight:800;color:var(--c2,#333)}
+.flash .bk{background:linear-gradient(140deg,var(--c1,#4361ee),var(--c2,#b5179e));color:#fff;transform:rotateY(180deg);font-size:20px;font-weight:700;line-height:1.5}
+.flash small{display:block;font-size:14px;font-weight:600;opacity:.75;margin-top:10px}
+
+.mh{text-align:center;font-weight:800;color:#4a4f7a;margin-bottom:12px}
+.mcols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcol{display:flex;flex-direction:column;gap:9px}
+.mcol h4{margin:0;text-align:center;color:#4a4f7a}
+.mb{border:2px solid #e3e0f7;background:#fff;border-radius:14px;padding:11px 9px;font-size:15px;line-height:1.35;box-shadow:0 4px 0 #e3e0f7}
+.mb.sel{background:#fff1b8;border-color:#ffb703;box-shadow:0 4px 0 #ffb703}
+.mb.done{background:#c9f7d6;border-color:#2fbf71;box-shadow:0 4px 0 #2fbf71;opacity:.75}
+.mb.bad{background:#ffd3d3;border-color:#e5484d;animation:shake .35s}
+
+.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px;min-height:46px}
+.chipb{border:2px solid #e3e0f7;background:#fff;border-radius:99px;padding:9px 14px;font-size:15px;font-weight:700;box-shadow:0 4px 0 #e3e0f7}
+.chipb.sel{background:#fff1b8;border-color:#ffb703;box-shadow:0 4px 0 #ffb703;transform:scale(1.05)}
+.chipb.bad{background:#ffd3d3;animation:shake .35s}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.bucket{border:3px dashed #cfc8f5;border-radius:18px;background:#fff;padding:10px;min-height:120px;text-align:center;cursor:pointer}
+.bucket h4{margin:0 0 8px;font-size:16px}
+.bucket div{background:#c9f7d6;border-radius:10px;padding:5px 8px;margin:5px 0;font-size:14px;font-weight:700}
+.bucket.flashok{border-color:#2fbf71}
+
+.oans{min-height:56px;background:#fff;border:3px dashed #cfc8f5;border-radius:16px;padding:8px;margin:12px 0}
+.oans div{background:#c9f7d6;border-radius:10px;padding:8px 10px;margin:5px 0;font-size:15px;font-weight:700}
+.oleft{display:grid;gap:9px}
+
+.conf{position:fixed;top:-40px;font-size:28px;pointer-events:none;z-index:60;animation:fall 1.6s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(520deg);opacity:.6}}
+@media (max-width:560px){.tab{font-size:13px}.top .tt b{font-size:16px}.mb{font-size:14px}}
+
+.la-say{border:0;background:#efeaff;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;vertical-align:middle;margin-left:6px;box-shadow:0 3px 0 #e3e0f7}
+.la-say:active{background:#ffb703}
+.la-row{display:flex;gap:8px;align-items:flex-start}
+
 </style>
+<script src="../assets/learn-audio.js?v=2"></script>
 </head>
 <body>
-<div class="box">
-  <div class="em" id="em">🚧</div>
-  <h1 id="t">Coming soon</h1>
-  <p>This subject will be added next. Until then, try English, Hindi or Social!</p>
-  <a href="../">🏠 Back to subjects</a>
-</div>
+<div id="app"></div>
+<div class="ov" id="ov"><div class="ovtop"><button type="button" onclick="closeOv()">✕</button><div class="t" id="ovt"></div><div class="sc" id="ovs"></div></div><div class="ovb" id="ovb"></div></div>
+<script type="application/json" id="data">{"chapters":[{"id":"pwc","subject":"Physics","title":"Pressure, Wind and Cyclone","short":"Ch 2 · Pressure & cyclones","emoji":"💨","c1":"#0077b6","c2":"#03045e","summary":["Pressure is force divided by area. Its unit is the pascal, which is one newton per square metre.","An elephant of weight 20,000 N standing on four feet of 0.25 m² each exerts a pressure of 20,000 Pa.","Wind exerts a force. That force can lift fallen leaves and bend trees.","Overhead tanks are kept high so the tall water column gives a strong stream at the tap.","A tap on a lower floor gets a stronger stream, because more water stands above it.","Water shoots out of a hole in a pipe because pressure acts on all sides and the hole is narrow.","An open balloon deflates because air moves from high pressure inside to low pressure outside.","The same force on a smaller area gives a higher pressure, so boat B presses harder than boat A.","Lightning needs charge to build up. If air and clouds conducted electricity well, lightning would not occur.","A cyclone grows over a warm ocean when moist air rises, condensation releases heat, and winds spin into the low pressure."],"topics":[{"id":"p1","title":"Q1. Pressure under an elephant’s feet","blocks":[{"p":"An elephant stands on four feet. The area of one foot is 0.25 m² and its weight is 20,000 N. Find the pressure on the ground.","a":["pwc-a0"]},{"p":"Force = 20,000 N.","a":["pwc-a1"]},{"p":"Area of one foot = 0.25 m². Area of four feet = 4 × 0.25 = 1 m².","a":["pwc-a2"]},{"p":"Pressure = Force ÷ Area = 20,000 ÷ 1 = 20,000 Pa.","a":["pwc-a3"]},{"p":"20,000 Pa means 20,000 N/m². The elephant exerts a pressure of 20,000 pascal.","a":["pwc-a4"]}]},{"id":"p2","title":"Q2. Why do leaves rise and trees bend in the wind?","blocks":[{"p":"Moving air exerts pressure, which is a force spread over a surface.","a":["pwc-a5"]},{"p":"That force lifts fallen leaves into the air.","a":["pwc-a6"]},{"p":"The same push bends trees when the wind is strong.","a":["pwc-a7"]}]},{"id":"p3","title":"Q3. Why are overhead tanks placed at a height?","blocks":[{"p":"Pressure in a liquid increases as the height of the liquid column increases.","a":["pwc-a8"]},{"p":"A tank placed high on a roof makes a tall column of water above the taps.","a":["pwc-a9"]},{"p":"The higher pressure pushes water out of the tap in a good, strong stream.","a":["pwc-a10"]}]},{"id":"p4","title":"Q4. Who gets the stronger stream of tap water?","blocks":[{"p":"Imagine a three-storey building with the overhead tank on the top floor. You live on the second floor and your friend lives on the first floor.","a":["pwc-a11"]},{"p":"The strength of the stream depends on the height of the water column above the tap.","a":["pwc-a12"]},{"p":"Your friend’s tap on the first floor has a taller column of water above it than your tap on the second floor.","a":["pwc-a13"]},{"p":"So your friend receives the more powerful stream of water.","a":["pwc-a14"]}]},{"id":"p5","title":"Q5. Why does water shoot out of a leaking pipe?","blocks":[{"p":"The pipes are connected to a tank kept at a height, so the water column inside is tall and the pressure is high.","a":["pwc-a15"]},{"p":"Water exerts pressure on all sides of the pipe, including the bottom and any hole.","a":["pwc-a16"]},{"p":"When that pressure finds a narrow opening, such as a hole or a leak, the water comes out like a fountain.","a":["pwc-a17"]}]},{"id":"p6","title":"Q6. An inflated balloon left with its mouth open","blocks":[{"p":"Air inside the balloon presses outward on the rubber walls, so the balloon stays stretched.","a":["pwc-a18"]},{"p":"The stretched rubber presses back on the air with an equal and opposite force.","a":["pwc-a19"]},{"p":"If the mouth is left open, air escapes from the high pressure inside to the low pressure outside.","a":["pwc-a20"]},{"p":"The balloon goes flat.","a":["pwc-a21"]}]},{"id":"p7","title":"Q7. Pressure under two boats","blocks":[{"p":"Boats A and B each carry 3 persons. Each person weighs 700 N. Boat A has a base area of 7 m². Boat B has a base area of 3.5 m².","a":["pwc-a22"]},{"p":"Force on each boat = 700 × 3 = 2,100 N.","a":["pwc-a23"]},{"p":"Pressure under boat A = 2,100 ÷ 7 = 300 Pa.","a":["pwc-a24"]},{"p":"Pressure under boat B = 2,100 ÷ 3.5 = 600 Pa.","a":["pwc-a25"]},{"p":"Boat B exerts more pressure because the same force acts on a smaller area.","a":["pwc-a26"]}]},{"id":"p8","title":"Q8. Would lightning occur if air and clouds conducted electricity?","blocks":[{"p":"Lightning needs electric charge to build up in a cloud.","a":["pwc-a27"]},{"p":"If the air and the clouds were good conductors, the charges could not accumulate.","a":["pwc-a28"]},{"p":"There would be no charge build-up, so lightning would not occur.","a":["pwc-a29"]}]},{"id":"p9","title":"Q9. How does a storm become a cyclone?","blocks":[{"p":"Cyclones are large storms that form over warm oceans.","a":["pwc-a30"]},{"p":"Warm ocean water heats the air above it. The air becomes warm and moist and rises.","a":["pwc-a31"]},{"p":"High up, the water vapour condenses into raindrops. Condensation releases heat back into the air.","a":["pwc-a32"]},{"p":"The extra heat makes the air rise further, and the pressure near the surface becomes very low.","a":["pwc-a33"]},{"p":"Air from around the low-pressure centre rushes in, begins to spin, and the storm becomes a cyclone.","a":["pwc-a34"]}]}],"quiz":[{"topic":"p1","type":"mcq","q":"Pressure equals ____.","a":"force divided by area","opts":["force divided by area","area divided by force","force times height only","mass times time"],"id":"pwc-q0"},{"topic":"p1","type":"mcq","q":"The elephant’s four feet cover 1 m² in total. Its weight is 20,000 N. The pressure is ____.","a":"20,000 Pa","opts":["20,000 Pa","0.25 Pa","80,000 Pa","500 Pa"],"id":"pwc-q1"},{"topic":"p1","type":"mcq","q":"One pascal is the same as ____.","a":"1 N/m²","opts":["1 N/m²","1 m/s","1 kg","1 litre"],"id":"pwc-q2"},{"topic":"p2","type":"mcq","q":"Fallen leaves rise in a strong wind because the wind ____.","a":"exerts a force on them","opts":["exerts a force on them","removes gravity forever","freezes them","makes them heavier"],"id":"pwc-q3"},{"topic":"p3","type":"mcq","q":"Overhead tanks are placed high so that ____.","a":"the water pressure at the tap is greater","opts":["the water pressure at the tap is greater","water has no pressure","the tank stays empty","pipes need no water"],"id":"pwc-q4"},{"topic":"p3","type":"mcq","q":"Pressure in a liquid increases when the liquid column is ____.","a":"taller","opts":["taller","shorter","removed","frozen and still"],"id":"pwc-q5"},{"topic":"p4","type":"mcq","q":"With the tank on the roof, who gets the stronger stream?","a":"The friend on the first floor","opts":["The friend on the first floor","The person on the second floor","Both get exactly the same","Nobody, the tank is too high"],"id":"pwc-q6"},{"topic":"p4","type":"mcq","q":"The first-floor tap is stronger because ____.","a":"a taller water column stands above it","opts":["a taller water column stands above it","the first floor is closer to the sky","the second floor has no pipes","wind blows only downstairs"],"id":"pwc-q7"},{"topic":"p5","type":"mcq","q":"Water comes out of a hole like a fountain because ____.","a":"high pressure pushes it through a narrow opening","opts":["high pressure pushes it through a narrow opening","the hole sucks air in only","water has no pressure in pipes","the tank is underground"],"id":"pwc-q8"},{"topic":"p6","type":"mcq","q":"An inflated balloon left open goes flat because air moves ____.","a":"from high pressure inside to low pressure outside","opts":["from high pressure inside to low pressure outside","from outside into the balloon","only upwards","into the rubber itself"],"id":"pwc-q9"},{"topic":"p7","type":"mcq","q":"Boat B has a smaller base than boat A, with the same load. Boat B exerts ____.","a":"more pressure","opts":["more pressure","less pressure","no pressure","the same pressure"],"id":"pwc-q10"},{"topic":"p7","type":"mcq","q":"Pressure under boat B is ____.","a":"600 Pa","opts":["600 Pa","300 Pa","2,100 Pa","3.5 Pa"],"id":"pwc-q11"},{"topic":"p7","type":"mcq","q":"Pressure under boat A is ____.","a":"300 Pa","opts":["300 Pa","600 Pa","7 Pa","20,000 Pa"],"id":"pwc-q12"},{"topic":"p8","type":"mcq","q":"If air and clouds were good conductors, lightning would not occur because ____.","a":"charge could not build up","opts":["charge could not build up","clouds would become heavier","rain would stop forever","the Sun would go out"],"id":"pwc-q13"},{"topic":"p9","type":"mcq","q":"Cyclones form over ____.","a":"warm oceans","opts":["warm oceans","dry deserts","frozen lakes","classroom floors"],"id":"pwc-q14"},{"topic":"p9","type":"mcq","q":"When water vapour condenses in a growing storm, it ____.","a":"releases heat and the air rises further","opts":["releases heat and the air rises further","stops all wind","freezes the ocean","raises the air pressure at once"],"id":"pwc-q15"}],"match":[{"title":"Situation ↔ What happens","left":"Situation","right":"What happens","pairs":[["Tank placed high","Stronger stream at the tap"],["Hole in a water pipe","Water shoots out like a fountain"],["Balloon mouth left open","Air rushes out and it goes flat"],["Smaller base, same force","Higher pressure"],["Warm moist air keeps rising","A cyclone can form"]]}],"sort":[{"title":"Higher pressure or lower pressure?","buckets":["⬆️ Higher pressure","⬇️ Lower pressure"],"items":[["Taller water column",0],["Same force on a smaller area",0],["Tap closer to a roof tank’s base",0],["Shorter water column",1],["Same force on a larger area",1],["Air outside an open balloon",1]]}],"order":[],"flash":[["Pressure","Force divided by area, measured in pascal"],["Elephant’s pressure","20,000 N on 1 m² gives 20,000 Pa"],["Overhead tank","Kept high so the water column presses hard at the tap"],["First floor vs second","The lower tap has more water above it, so a stronger stream"],["Leaking pipe","Pressure on all sides pushes water out of a narrow hole"],["Open balloon","Air leaves from high pressure inside to low pressure outside"],["Boat B","Smaller area, same force, pressure 600 Pa"],["Lightning","Needs charge to build up. Good conductors would stop that build-up"],["Cyclone","A spinning storm born over a warm ocean around very low pressure"]],"summaryAudio":[["pwc-a35"],["pwc-a36"],["pwc-a37"],["pwc-a38"],["pwc-a39"],["pwc-a40"],["pwc-a41"],["pwc-a42"],["pwc-a43"],["pwc-a44"]]},{"id":"hlt","subject":"Biology","title":"Health: Communicable Diseases and Lifestyle","short":"Diseases · vaccines · lifestyle","emoji":"🦠","c1":"#2a9d8f","c2":"#1b4332","summary":["Communicable diseases spread from person to person. Common cold, influenza and chickenpox are caused by viruses.","We prevent infection by staying clean, drinking safe water, covering coughs, resting when ill and getting vaccinated.","Parasites live on or inside another living thing and take nourishment from it. Worms spread through dirty food and water.","Non-communicable diseases such as diabetes, heart disease, cancer and obesity are not caught from another person.","Food energy is measured in calories. Extra energy is stored as fat. High blood pressure and diabetes need care of diet and activity.","Antibiotics treat bacterial infections. Overuse leads to resistance, so they must be taken only as the doctor prescribes.","Vaccines teach the body to fight a germ. BCG, polio drops, MMR, DPT and Hepatitis B are examples.","Pulse polio helped India become polio-free. A vaccine protects the child and the whole community."],"topics":[{"id":"b1","title":"Spread of communicable diseases","blocks":[{"p":"A communicable disease can pass from one person to another.","a":["hlt-a0"]},{"table":{"head":["Disease","Cause","Where it infects","Symptoms","Prevention"],"rows":[["Common cold and influenza","Virus","Respiratory tract","Runny nose, sore throat, cough, fever, body ache","Rest, stay home, avoid crowds"],["Chickenpox","Virus","Respiratory tract and skin","Mild fever, itchy rash and blisters","Keep the ill person apart, vaccination"]]},"a":[["hlt-a1"],["hlt-a2"]]}]},{"id":"b2","title":"How to prevent infectious diseases","blocks":[{"p":"Keep yourself and your surroundings clean.","a":["hlt-a3"]},{"ul":["Bathe regularly, brush your teeth and wash your hands with soap.","Keep the house clean, dry and well aired.","Drink safe water and keep food covered.","Do not spit in the open. Cover your mouth when you cough or sneeze.","A person who is ill should rest and stay apart so others do not catch it.","Vaccination protects you before the disease arrives.","A balanced diet helps the body fight infection."],"a":[["hlt-a4"],["hlt-a5"],["hlt-a6"],["hlt-a7"],["hlt-a8"],["hlt-a9"],["hlt-a10"]]}]},{"id":"b3","title":"Parasites","blocks":[{"p":"A parasite lives on or inside another living thing, called the host, and takes nourishment from it.","a":["hlt-a11"]},{"p":"Many parasites spread through contaminated food and water. Worms are a common example.","a":["hlt-a12"]},{"p":"Wash your hands, cook food well and drink clean water so parasites do not get a chance.","a":["hlt-a13"]}]},{"id":"b4","title":"Non-communicable diseases","blocks":[{"p":"Non-communicable diseases do not spread from person to person by coughs, touch or food.","a":["hlt-a14"]},{"p":"Examples from your notes: diabetes, cancer, heart disease and obesity.","a":["hlt-a15"]},{"p":"They are linked to lifestyle, diet, lack of exercise and, sometimes, to conditions that run in a family.","a":["hlt-a16"]}]},{"id":"b5","title":"Calories, high blood pressure and diabetes","blocks":[{"h":"Calories"},{"p":"The body gets energy from food. That energy is measured in calories.","a":["hlt-a17"]},{"p":"Glucose from food is an important source of energy. Energy the body does not use is stored as fat.","a":["hlt-a18"]},{"h":"High blood pressure"},{"p":"Blood pressure is the force of blood pushing against the walls of the arteries.","a":["hlt-a19"]},{"p":"It is called high when that force stays above the normal level for that person.","a":["hlt-a20"]},{"p":"Too much salt, stress, extra body weight and too little exercise can push it up. It can harm the heart, kidneys and eyes.","a":["hlt-a21"]},{"p":"Eating less salt, staying active and following the doctor’s advice help to control it.","a":["hlt-a22"]},{"h":"Diabetes"},{"p":"In diabetes the body does not make enough insulin, or cannot use insulin well, so glucose stays high in the blood.","a":["hlt-a23"]},{"p":"Signs include thirst, passing urine often, tiredness, weight change and cuts that heal slowly.","a":["hlt-a24"]},{"p":"A balanced diet, physical activity and medicine, if the doctor advises it, help to manage diabetes.","a":["hlt-a25"]}]},{"id":"b6","title":"Obesity and healthy habits","blocks":[{"p":"Obesity means the body has stored more fat than is healthy.","a":["hlt-a26"]},{"p":"It can be influenced by the food we eat, how active we are, and habits in the family.","a":["hlt-a27"]},{"p":"Lifestyle changes can prevent it and can reduce the chance of diabetes and high blood pressure.","a":["hlt-a28"]},{"ul":["Eat a balanced diet with fruit, vegetables and home-cooked food.","Limit salt, sugar, fried food and sugary drinks.","Be physically active every day.","Get enough sleep.","Ask a doctor for advice instead of following random tips."],"a":[["hlt-a29"],["hlt-a30"],["hlt-a31"],["hlt-a32"],["hlt-a33"]]}]},{"id":"b7","title":"Antibiotics","blocks":[{"p":"Antibiotics revolutionised the treatment of bacterial infections and have saved millions of lives.","a":["hlt-a34"]},{"p":"Alexander Fleming discovered penicillin in 1928. It was the first antibiotic.","a":["hlt-a35"]},{"p":"Antibiotics do not cure diseases caused by viruses, such as a common cold.","a":["hlt-a36"]},{"p":"Overuse has led to antibiotic resistance, which makes infections harder to cure.","a":["hlt-a37"]},{"p":"Use an antibiotic only when a doctor prescribes it, and finish the course. That keeps the medicine effective.","a":["hlt-a38"]}]},{"id":"b8","title":"Vaccines, pulse polio and the community","blocks":[{"p":"A vaccine teaches the body to recognise a germ, using a weakened or killed form, or a harmless part of it.","a":["hlt-a39"]},{"p":"The body then responds faster if the real germ arrives later.","a":["hlt-a40"]},{"ul":["BCG protects against tuberculosis.","Oral polio vaccine protects against polio.","MMR protects against measles, mumps and rubella.","DPT protects against diphtheria, whooping cough (pertussis) and tetanus.","Hepatitis B vaccine protects against hepatitis B."],"a":[["hlt-a41"],["hlt-a42"],["hlt-a43"],["hlt-a44"],["hlt-a45"]]},{"p":"In the pulse polio campaign, children across India were given oral polio drops. India was later declared polio-free.","a":["hlt-a46"]},{"p":"Vaccination protects the child and also the community, because the germ finds fewer people it can infect.","a":["hlt-a47"]},{"p":"Community health also means clean surroundings, safe drinking water, covered waste, and not spitting in public.","a":["hlt-a48"]}]}],"quiz":[{"topic":"b1","type":"mcq","q":"Common cold and influenza are caused by a ____.","a":"virus","opts":["virus","lack of sleep only","a broken bone","too much water"],"id":"hlt-q0"},{"topic":"b1","type":"mcq","q":"Chickenpox shows itself mainly as ____.","a":"mild fever with an itchy rash and blisters","opts":["mild fever with an itchy rash and blisters","a broken tooth","high blood pressure","a stomach with no symptoms"],"id":"hlt-q1"},{"topic":"b1","type":"mcq","q":"A disease that can pass from person to person is ____.","a":"communicable","opts":["communicable","non-communicable","a calorie","a vaccine"],"id":"hlt-q2"},{"topic":"b2","type":"mcq","q":"Which habit helps stop infections spreading?","a":"Wash hands with soap and cover a cough","opts":["Wash hands with soap and cover a cough","Spit in the open","Share a sick person’s cup","Leave food uncovered"],"id":"hlt-q3"},{"topic":"b2","type":"mcq","q":"Vaccination helps because it ____.","a":"protects you before the disease arrives","opts":["protects you before the disease arrives","is only a type of food","replaces sleep","cures a broken bone"],"id":"hlt-q4"},{"topic":"b3","type":"mcq","q":"A parasite ____.","a":"lives on a host and takes nourishment from it","opts":["lives on a host and takes nourishment from it","is a kind of vitamin","always lives alone with no host","is the same as a vaccine"],"id":"hlt-q5"},{"topic":"b3","type":"mcq","q":"Worms often spread through ____.","a":"contaminated food and water","opts":["contaminated food and water","reading a book","fresh air only","vaccination"],"id":"hlt-q6"},{"topic":"b4","type":"mcq","q":"Which of these is non-communicable?","a":"Diabetes","opts":["Diabetes","Common cold","Influenza","Chickenpox"],"id":"hlt-q7"},{"topic":"b4","type":"mcq","q":"Non-communicable diseases ____.","a":"do not spread by coughs or touch","opts":["do not spread by coughs or touch","always pass in one sneeze","are caused only by viruses","cannot be influenced by diet"],"id":"hlt-q8"},{"topic":"b5","type":"mcq","q":"Calories measure the ____ in food.","a":"energy","opts":["energy","colour","loudness","speed of light"],"id":"hlt-q9"},{"topic":"b5","type":"mcq","q":"Blood pressure is the force of blood against ____.","a":"artery walls","opts":["artery walls","the teeth","the hair","the blackboard"],"id":"hlt-q10"},{"topic":"b5","type":"mcq","q":"In diabetes, glucose in the blood stays high because of a problem with ____.","a":"insulin","opts":["insulin","the common cold virus","soap","coral"],"id":"hlt-q11"},{"topic":"b6","type":"mcq","q":"Obesity means the body has stored too much ____.","a":"fat","opts":["fat","water only in the eyes","oxygen","calcium in the hair"],"id":"hlt-q12"},{"topic":"b6","type":"mcq","q":"A helpful habit against obesity is to ____.","a":"stay active and eat a balanced diet","opts":["stay active and eat a balanced diet","drink more sugary drinks","skip all sleep","add extra salt to every meal"],"id":"hlt-q13"},{"topic":"b7","type":"mcq","q":"Antibiotics are used against ____.","a":"bacteria","opts":["bacteria","all viruses such as a cold","broken bones","high mountains"],"id":"hlt-q14"},{"topic":"b7","type":"mcq","q":"Antibiotic resistance grows when antibiotics are ____.","a":"overused","opts":["overused","never discovered","used only as the doctor says","replaced by fruit"],"id":"hlt-q15"},{"topic":"b7","type":"mcq","q":"Penicillin was discovered by ____.","a":"Alexander Fleming","opts":["Alexander Fleming","Isaac Newton","Mahatma Gandhi","C. V. Raman"],"id":"hlt-q16"},{"topic":"b8","type":"mcq","q":"BCG vaccine protects against ____.","a":"tuberculosis","opts":["tuberculosis","polio only","chickenpox only","diabetes"],"id":"hlt-q17"},{"topic":"b8","type":"mcq","q":"MMR protects against measles, mumps and ____.","a":"rubella","opts":["rubella","typhoid only","scurvy","obesity"],"id":"hlt-q18"},{"topic":"b8","type":"mcq","q":"DPT includes protection against tetanus, diphtheria and ____.","a":"whooping cough","opts":["whooping cough","the common cold only","tooth decay","heatstroke"],"id":"hlt-q19"},{"topic":"b8","type":"mcq","q":"Pulse polio gave children ____.","a":"oral polio drops","opts":["oral polio drops","an antibiotic for a cold","extra salt","a blood-pressure tablet"],"id":"hlt-q20"},{"topic":"b8","type":"mcq","q":"Vaccinating many people also protects the community because ____.","a":"the germ finds fewer people to infect","opts":["the germ finds fewer people to infect","hospitals close","calories disappear","rain stops"],"id":"hlt-q21"}],"match":[{"title":"Vaccine ↔ Disease","left":"Vaccine","right":"Protects against","pairs":[["BCG","Tuberculosis"],["Oral polio drops","Polio"],["MMR","Measles, mumps and rubella"],["DPT","Diphtheria, whooping cough, tetanus"],["Hepatitis B vaccine","Hepatitis B"]]}],"sort":[{"title":"Communicable or not?","buckets":["🤧 Communicable","💛 Not caught from others"],"items":[["Common cold",0],["Influenza",0],["Chickenpox",0],["Worm infection from dirty water",0],["Diabetes",1],["High blood pressure",1],["Obesity",1],["Many cancers",1]]}],"order":[],"flash":[["Communicable disease","A disease that can pass from one person to another"],["Chickenpox","A viral illness with fever and an itchy blistering rash"],["Parasite","Lives on a host and takes nourishment from it"],["Calorie","A measure of the energy in food"],["High blood pressure","Blood pushing too hard, for too long, on artery walls"],["Diabetes","Glucose stays high in the blood because of an insulin problem"],["Antibiotic","A medicine against bacteria. It does not cure a viral cold"],["Penicillin","The first antibiotic, discovered by Alexander Fleming in 1928"],["Vaccine","Teaches the body to recognise and fight a germ"],["Pulse polio","A campaign of oral polio drops that helped India become polio-free"]],"summaryAudio":[["hlt-a49"],["hlt-a50"],["hlt-a51"],["hlt-a52"],["hlt-a53"],["hlt-a54"],["hlt-a55"],["hlt-a56"]]}],"voice":[["pwc-a0","An elephant stands on four feet. The area of one foot is 0.25 m² and its weight is 20,000 N. Find the pressure on the ground."],["pwc-a1","Force = 20,000 N."],["pwc-a2","Area of one foot = 0.25 m². Area of four feet = 4 × 0.25 = 1 m²."],["pwc-a3","Pressure = Force ÷ Area = 20,000 ÷ 1 = 20,000 Pa."],["pwc-a4","20,000 Pa means 20,000 N/m². The elephant exerts a pressure of 20,000 pascal."],["pwc-a5","Moving air exerts pressure, which is a force spread over a surface."],["pwc-a6","That force lifts fallen leaves into the air."],["pwc-a7","The same push bends trees when the wind is strong."],["pwc-a8","Pressure in a liquid increases as the height of the liquid column increases."],["pwc-a9","A tank placed high on a roof makes a tall column of water above the taps."],["pwc-a10","The higher pressure pushes water out of the tap in a good, strong stream."],["pwc-a11","Imagine a three-storey building with the overhead tank on the top floor. You live on the second floor and your friend lives on the first floor."],["pwc-a12","The strength of the stream depends on the height of the water column above the tap."],["pwc-a13","Your friend’s tap on the first floor has a taller column of water above it than your tap on the second floor."],["pwc-a14","So your friend receives the more powerful stream of water."],["pwc-a15","The pipes are connected to a tank kept at a height, so the water column inside is tall and the pressure is high."],["pwc-a16","Water exerts pressure on all sides of the pipe, including the bottom and any hole."],["pwc-a17","When that pressure finds a narrow opening, such as a hole or a leak, the water comes out like a fountain."],["pwc-a18","Air inside the balloon presses outward on the rubber walls, so the balloon stays stretched."],["pwc-a19","The stretched rubber presses back on the air with an equal and opposite force."],["pwc-a20","If the mouth is left open, air escapes from the high pressure inside to the low pressure outside."],["pwc-a21","The balloon goes flat."],["pwc-a22","Boats A and B each carry 3 persons. Each person weighs 700 N. Boat A has a base area of 7 m². Boat B has a base area of 3.5 m²."],["pwc-a23","Force on each boat = 700 × 3 = 2,100 N."],["pwc-a24","Pressure under boat A = 2,100 ÷ 7 = 300 Pa."],["pwc-a25","Pressure under boat B = 2,100 ÷ 3.5 = 600 Pa."],["pwc-a26","Boat B exerts more pressure because the same force acts on a smaller area."],["pwc-a27","Lightning needs electric charge to build up in a cloud."],["pwc-a28","If the air and the clouds were good conductors, the charges could not accumulate."],["pwc-a29","There would be no charge build-up, so lightning would not occur."],["pwc-a30","Cyclones are large storms that form over warm oceans."],["pwc-a31","Warm ocean water heats the air above it. The air becomes warm and moist and rises."],["pwc-a32","High up, the water vapour condenses into raindrops. Condensation releases heat back into the air."],["pwc-a33","The extra heat makes the air rise further, and the pressure near the surface becomes very low."],["pwc-a34","Air from around the low-pressure centre rushes in, begins to spin, and the storm becomes a cyclone."],["pwc-a35","Pressure is force divided by area. Its unit is the pascal, which is one newton per square metre."],["pwc-a36","An elephant of weight 20,000 N standing on four feet of 0.25 m² each exerts a pressure of 20,000 Pa."],["pwc-a37","Wind exerts a force. That force can lift fallen leaves and bend trees."],["pwc-a38","Overhead tanks are kept high so the tall water column gives a strong stream at the tap."],["pwc-a39","A tap on a lower floor gets a stronger stream, because more water stands above it."],["pwc-a40","Water shoots out of a hole in a pipe because pressure acts on all sides and the hole is narrow."],["pwc-a41","An open balloon deflates because air moves from high pressure inside to low pressure outside."],["pwc-a42","The same force on a smaller area gives a higher pressure, so boat B presses harder than boat A."],["pwc-a43","Lightning needs charge to build up. If air and clouds conducted electricity well, lightning would not occur."],["pwc-a44","A cyclone grows over a warm ocean when moist air rises, condensation releases heat, and winds spin into the low pressure."],["hlt-a0","A communicable disease can pass from one person to another."],["hlt-a1","Common cold and influenza, Virus, Respiratory tract, Runny nose, sore throat, cough, fever, body ache, Rest, stay home, avoid crowds"],["hlt-a2","Chickenpox, Virus, Respiratory tract and skin, Mild fever, itchy rash and blisters, Keep the ill person apart, vaccination"],["hlt-a3","Keep yourself and your surroundings clean."],["hlt-a4","Bathe regularly, brush your teeth and wash your hands with soap."],["hlt-a5","Keep the house clean, dry and well aired."],["hlt-a6","Drink safe water and keep food covered."],["hlt-a7","Do not spit in the open. Cover your mouth when you cough or sneeze."],["hlt-a8","A person who is ill should rest and stay apart so others do not catch it."],["hlt-a9","Vaccination protects you before the disease arrives."],["hlt-a10","A balanced diet helps the body fight infection."],["hlt-a11","A parasite lives on or inside another living thing, called the host, and takes nourishment from it."],["hlt-a12","Many parasites spread through contaminated food and water. Worms are a common example."],["hlt-a13","Wash your hands, cook food well and drink clean water so parasites do not get a chance."],["hlt-a14","Non-communicable diseases do not spread from person to person by coughs, touch or food."],["hlt-a15","Examples from your notes: diabetes, cancer, heart disease and obesity."],["hlt-a16","They are linked to lifestyle, diet, lack of exercise and, sometimes, to conditions that run in a family."],["hlt-a17","The body gets energy from food. That energy is measured in calories."],["hlt-a18","Glucose from food is an important source of energy. Energy the body does not use is stored as fat."],["hlt-a19","Blood pressure is the force of blood pushing against the walls of the arteries."],["hlt-a20","It is called high when that force stays above the normal level for that person."],["hlt-a21","Too much salt, stress, extra body weight and too little exercise can push it up. It can harm the heart, kidneys and eyes."],["hlt-a22","Eating less salt, staying active and following the doctor’s advice help to control it."],["hlt-a23","In diabetes the body does not make enough insulin, or cannot use insulin well, so glucose stays high in the blood."],["hlt-a24","Signs include thirst, passing urine often, tiredness, weight change and cuts that heal slowly."],["hlt-a25","A balanced diet, physical activity and medicine, if the doctor advises it, help to manage diabetes."],["hlt-a26","Obesity means the body has stored more fat than is healthy."],["hlt-a27","It can be influenced by the food we eat, how active we are, and habits in the family."],["hlt-a28","Lifestyle changes can prevent it and can reduce the chance of diabetes and high blood pressure."],["hlt-a29","Eat a balanced diet with fruit, vegetables and home-cooked food."],["hlt-a30","Limit salt, sugar, fried food and sugary drinks."],["hlt-a31","Be physically active every day."],["hlt-a32","Get enough sleep."],["hlt-a33","Ask a doctor for advice instead of following random tips."],["hlt-a34","Antibiotics revolutionised the treatment of bacterial infections and have saved millions of lives."],["hlt-a35","Alexander Fleming discovered penicillin in 1928. It was the first antibiotic."],["hlt-a36","Antibiotics do not cure diseases caused by viruses, such as a common cold."],["hlt-a37","Overuse has led to antibiotic resistance, which makes infections harder to cure."],["hlt-a38","Use an antibiotic only when a doctor prescribes it, and finish the course. That keeps the medicine effective."],["hlt-a39","A vaccine teaches the body to recognise a germ, using a weakened or killed form, or a harmless part of it."],["hlt-a40","The body then responds faster if the real germ arrives later."],["hlt-a41","BCG protects against tuberculosis."],["hlt-a42","Oral polio vaccine protects against polio."],["hlt-a43","MMR protects against measles, mumps and rubella."],["hlt-a44","DPT protects against diphtheria, whooping cough (pertussis) and tetanus."],["hlt-a45","Hepatitis B vaccine protects against hepatitis B."],["hlt-a46","In the pulse polio campaign, children across India were given oral polio drops. India was later declared polio-free."],["hlt-a47","Vaccination protects the child and also the community, because the germ finds fewer people it can infect."],["hlt-a48","Community health also means clean surroundings, safe drinking water, covered waste, and not spitting in public."],["hlt-a49","Communicable diseases spread from person to person. Common cold, influenza and chickenpox are caused by viruses."],["hlt-a50","We prevent infection by staying clean, drinking safe water, covering coughs, resting when ill and getting vaccinated."],["hlt-a51","Parasites live on or inside another living thing and take nourishment from it. Worms spread through dirty food and water."],["hlt-a52","Non-communicable diseases such as diabetes, heart disease, cancer and obesity are not caught from another person."],["hlt-a53","Food energy is measured in calories. Extra energy is stored as fat. High blood pressure and diabetes need care of diet and activity."],["hlt-a54","Antibiotics treat bacterial infections. Overuse leads to resistance, so they must be taken only as the doctor prescribes."],["hlt-a55","Vaccines teach the body to fight a germ. BCG, polio drops, MMR, DPT and Hepatitis B are examples."],["hlt-a56","Pulse polio helped India become polio-free. A vaccine protects the child and the whole community."]]}</script>
 <script>
-const map={malayalam:['📗','Malayalam'],science:['🔬','Science'],computer:['💻','Computer'],gk:['🧠','GK']};
-const key=location.pathname.replace(/\/+$/,'').split('/').pop();
-if(map[key]){document.getElementById('em').textContent=map[key][0];document.getElementById('t').textContent=map[key][1]+' — Coming soon';document.title=map[key][1]+' · Coming soon'}
+const D = JSON.parse(document.getElementById('data').textContent);
+const TXT = Object.fromEntries(D.voice);
+const CH = Object.fromEntries(D.chapters.map(c => [c.id, c]));
+const app = document.getElementById('app');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const load = k => new Set(JSON.parse(localStorage.getItem(k) || '[]'));
+const readSet = load('sci8-read'), okSet = load('sci8-ok');
+const save = () => { localStorage.setItem('sci8-read', JSON.stringify([...readSet])); localStorage.setItem('sci8-ok', JSON.stringify([...okSet])); };
+let slow = localStorage.getItem('sci8-slow') === '1';
+
+const qsOf = (c, tid) => c.quiz.filter(q => q.topic === tid);
+const mastered = (c, tid) => qsOf(c, tid).every(q => okSet.has(q.id));
+function starsOf(c) {
+  let got = 0;
+  c.topics.forEach(t => { if (readSet.has(t.id)) got++; if (mastered(c, t.id)) got++; });
+  return {got, total: c.topics.length * 2};
+}
+function allStars() {
+  return D.chapters.reduce((s, c) => { const x = starsOf(c); return {got: s.got + x.got, total: s.total + x.total}; }, {got: 0, total: 0});
+}
+
+const sp = new Audio();
+let ptok = 0, cur = null;
+const rate = () => slow ? 0.75 : 1;
+function clearOn() {
+  document.querySelectorAll('.ln.on').forEach(e => e.classList.remove('on'));
+  document.querySelectorAll('.mini').forEach(b => b.textContent = '▶');
+}
+function stopAll() { ptok++; sp.pause(); clearOn(); cur = null; }
+function playClip(id, mine, text) {
+  return new Promise(res => {
+    if (mine !== ptok) return res(false);
+    let remote = false;
+    sp.onended = () => res(mine === ptok);
+    sp.onerror = () => {
+      if (mine !== ptok) return res(false);
+      const t = text || TXT[id];
+      if (!remote && t) {
+        remote = true;
+        sp.src = 'https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=en-IN&q=' + encodeURIComponent(t.slice(0, 190));
+        sp.defaultPlaybackRate = sp.playbackRate = rate();
+        sp.play().catch(() => {});
+      } else res(false);
+    };
+    sp.src = id ? 'voice/' + id + '.mp3' : 'about:blank';
+    sp.defaultPlaybackRate = sp.playbackRate = rate();
+    sp.play().catch(e => { if (e.name === 'NotAllowedError') res(false); });
+  });
+}
+async function playLines(els, after) {
+  stopAll();
+  const mine = ptok;
+  for (const el of els) {
+    if (mine !== ptok) return;
+    clearOn();
+    el.classList.add('on');
+    const b = el.querySelector('.mini');
+    if (b) b.textContent = '⏸';
+    cur = {el, paused: false};
+    el.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+    for (const id of el.dataset.a.split(',')) {
+      if (!(await playClip(id, mine))) return;
+    }
+  }
+  if (mine === ptok) { stopAll(); if (after) after(); }
+}
+function sayText(t) { stopAll(); playClip(null, ptok, t.replace(/_+/g, ' blank ')); }
+document.addEventListener('click', e => {
+  const m = e.target.closest('.mini');
+  if (!m) return;
+  const el = m.closest('.ln');
+  if (cur && cur.el === el) {
+    if (cur.paused) { cur.paused = false; sp.play().catch(() => {}); m.textContent = '⏸'; }
+    else { cur.paused = true; sp.pause(); m.textContent = '▶'; }
+  } else playLines([el]);
+});
+function toggleSlow() {
+  slow = !slow;
+  localStorage.setItem('sci8-slow', slow ? '1' : '0');
+  sp.defaultPlaybackRate = sp.playbackRate = rate();
+  document.querySelectorAll('.slowbtn').forEach(b => b.classList.toggle('on', slow));
+}
+const slowBtn = () => `<button class="slowbtn ${slow ? 'on' : ''}" onclick="toggleSlow()">🐢 Slow</button>`;
+
+let view = {name: 'home'};
+function go(v) { stopAll(); view = v; render(); window.scrollTo(0, 0); }
+function render() {
+  const c = view.ch ? CH[view.ch] : null;
+  document.body.style.setProperty('--c1', c ? c.c1 : '#4361ee');
+  document.body.style.setProperty('--c2', c ? c.c2 : '#b5179e');
+  ({home, ch: chapter, rev: revision, track: tracker})[view.name]();
+}
+
+function trackerBox(x, label) {
+  const pct = x.total ? Math.round(x.got / x.total * 100) : 0;
+  return `<div class="tracker"><div class="row"><span>⭐ ${label}</span><span>${x.got} / ${x.total} stars · ${pct}%</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <small>Each topic has 2 stars: 📖 read it (listen or tap "Mark as read") and 🎯 answer all its questions correctly.</small></div>`;
+}
+
+function home() {
+  app.innerHTML = `
+    <div class="hero"><div class="big">🔬</div><h1>Class 8 Science</h1><p>Pressure &amp; cyclones · Health · Learn, listen and play!</p></div>
+    ${trackerBox(allStars(), 'My Life Stars')}
+    <div class="cgrid">${D.chapters.map(c => {
+      const x = starsOf(c), pct = Math.round(x.got / x.total * 100);
+      return `<button class="ccard" style="--c1:${c.c1};--c2:${c.c2}" onclick="go({name:'ch',ch:'${c.id}',tab:'sum'})">
+        <span class="em">${c.emoji}</span><div class="sub">${c.subject}</div><h2>${esc(c.title)}</h2>
+        <div class="bar"><i style="width:${pct}%"></i></div><div class="st">⭐ ${x.got} / ${x.total} stars · ${c.topics.length} topics · ${c.quiz.length} questions</div></button>`;
+    }).join('')}</div>
+    <div class="quick">
+      <button class="qbtn" style="--b:linear-gradient(135deg,#06d6a0,#118ab2)" onclick="go({name:'rev'})">⚡ Quick Revision<small>All summaries in one place</small></button>
+      <button class="qbtn" style="--b:linear-gradient(135deg,#ffb703,#fb8500)" onclick="startQuiz({all:true})">🏆 Mixed Practice<small>All chapters, until all correct</small></button>
+      <button class="qbtn" style="--b:linear-gradient(135deg,#ef476f,#b5179e)" onclick="startChallenge({all:true})">❤️ Challenge<small>All chapters · 3 lives</small></button>
+      <button class="qbtn" style="--b:linear-gradient(135deg,#7b2cbf,#4361ee)" onclick="go({name:'track'})">⭐ Star Tracker<small>Check what is covered</small></button>
+    </div>
+    <p class="foot"><a href="../">🏠 All subjects</a></p>`;
+}
+
+function topBar(c, small, title, right) {
+  return `<div class="top">
+    <button class="home" title="Home" onclick="location.href='../index.html'">🏠</button>
+    <button class="home" title="Back" onclick="if(history.length>1)history.back();else go({name:'home'})">←</button>
+    <div class="tt"><small>${small}</small><b>${esc(title)}</b></div>${right || ''}${slowBtn()}</div>`;
+}
+
+function blockHtml(b) {
+  const bold = t => { const i = t.indexOf(': '); return i > 0 && i < 45 ? `<b class="k">${esc(t.slice(0, i))}:</b> ${esc(t.slice(i + 2))}` : esc(t); };
+  if (b.h) return `<h4>${esc(b.h)}</h4>`;
+  if (b.p) return `<div class="ln" data-a="${b.a.join(',')}"><button class="mini">▶</button><span class="tx">${bold(b.p)}</span></div>`;
+  if (b.ul) return b.ul.map((t, i) => `<div class="ln li" data-a="${b.a[i].join(',')}"><button class="mini">▶</button><span class="tx">${bold(t)}</span></div>`).join('');
+  if (b.table) return `<table><tr>${b.table.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr>${b.table.rows.map((r, i) =>
+    `<tr class="ln" data-a="${b.a[i].join(',')}">${r.map((x, j) => `<td>${j === 0 ? '<button class="mini">▶</button>' : ''}${j === 0 ? `<b class="k">${esc(x)}</b>` : esc(x)}</td>`).join('')}</tr>`).join('')}</table>`;
+  return '';
+}
+
+function chapter() {
+  const c = CH[view.ch], x = starsOf(c);
+  const tabs = [['sum', '⚡ Summary'], ['notes', '📚 Notes'], ['games', '🎮 Games'], ['stars', '⭐ Stars']];
+  let body = '';
+  if (view.tab === 'sum') {
+    body = `<div class="tools"><button class="pill" onclick="playAll()">▶ Play all</button>
+      <button class="pill alt" onclick="startQuiz({ch:'${c.id}'})">🎯 Test me on this chapter</button></div>
+      <div id="sumlist">${c.summary.map((s, k) => `<div class="scard ln" data-a="${c.summaryAudio[k].join(',')}"><span class="num">${k + 1}</span><span class="tx">${esc(s)}</span><button class="mini">▶</button></div>`).join('')}</div>`;
+  } else if (view.tab === 'notes') {
+    body = `<p style="color:#5b5f86;margin:0 2px 12px">All of your notes, topic by topic. Tap ▶ to hear a line, tap again (⏸) to pause. "▶ Listen" reads the whole topic and gives you the 📖 star.</p>` +
+      c.topics.map(t => {
+        const r = readSet.has(t.id), m = mastered(c, t.id), n = qsOf(c, t.id), nok = n.filter(q => okSet.has(q.id)).length;
+        return `<div class="topic ${r && m ? 'done' : ''}" id="t-${t.id}">
+          <div class="th"><h3>${esc(t.title)}</h3><div class="tstars"><span>📖${r ? '⭐' : '☆'}</span><span>🎯${m ? '⭐' : '☆'}</span></div></div>
+          ${t.blocks.map(blockHtml).join('')}
+          <div class="tbtns"><button onclick="listenTopic('${t.id}')">▶ Listen</button>
+            <button class="${r ? 'read' : ''}" onclick="toggleRead('${t.id}')">${r ? '✅ Read' : '✓ Mark as read'}</button>
+            <button onclick="startQuiz({ch:'${c.id}',topic:'${t.id}'})">🎯 Quiz me (${nok}/${n.length})</button></div></div>`;
+      }).join('');
+  } else if (view.tab === 'games') {
+    const tile = (b, i, title, sub, fn) => `<button class="gt" style="--b:${b}" onclick="${fn}"><span class="i">${i}</span><b>${esc(title)}</b><small>${esc(sub)}</small></button>`;
+    body = `<div class="gtiles">
+        ${tile('linear-gradient(135deg,#4361ee,#7b2cbf)', '🎯', 'Practice Quiz', `All ${c.quiz.length} questions. Wrong ones come back.`, `startQuiz({ch:'${c.id}'})`)}
+        ${tile('linear-gradient(135deg,#ef476f,#b5179e)', '❤️', 'Challenge', '3 lives. How far can you go?', `startChallenge({ch:'${c.id}'})`)}
+        ${tile('linear-gradient(135deg,#ffb703,#fb8500)', '🃏', 'Flashcards', `${c.flash.length} cards to flip`, `startFlash('${c.id}')`)}
+      </div>
+      <div class="ghead">🔗 Match the following</div>
+      <div class="gtiles">${c.match.map((m, i) => tile('linear-gradient(135deg,#118ab2,#06d6a0)', '🔗', m.title, `${m.pairs.length} pairs`, `startMatch('${c.id}',${i})`)).join('')}</div>
+      <div class="ghead">🧺 Sort it into groups</div>
+      <div class="gtiles">${c.sort.map((s, i) => tile('linear-gradient(135deg,#2a9d8f,#80b918)', '🧺', s.title, `${s.items.length} items`, `startSort('${c.id}',${i})`)).join('')}</div>
+      ${c.order.length ? `<div class="ghead">🔢 Put in order</div><div class="gtiles">${c.order.map((o, i) => tile('linear-gradient(135deg,#d62828,#f77f00)', '🔢', o.title, `${o.items.length} steps`, `startOrder('${c.id}',${i})`)).join('')}</div>` : ''}`;
+  } else {
+    body = trackerBox(x, c.subject + ' stars') + checklist(c);
+  }
+  app.innerHTML = topBar(c, c.subject, c.title, `<span class="chip">⭐ ${x.got}/${x.total}</span>`) +
+    `<div class="tabs">${tabs.map(([k, l]) => `<button class="tab ${view.tab === k ? 'on' : ''}" onclick="go({name:'ch',ch:'${c.id}',tab:'${k}'})">${l}</button>`).join('')}</div>${body}`;
+}
+
+function checklist(c) {
+  return c.topics.map(t => {
+    const r = readSet.has(t.id), n = qsOf(c, t.id), nok = n.filter(q => okSet.has(q.id)).length, m = nok === n.length;
+    return `<div class="check"><span class="s">${r && m ? '🌟' : r || m ? '⭐' : '☆'}</span>
+      <div class="ct">${esc(t.title)}<small>📖 ${r ? 'Read ✓' : 'Not read yet'} · 🎯 ${nok}/${n.length} correct</small></div>
+      <button onclick="goTopic('${c.id}','${t.id}')">📖 Read</button><button onclick="startQuiz({ch:'${c.id}',topic:'${t.id}'})">🎯 Quiz</button></div>`;
+  }).join('');
+}
+function goTopic(cid, tid) {
+  go({name: 'ch', ch: cid, tab: 'notes'});
+  setTimeout(() => { const el = document.getElementById('t-' + tid); if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'}); }, 50);
+}
+function tracker() {
+  app.innerHTML = topBar(null, 'Check your coverage', 'Star Tracker') + trackerBox(allStars(), 'All chapters') +
+    D.chapters.map(c => { const x = starsOf(c); return `<div class="ghead" style="font-size:18px">${c.emoji} ${c.subject}: ${esc(c.title)} · ⭐ ${x.got}/${x.total}</div>${checklist(c)}`; }).join('');
+}
+function revision() {
+  app.innerHTML = topBar(null, 'Quick review', '⚡ Quick Revision') +
+    `<div class="tools"><button class="pill" onclick="playAll()">▶ Play all</button></div><div id="sumlist">` +
+    D.chapters.map(c => `<div class="ghead" style="font-size:18px">${c.emoji} ${c.subject}: ${esc(c.title)}</div>` +
+      c.summary.map((s, k) => `<div class="scard ln" style="--c1:${c.c1}" data-a="${c.summaryAudio[k].join(',')}"><span class="num" style="background:${c.c1}">${k + 1}</span><span class="tx">${esc(s)}</span><button class="mini">▶</button></div>`).join('')).join('') + `</div>`;
+}
+function playAll() { playLines([...document.querySelectorAll('#sumlist .ln')]); }
+function listenTopic(tid) {
+  const card = document.getElementById('t-' + tid);
+  playLines([...card.querySelectorAll('.ln')], () => { if (!readSet.has(tid)) { readSet.add(tid); save(); rerender(); confetti(); } });
+}
+function toggleRead(tid) {
+  if (readSet.has(tid)) readSet.delete(tid); else { readSet.add(tid); confetti(); ding(); }
+  save(); rerender();
+}
+function rerender() { const y = window.scrollY; render(); window.scrollTo(0, y); }
+
+let actx = null;
+function tone(fs, d, type, v) {
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const t0 = actx.currentTime;
+    fs.forEach((f, k) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t0 + k * d);
+      g.gain.exponentialRampToValueAtTime(v, t0 + k * d + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + (k + 1) * d);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t0 + k * d); o.stop(t0 + (k + 1) * d + 0.05);
+    });
+  } catch (e) {}
+}
+const ding = () => tone([660, 880, 1175], 0.1, 'sine', 0.3);
+const buzz = () => tone([220, 165], 0.16, 'triangle', 0.3);
+function confetti() {
+  const em = ['⭐', '🎉', '✨', '🌟', '🎈', '💜'];
+  for (let i = 0; i < 20; i++) {
+    const s = document.createElement('span');
+    s.className = 'conf'; s.textContent = em[i % em.length];
+    s.style.left = Math.random() * 100 + 'vw'; s.style.animationDelay = Math.random() * 0.4 + 's';
+    document.body.appendChild(s); setTimeout(() => s.remove(), 2200);
+  }
+}
+
+const ov = document.getElementById('ov'), ovb = () => document.getElementById('ovb');
+let G = null;
+function openOv(title, c) {
+  stopAll();
+  ov.style.setProperty('--c1', c ? c.c1 : '#4361ee');
+  ov.style.setProperty('--c2', c ? c.c2 : '#b5179e');
+  document.getElementById('ovt').textContent = title;
+  document.getElementById('ovs').textContent = '';
+  ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeOv() { stopAll(); ov.classList.remove('show'); document.body.style.overflow = ''; G = null; rerender(); }
+const setScore = t => document.getElementById('ovs').innerHTML = t;
+
+function pool(o) {
+  if (o.all) return D.chapters.flatMap(c => c.quiz.map(q => ({...q, c})));
+  const c = CH[o.ch];
+  return c.quiz.filter(q => !o.topic || q.topic === o.topic).map(q => ({...q, c}));
+}
+function quizTitle(o, word) {
+  if (o.all) return word + ': All chapters';
+  const c = CH[o.ch];
+  if (o.topic) return '🎯 ' + c.topics.find(t => t.id === o.topic).title;
+  return word + ': ' + c.subject;
+}
+function startQuiz(o) {
+  const list = pool(o);
+  G = {mode: 'practice', o, queue: shuffle(list), total: list.length, learned: new Set(), first: 0, missed: new Map()};
+  openOv(quizTitle(o, '🎯 Practice'), o.ch ? CH[o.ch] : null);
+  showQ();
+}
+function startChallenge(o) {
+  const list = pool(o);
+  G = {mode: 'challenge', o, queue: shuffle(list), total: list.length, lives: 3, score: 0, streak: 0, bestStreak: 0, missed: new Map()};
+  openOv(quizTitle(o, '❤️ Challenge'), o.ch ? CH[o.ch] : null);
+  showQ();
+}
+const TYPE = {mcq: ['Choose the answer', '#4361ee'], tf: ['True or False', '#06a77d'], fill: ['Fill in the blank', '#7b2cbf']};
+function showQ() {
+  if (!G.queue.length || (G.mode === 'challenge' && G.lives <= 0)) return quizEnd();
+  const q = G.queue[0];
+  G.cur = q; G.opts = q.type === 'tf' ? q.opts : shuffle(q.opts); G.answered = false;
+  const done = G.mode === 'practice' ? G.learned.size : G.total - G.queue.length;
+  setScore(G.mode === 'practice' ? `⭐ ${G.learned.size}/${G.total}` : `<span class="lives">${'❤️'.repeat(G.lives)}${'🤍'.repeat(3 - G.lives)}</span> · ${G.score}`);
+  const qhtml = esc(q.q).replace(/_{3,}/g, '<span class="blank">&nbsp;</span>');
+  ovb().innerHTML = `
+    <div class="qprog"><div class="bar"><i style="width:${done / G.total * 100}%"></i></div><span>${G.mode === 'practice' ? `${G.learned.size}/${G.total} learned` : `Q ${done + 1}/${G.total} · 🔥 ${G.streak}`}</span></div>
+    <div class="qc">
+      <span class="badge" style="--bb:${TYPE[q.type][1]}">${TYPE[q.type][0]}</span> <span class="badge" style="--bb:${q.c.c1}">${q.c.emoji} ${q.c.subject}</span>
+      <div class="qq"><span>${qhtml}</span><button class="say" onclick="sayText(G.cur.q)">🔊</button></div>
+      <div class="opts">${G.opts.map((o, k) => `<button class="opt" onclick="answer(this,${k})">${esc(o)}</button>`).join('')}</div>
+      <div id="after"></div>
+    </div>`;
+  ovb().scrollTop = 0;
+}
+function answer(btn, k) {
+  if (G.answered) return;
+  G.answered = true;
+  const q = G.queue.shift(), btns = [...document.querySelectorAll('.opt')];
+  btns.forEach(b => b.disabled = true);
+  const ok = G.opts[k] === q.a;
+  let note;
+  if (ok) {
+    btn.classList.add('ok');
+    okSet.add(q.id); save();
+    ding(); confetti();
+    if (G.mode === 'practice') { G.learned.add(q.id); if (!G.missed.has(q.id)) G.first++; }
+    else { G.score++; G.streak++; G.bestStreak = Math.max(G.bestStreak, G.streak); }
+    note = `<div class="note good">${['Well done! 🎉', 'Super! 🌟', 'Correct! 💯', 'Brilliant! ✨'][Math.floor(Math.random() * 4)]}</div>`;
+  } else {
+    btn.classList.add('bad');
+    btns.forEach((b, j) => { if (G.opts[j] === q.a) b.classList.add('ok'); });
+    G.missed.set(q.id, {q: q.q, a: q.a});
+    buzz();
+    if (G.mode === 'practice') {
+      G.queue.splice(Math.min(G.queue.length, 3 + Math.floor(Math.random() * 3)), 0, q);
+      note = `<div class="note bad">The right answer is in green. This question will come back soon 🔁</div>`;
+    } else {
+      G.lives--; G.streak = 0;
+      note = `<div class="note bad">Oops! You lost a life 💔 The right answer is in green.</div>`;
+    }
+  }
+  setScore(G.mode === 'practice' ? `⭐ ${G.learned.size}/${G.total}` : `<span class="lives">${'❤️'.repeat(Math.max(0, G.lives))}${'🤍'.repeat(3 - Math.max(0, G.lives))}</span> · ${G.score}`);
+  document.getElementById('after').innerHTML = note + `<button class="nx" onclick="showQ()">Next ➜</button>`;
+}
+function quizEnd() {
+  const review = [...G.missed.values()];
+  let big, msg, line, stars;
+  if (G.mode === 'practice') {
+    const s = G.first, n = G.total;
+    stars = Math.max(1, Math.round(s / n * 5));
+    big = s === n ? '🏆' : s >= n * 0.7 ? '🥳' : '💪';
+    msg = s === n ? 'Perfect! All correct the first time!' : 'Great! Now you know all of them!';
+    line = `${s} of ${n} correct on the first try`;
+  } else {
+    const key = 'sci8-best-' + (G.o.all ? 'all' : G.o.ch);
+    const best = Math.max(+(localStorage.getItem(key) || 0), G.score);
+    localStorage.setItem(key, best);
+    stars = Math.max(1, Math.round(G.score / G.total * 5));
+    big = G.lives > 0 ? '🏆' : '💥';
+    msg = G.lives > 0 ? 'You finished with lives left!' : 'Game over! Try to beat your score.';
+    line = `Score: ${G.score} · Best streak: 🔥 ${G.bestStreak} · Best score: ${best}`;
+  }
+  ovb().innerHTML = `<div class="end"><div class="bigem">${big}</div><h2>${msg}</h2><p style="font-size:17px">${line}</p>
+    <div class="stars">${'⭐'.repeat(stars)}${'☆'.repeat(5 - stars)}</div>
+    ${review.length ? `<div class="review"><h3>Read these once more:</h3>${review.map(r => `<div>${esc(r.q)}<br><b>✔ ${esc(r.a)}</b></div>`).join('')}</div>` : ''}
+    <div class="row2"><button class="nx" onclick="${G.mode === 'practice' ? 'startQuiz' : 'startChallenge'}(G.o)">🔁 Play again</button><button class="nx alt" onclick="closeOv()">✕ Close</button></div></div>`;
+  confetti(); ding();
+}
+
+function startFlash(cid) {
+  const c = CH[cid];
+  G = {mode: 'flash', c, deck: shuffle(c.flash), i: 0};
+  openOv('🃏 Flashcards: ' + c.subject, c);
+  showFlash();
+}
+function showFlash() {
+  const [f, b] = G.deck[G.i];
+  setScore(`${G.i + 1} / ${G.deck.length}`);
+  ovb().innerHTML = `<p class="mh">Think of the answer, then tap the card to flip it 👆</p>
+    <div class="flash" id="fc" onclick="this.classList.toggle('fl')"><div class="in">
+      <div class="f fr">${esc(f)}<small>tap to flip</small></div><div class="f bk">${esc(b)}</div></div></div>
+    <div class="row2"><button class="nx alt" onclick="G.i=(G.i-1+G.deck.length)%G.deck.length;showFlash()">← Back</button>
+      <button class="nx alt" onclick="sayText(G.deck[G.i][0]+'. '+G.deck[G.i][1])">🔊</button>
+      <button class="nx" onclick="G.i=(G.i+1)%G.deck.length;showFlash()">Next →</button></div>
+    <div class="row2"><button class="nx alt" onclick="G.deck=shuffle(G.deck);G.i=0;showFlash()">🔀 Shuffle</button></div>`;
+}
+
+function startMatch(cid, mi) {
+  const c = CH[cid], m = c.match[mi];
+  const pairs = shuffle(m.pairs.map((p, i) => ({l: p[0], r: p[1], i})));
+  const nr = Math.ceil(pairs.length / 5), size = Math.ceil(pairs.length / nr), rounds = [];
+  for (let k = 0; k < pairs.length; k += size) rounds.push(pairs.slice(k, k + size));
+  G = {mode: 'match', c, cid, mi, m, rounds, r: 0, mistakes: 0};
+  openOv('🔗 ' + m.title, c);
+  showMatch();
+}
+function showMatch() {
+  const R = G.rounds[G.r];
+  G.done = 0; G.sel = null;
+  setScore(`Round ${G.r + 1}/${G.rounds.length}`);
+  ovb().innerHTML = `<p class="mh">Tap one on the left, then its partner on the right 👆</p><div class="mcols">
+    <div class="mcol"><h4>${esc(G.m.left)}</h4>${shuffle(R).map(p => `<button class="mb" data-i="${p.i}" onclick="pickL(this)">${esc(p.l)}</button>`).join('')}</div>
+    <div class="mcol"><h4>${esc(G.m.right)}</h4>${shuffle(R).map(p => `<button class="mb" data-i="${p.i}" onclick="pickR(this)">${esc(p.r)}</button>`).join('')}</div></div>`;
+}
+function pickL(b) {
+  if (b.classList.contains('done')) return;
+  document.querySelectorAll('.mcol:first-child .mb').forEach(x => x.classList.remove('sel'));
+  b.classList.add('sel'); G.sel = b;
+}
+function pickR(b) {
+  if (b.classList.contains('done')) return;
+  if (!G.sel) { b.classList.add('bad'); setTimeout(() => b.classList.remove('bad'), 400); return; }
+  if (b.dataset.i === G.sel.dataset.i) {
+    [b, G.sel].forEach(x => { x.classList.remove('sel'); x.classList.add('done'); });
+    G.sel = null; G.done++; ding();
+    if (G.done === G.rounds[G.r].length) setTimeout(matchEnd, 500);
+  } else {
+    const s = G.sel; [b, s].forEach(x => x.classList.add('bad'));
+    setTimeout(() => { b.classList.remove('bad'); s.classList.remove('bad'); }, 400);
+    G.mistakes++; buzz();
+  }
+}
+function matchEnd() {
+  const last = G.r + 1 >= G.rounds.length;
+  confetti();
+  ovb().innerHTML = `<div class="end"><div class="bigem">${last ? '🏆' : '🎉'}</div><h2>${last ? 'All pairs matched!' : 'Round complete!'}</h2>
+    ${last ? `<p>Mistakes: <b>${G.mistakes}</b>${G.mistakes ? '' : ' 💯'}</p>` : ''}
+    <div class="row2">${last ? `<button class="nx" onclick="startMatch(G.cid,G.mi)">🔁 Play again</button>` : `<button class="nx" onclick="G.r++;showMatch()">Next round ➜</button>`}
+    <button class="nx alt" onclick="closeOv()">✕ Close</button></div></div>`;
+}
+
+function startSort(cid, si) {
+  const c = CH[cid], s = c.sort[si];
+  G = {mode: 'sort', c, cid, si, s, left: shuffle(s.items.map((it, i) => i)), placed: s.buckets.map(() => []), sel: null, mistakes: 0};
+  openOv('🧺 ' + s.title, c);
+  showSort();
+}
+function showSort() {
+  const s = G.s;
+  setScore(`${s.items.length - G.left.length}/${s.items.length}`);
+  if (!G.left.length) {
+    confetti(); ding();
+    ovb().innerHTML = `<div class="end"><div class="bigem">🏆</div><h2>Everything sorted!</h2><p>Mistakes: <b>${G.mistakes}</b>${G.mistakes ? '' : ' 💯'}</p>
+      <div class="row2"><button class="nx" onclick="startSort(G.cid,G.si)">🔁 Play again</button><button class="nx alt" onclick="closeOv()">✕ Close</button></div></div>`;
+    return;
+  }
+  ovb().innerHTML = `<p class="mh">Tap an item, then tap the group it belongs to 👇</p>
+    <div class="pool">${G.left.map(i => `<button class="chipb ${G.sel === i ? 'sel' : ''}" data-i="${i}" onclick="G.sel=${i};showSort()">${esc(s.items[i][0])}</button>`).join('')}</div>
+    <div class="buckets">${s.buckets.map((b, k) => `<div class="bucket" onclick="dropTo(${k},this)"><h4>${esc(b)}</h4>${G.placed[k].map(i => `<div>${esc(s.items[i][0])}</div>`).join('')}</div>`).join('')}</div>`;
+}
+function dropTo(k, el) {
+  if (G.sel === null) return;
+  const i = G.sel;
+  if (G.s.items[i][1] === k) {
+    G.placed[k].push(i); G.left = G.left.filter(x => x !== i); G.sel = null; ding(); showSort();
+  } else {
+    G.mistakes++; buzz();
+    const chip = document.querySelector(`.chipb[data-i="${i}"]`);
+    if (chip) { chip.classList.add('bad'); setTimeout(() => chip.classList.remove('bad'), 400); }
+  }
+}
+
+function startOrder(cid, oi) {
+  const c = CH[cid], o = c.order[oi];
+  G = {mode: 'order', c, cid, oi, o, picked: 0, shuf: shuffle(o.items.map((_, i) => i)), mistakes: 0};
+  openOv('🔢 ' + o.title, c);
+  setScore('');
+  ovb().innerHTML = `<div class="qc"><div class="qq"><span>Tap them in the correct order: first one first!</span></div>
+    <div class="oans" id="oans"></div>
+    <div class="oleft">${G.shuf.map(i => `<button class="opt" data-i="${i}" onclick="pickO(this)">${esc(o.items[i])}</button>`).join('')}</div><div id="after"></div></div>`;
+}
+function pickO(b) {
+  if (+b.dataset.i === G.picked) {
+    G.picked++;
+    document.getElementById('oans').insertAdjacentHTML('beforeend', `<div>${G.picked}. ${esc(G.o.items[+b.dataset.i])}</div>`);
+    b.remove(); ding();
+    if (G.picked === G.o.items.length) {
+      confetti();
+      document.getElementById('after').innerHTML = `<div class="note good">Perfect order! 🎉 Mistakes: ${G.mistakes}</div>
+        <div class="row2"><button class="nx" onclick="startOrder(G.cid,G.oi)">🔁 Play again</button><button class="nx alt" onclick="closeOv()">✕ Close</button></div>`;
+    }
+  } else {
+    b.classList.add('bad'); setTimeout(() => b.classList.remove('bad'), 400); G.mistakes++; buzz();
+  }
+}
+
+render();
 </script>
 </body>
 </html>
